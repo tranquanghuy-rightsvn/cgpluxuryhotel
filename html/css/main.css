@@ -65,9 +65,9 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .lang-btn img, .lang-menu img { width: 16px; height: 11px; object-fit: cover; }
 .lang-menu { position: absolute; right: 0; top: 55px; width: 190px; padding: 10px 20px; background: linear-gradient(#ddd 0, #fff 20px); box-shadow: 0 0 20px rgba(0, 0, 0, .1); opacity: 0; visibility: hidden; transition: .3s; }
 .lang:hover .lang-menu, .lang.is-open .lang-menu { opacity: 1; visibility: visible; }
-.lang-menu button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 0; font: 400 15px/22.5px var(--serif); color: var(--navy); text-align: left; }
-.lang-menu li + li button { border-top: 1px solid rgba(0, 0, 0, .1); }
-.lang-menu button:hover, .lang-menu button.is-active { color: var(--gold); }
+.lang-menu button, .lang-menu a { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 0; font: 400 15px/22.5px var(--serif); color: var(--navy); text-align: left; }
+.lang-menu li + li button, .lang-menu li + li a { border-top: 1px solid rgba(0, 0, 0, .1); }
+.lang-menu button:hover, .lang-menu button.is-active, .lang-menu a:hover, .lang-menu a.is-active { color: var(--gold); }
 .nav-toggle { display: none; }
 
 /* Sticky state (btStickyHeaderActive) */

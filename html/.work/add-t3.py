@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""Add translations for the package/service pages to js/i18n.js. Run from html/."""
+import json
+T = {
+ "pd.duration": ["Thời gian", "Duration", "기간", "入住时长", "Продолжительность", "Dauer"],
+ "pd.guests": ["Số khách", "Guests", "인원", "入住人数", "Гости", "Gäste"],
+ "pd.cat": ["Nhóm gói", "Collection", "컬렉션", "系列", "Коллекция", "Kollektion"],
+ "pd.badge": ["Điểm nổi bật", "Highlight", "하이라이트", "亮点", "Особенность", "Highlight"],
+ "pd.price": ["Giá gói", "Package price", "패키지 요금", "套餐价格", "Цена пакета", "Paketpreis"],
+ "pd.other": ["Gói lưu trú khác", "Other Packages", "다른 패키지", "其他套餐", "Другие пакеты", "Weitere Pakete"],
+ "pd.terms": ["Xem điều khoản chung", "View general terms", "일반 약관 보기", "查看一般条款", "Общие условия", "Allgemeine Bedingungen"],
+ "pk.sub": ["Chọn gói lưu trú phù hợp cho hành trình của bạn", "Choose the stay package that suits your journey", "여정에 맞는 패키지를 선택하세요", "选择适合您旅程的住宿套餐", "Выберите пакет для вашей поездки", "Wählen Sie das passende Paket für Ihre Reise"],
+ "pk.viewall": ["Xem tất cả gói", "View all packages", "전체 패키지 보기", "查看全部套餐", "Все пакеты", "Alle Pakete ansehen"],
+ "svc.page": ["Dịch vụ", "Services", "서비스", "服务", "Услуги", "Services"],
+ "svc.cta": ["Xem gói lưu trú", "View packages", "패키지 보기", "查看套餐", "Смотреть пакеты", "Pakete ansehen"],
+ "s1.t": ["Hồ bơi ngoài trời", "Outdoor swimming pool", "야외 수영장", "室外泳池", "Открытый бассейн", "Außenpool"],
+ "s1.d": ["Thư giãn bên hồ bơi ngoài trời giữa khoảng xanh yên bình của Hội An. Miễn phí cho mọi khách lưu trú – nơi lý tưởng để bơi mát hay tận hưởng một buổi chiều thong thả.",
+          "Unwind by our outdoor swimming pool, surrounded by greenery in a peaceful corner of Hoi An. Complimentary for all guests and the perfect spot for a refreshing swim or a lazy afternoon.",
+          "호이안의 평화로운 녹음 속 야외 수영장에서 휴식을 취하세요. 모든 투숙객이 무료로 이용할 수 있으며, 시원한 수영이나 여유로운 오후를 보내기에 완벽한 곳입니다.",
+          "在会安宁静绿意环绕的室外泳池放松身心。所有住客均可免费使用，是畅游或悠闲度过午后的理想之地。",
+          "Отдыхайте у открытого бассейна в окружении зелени в тихом уголке Хойана. Бесплатно для всех гостей — идеальное место, чтобы освежиться или провести неспешный день.",
+          "Entspannen Sie am Außenpool inmitten von viel Grün in einer ruhigen Ecke von Hoi An. Für alle Gäste kostenlos – ideal für ein erfrischendes Bad oder einen gemütlichen Nachmittag."],
+ "s2.t": ["Bữa sáng, trà chiều & ẩm thực", "Breakfast, afternoon tea & dining", "조식, 애프터눈 티 & 다이닝", "早餐、下午茶与餐饮", "Завтрак, чай и ужины", "Frühstück, Afternoon Tea & Dinner"],
+ "s2.d": ["Bắt đầu mỗi ngày với bữa sáng ngon miệng, thưởng thức trà chiều bên ban công và kết thúc ngày bằng bữa tối do bếp của khách sạn chuẩn bị. Café và nhà hàng phục vụ cà phê, trà và đồ uống đặc trưng suốt cả ngày.",
+          "Start every day with a delicious breakfast, enjoy afternoon tea on the balcony, and end the day with a dinner prepared by our kitchen. Our café and restaurant also serve coffee, tea and signature drinks throughout the day.",
+          "맛있는 조식으로 하루를 시작하고, 발코니에서 애프터눈 티를 즐기며, 호텔 주방이 준비한 디너로 하루를 마무리하세요. 카페와 레스토랑에서는 하루 종일 커피, 차, 시그니처 음료를 제공합니다.",
+          "每天以美味早餐开启，在阳台享用下午茶，以酒店厨房精心准备的晚餐结束一天。咖啡厅与餐厅全天供应咖啡、茶及招牌饮品。",
+          "Начинайте день с вкусного завтрака, наслаждайтесь чаем на балконе и завершайте день ужином от нашей кухни. Кафе и ресторан весь день предлагают кофе, чай и фирменные напитки.",
+          "Beginnen Sie jeden Tag mit einem leckeren Frühstück, genießen Sie Afternoon Tea auf dem Balkon und beenden Sie den Tag mit einem Abendessen aus unserer Küche. Café und Restaurant servieren den ganzen Tag Kaffee, Tee und Signature-Drinks."],
+ "s3.t": ["Massage thư giãn", "Relaxing massage", "릴랙싱 마사지", "舒缓按摩", "Расслабляющий массаж", "Entspannungsmassage"],
+ "s3.d": ["Xua tan mệt mỏi sau hành trình với liệu trình massage thư giãn, rồi ngâm mình trong căn phòng có bồn tắm. Dịch vụ massage do đối tác chuyên nghiệp cung cấp và cần đặt trước.",
+          "Relieve the tension of travel with a relaxing massage, then unwind in a room with a bathtub. Massage services are provided by qualified partners and require advance reservation.",
+          "릴랙싱 마사지로 여행의 피로를 풀고 욕조가 있는 객실에서 휴식을 취하세요. 마사지는 전문 제휴 업체가 제공하며 사전 예약이 필요합니다.",
+          "以舒缓按摩消除旅途疲惫，再在带浴缸的客房中放松身心。按摩服务由专业合作伙伴提供，需提前预约。",
+          "Снимите усталость после дороги расслабляющим массажем, а затем отдохните в номере с ванной. Массаж проводят квалифицированные партнёры, требуется предварительная запись.",
+          "Lösen Sie die Anspannung der Reise mit einer Entspannungsmassage und genießen Sie danach ein Zimmer mit Badewanne. Massagen werden von qualifizierten Partnern angeboten und erfordern eine Vorabreservierung."],
+ "s4.t": ["Trang trí phòng & tiệc kỷ niệm", "Room decoration & celebrations", "객실 데코 & 기념일", "客房布置与庆祝", "Оформление номера и праздники", "Zimmerdekoration & Feiern"],
+ "s4.d": ["Tuần trăng mật, kỷ niệm ngày cưới hay sinh nhật đều xứng đáng được chăm chút. Chúng tôi chuẩn bị trang trí phòng lãng mạn, hoa tươi, bánh kỷ niệm và chụp ảnh trong khuôn viên khách sạn theo yêu cầu.",
+          "Honeymoons, anniversaries and birthdays deserve something special. We prepare romantic room decoration, fresh flowers, celebration cakes and a photo session within the hotel on request.",
+          "허니문, 결혼기념일, 생일은 특별해야 합니다. 요청 시 로맨틱한 객실 장식, 생화, 기념 케이크, 호텔 내 사진 촬영을 준비해 드립니다.",
+          "蜜月、纪念日与生日值得特别对待。我们可按需准备浪漫客房布置、鲜花、庆祝蛋糕及酒店内纪念摄影。",
+          "Медовый месяц, годовщина или день рождения заслуживают особого внимания. По запросу мы подготовим романтическое оформление номера, свежие цветы, праздничный торт и фотосессию в отеле.",
+          "Flitterwochen, Jahrestage und Geburtstage verdienen etwas Besonderes. Auf Wunsch bereiten wir romantische Zimmerdekoration, frische Blumen, Festtagstorten und ein Fotoshooting im Hotel vor."],
+ "s5.t": ["Đưa đón sân bay", "Airport transfers", "공항 픽업", "机场接送", "Трансфер из аэропорта", "Flughafentransfer"],
+ "s5.d": ["Đến nơi thật thư thái với dịch vụ đón sân bay khi bạn đến, hoặc đưa đón khứ hồi đã bao gồm trong một số gói lưu trú. Dịch vụ do đối tác chuyên nghiệp cung cấp và nên đặt trước.",
+          "Arrive relaxed with airport pick-up arranged for your arrival, or choose round-trip transfers included in selected packages. Transfers are provided by qualified partners and should be booked in advance.",
+          "도착 시 공항 픽업으로 편안하게 도착하거나, 일부 패키지에 포함된 왕복 픽업을 이용하세요. 픽업 서비스는 전문 제휴 업체가 제공하며 사전 예약이 필요합니다.",
+          "抵达时安排机场接机，让您轻松入住；部分套餐亦包含往返接送。接送服务由专业合作伙伴提供，请提前预订。",
+          "Встреча в аэропорту по прибытии или трансфер в обе стороны, включённый в некоторые пакеты. Трансфер предоставляют квалифицированные партнёры, его нужно заказывать заранее.",
+          "Kommen Sie entspannt an: Abholung vom Flughafen bei Ankunft oder Transfers hin und zurück in ausgewählten Paketen. Transfers werden von qualifizierten Partnern durchgeführt und sollten im Voraus gebucht werden."],
+ "s6.t": ["Wi-Fi tốc độ cao & góc làm việc", "High-speed Wi-Fi & workspace", "초고속 Wi-Fi & 업무 공간", "高速 Wi-Fi 与办公空间", "Скоростной Wi-Fi и рабочее место", "Highspeed-WLAN & Arbeitsplatz"],
+ "s6.d": ["Làm việc hiệu quả với Wi-Fi tốc độ cao khắp khách sạn và bàn làm việc thoải mái trong phòng. Dịch vụ giặt ủi và lễ tân 24/24 giúp những kỳ lưu trú dài ngày thật tiện lợi.",
+          "Stay productive with high-speed Wi-Fi throughout the hotel and a comfortable desk in your room. Laundry service and a 24-hour front desk make longer stays easy.",
+          "호텔 전역의 초고속 Wi-Fi와 객실 내 편안한 책상으로 생산적으로 일하세요. 세탁 서비스와 24시간 프런트 데스크로 장기 투숙도 편리합니다.",
+          "全酒店覆盖高速 Wi-Fi，客房配有舒适书桌，助您高效办公。洗衣服务与 24 小时前台让长住更加便利。",
+          "Работайте продуктивно: скоростной Wi-Fi по всему отелю и удобный стол в номере. Прачечная и круглосуточная стойка регистрации делают длительное проживание удобным.",
+          "Bleiben Sie produktiv mit Highspeed-WLAN im ganzen Hotel und einem bequemen Schreibtisch im Zimmer. Wäscheservice und 24-Stunden-Rezeption machen längere Aufenthalte einfach."],
+}
+p = "js/i18n.js"; s = open(p, encoding="utf-8").read()
+a = "  Object.keys(T2).forEach(function (k) { T[k] = T2[k]; });"
+assert a in s and "var T3" not in s
+add = "  var T3 = {\n" + ",\n".join(f'    "{k}": {json.dumps(v, ensure_ascii=False)}' for k, v in T.items()) + "\n  };\n  Object.keys(T3).forEach(function (k) { T[k] = T3[k]; });\n"
+s = s.replace(a, a + "\n" + add)
+open(p, "w", encoding="utf-8").write(s)
+print("ok", len(T))

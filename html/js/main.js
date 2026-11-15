@@ -89,31 +89,7 @@
   }
   $$(".carousel").forEach(carousel);
 
-  /* ---------- Package detail modal ---------- */
   function meta(p) { return I.nights(p.nights) + " · " + I.t("gl." + p.g); }
-  var modal;
-  function openDetail(id) {
-    var p = C.byId(id); if (!p) return;
-    if (!modal) {
-      modal = document.createElement("div");
-      modal.className = "modal";
-      modal.innerHTML = '<div class="modal-box" role="dialog" aria-modal="true"><button type="button" class="modal-close" aria-label="Close">&times;</button><div class="modal-img"></div><div class="modal-body"></div></div>';
-      document.body.appendChild(modal);
-      modal.addEventListener("click", function (e) { if (e.target === modal || e.target.classList.contains("modal-close")) modal.classList.remove("is-open"); });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.classList.remove("is-open"); });
-    }
-    $(".modal-img", modal).style.backgroundImage = "url(" + img(p.img) + ")";
-    $(".modal-body", modal).innerHTML = '<span class="post-date">' + esc(I.pick(p.badge)) + "</span>" +
-      '<h3 class="room-title">' + esc(I.pick(p.names)) + '</h3><p class="sub-title">' + esc(I.pick(p.tag)) + "</p>" + '<p class="modal-desc">' + esc(I.pick(p.desc)) + "</p>" +
-      '<span class="price-from">' + I.t("incl") + '</span><ul class="modal-list">' + p.inc.map(function (k) { return "<li>" + esc(C.incText(k, p, I)) + "</li>"; }).join("") + "</ul>" +
-      '<span class="price-from">' + esc(meta(p)) + '</span><span class="price">' + money(p.price) + " " + esc(I.t("u." + p.unit)) + "</span>" +
-      '<p class="modal-note">' + I.t("note.star") + '</p><a class="btn" href="' + bookUrl(p.id) + '">' + esc(I.pick(p.cta)) + "</a>";
-    modal.classList.add("is-open");
-  }
-  document.addEventListener("click", function (e) {
-    var d = e.target.closest("[data-detail]");
-    if (d) { e.preventDefault(); openDetail(d.dataset.detail); }
-  });
 
   /* ---------- Home search form ---------- */
   var sfl = $(".sfl");
@@ -148,5 +124,5 @@
     $$(".search-box input").forEach(function (i) { i.value = q; });
   }
 
-  window.CGPUI = { money: money, img: img, esc: esc, meta: meta, flag: flag, base: base, openDetail: openDetail };
+  window.CGPUI = { money: money, img: img, esc: esc, meta: meta, flag: flag, base: base };
 })();

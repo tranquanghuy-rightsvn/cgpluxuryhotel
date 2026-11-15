@@ -9,6 +9,10 @@ Run from the html/ folder:  node .work/export.cjs && python3 .work/build.py
 """
 import html as H, json, os, re, shutil, subprocess, time
 
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
 SITE = ""  # set to "https://your-domain" before going live (hreflang/canonical need absolute URLs)
 VER = time.strftime("%Y%m%d%H%M")
 subprocess.run(["node", ".work/export.cjs"], check=True, stdout=subprocess.DEVNULL)
@@ -16,6 +20,8 @@ D = json.load(open(".work/i18n.json", encoding="utf-8"))
 LANGS = D["langs"]
 DEFAULT = "vi"
 P = {p["id"]: p for p in D["P"]}
+for _p in P.values():
+    _p["slug"] = slugify(_p["names"][1])
 NEWS = D["NEWS"]
 NAMES = {"vi": "Tiếng Việt", "en": "English", "ko": "한국어", "zh": "中文", "ru": "Русский", "de": "Deutsch"}
 FLAGS = {"vi": "vi.png", "en": "en.png", "ko": "ko.svg", "zh": "zh.svg", "ru": "ru.svg", "de": "de.svg"}
@@ -25,6 +31,25 @@ MAP = "https://www.google.com/maps?q=78+Tr%E1%BA%A7n+Kh%C3%A1t+Ch%C3%A2n,+H%E1%B
 FB = "https://www.facebook.com/profile.php?id=61564529174870"
 PHONE, PHONE_TEL, EMAIL = "(+84) 98 924 46 24", "+84989244624", "cgpluxuryhotelhoian@gmail.com"
 PKG_MENU = [6, 2, 3, 4, 9, 10, 11]
+CATS = ["relax", "romance", "family", "long", "sig", "solo"]
+GALLERY = ["exterior-night", "exterior-day", "room-pool-view", "suite-arch-romantic", "town-view-window", "room-petals-balcony",
+           "grand-suite-arch", "suite-onyx-front", "towel-hearts", "bath-glass-view", "family-ricefield-view", "balcony-view",
+           "deluxe-gold-panel", "suite-onyx", "bath-rose", "marble-double", "family-twin-balcony", "suite-sunset",
+           "suite-gold", "room-romantic", "bathtub", "suite-onyx-window", "suite-sofa-curtains", "marble-room",
+           "standard-double", "bathroom-classic", "room-window", "room-twin", "room-twin-window", "room-double-balcony",
+           "room-bathtub-view", "room-desk", "room-sofa", "suite-lounge", "suite-arch", "pool"]
+PKG_PHOTOS = {1: ["room-pool-view", "town-view-window", "bath-glass-view"], 2: ["towel-hearts", "room-petals-balcony", "bath-rose"],
+              3: ["suite-arch-romantic", "towel-hearts", "bath-rose"], 4: ["family-twin-balcony", "family-ricefield-view", "bathroom-classic"],
+              5: ["standard-double", "marble-room", "bathroom-classic"], 6: ["room-pool-view", "marble-double", "bath-glass-view"],
+              7: ["room-petals-balcony", "suite-arch-romantic", "towel-hearts"], 8: ["town-view-window", "deluxe-gold-panel", "family-ricefield-view"],
+              9: ["marble-double", "standard-double", "suite-onyx-window"], 10: ["grand-suite-arch", "suite-onyx-front", "bath-glass-view"],
+              11: ["suite-sofa-curtains", "suite-onyx", "town-view-window"], 12: ["suite-onyx-window", "bath-rose", "room-pool-view"],
+              13: ["suite-onyx-front", "grand-suite-arch", "deluxe-gold-panel"]}
+GROUP_FILL = {"relax": ["room-pool-view", "town-view-window"], "family": ["family-twin-balcony", "family-ricefield-view"],
+              "long": ["marble-double", "suite-onyx-window"], "sig": ["grand-suite-arch", "suite-onyx-front"],
+              "romance": ["towel-hearts", "suite-arch-romantic"], "solo": ["suite-sofa-curtains", "suite-onyx"]}
+SERVICES = [("s1", "pool"), ("s2", "balcony-view"), ("s3", "bathtub"), ("s4", "room-romantic"), ("s5", "exterior-night"), ("s6", "room-desk")]
+
 
 SVG = {
     "pin": '<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
@@ -60,6 +85,8 @@ class Ctx:
     def date(self, iso): return D["short"][self.lang][iso]
     def url(self, slug=""): return self.L + slug if (self.L + slug) else "./"
     def img(self, n): return f"{self.R}images/{n}.jpg"
+    def pkg(self, pid): return self.url(f'goi-luu-tru/{P[pid]["slug"]}/')
+    def inc(self, k, p): return D["INC"][k][self.i].replace("{N}", self.nights(p["nights"])).replace("{n}", str(p["nights"]))
 
 
 def lang_url(lang, slug):
@@ -71,7 +98,7 @@ def header(c, cur):
     def a(slug, key, name):
         cls = ' class="is-current"' if cur == name else ""
         return f'<a href="{c.url(slug)}"{cls}>{e(c.t(key))}</a>'
-    sub = "".join(f'<li><a href="{c.url("dat-phong/")}?pkg={i}">{e(c.name(i))}</a></li>' for i in PKG_MENU)
+    sub = "".join(f'<li><a href="{c.pkg(i)}">{e(c.name(i))}</a></li>' for i in PKG_MENU)
     langs = "".join(
         f'<li><a href="{c.R + ("" if l == DEFAULT else l + "/") + c.slug or "./"}" hreflang="{l}" lang="{l}"{" class=is-active" if l == c.lang else ""}>'
         f'<img src="{c.R}images/flags/{FLAGS[l]}" alt="">{NAMES[l]}</a></li>' for l in LANGS)
@@ -84,8 +111,8 @@ def header(c, cur):
         <ul class="menu">
           <li>{a("", "nav.home", "home")}</li>
           <li>{a("gioi-thieu/", "nav.about", "about")}</li>
-          <li><a href="{c.home}#packages">{e(c.t("nav.packages"))}</a><ul class="sub-menu">{sub}</ul></li>
-          <li><a href="{c.home}#services">{e(c.t("nav.services"))}</a></li>
+          <li>{a("goi-luu-tru/", "nav.packages", "packages")}<ul class="sub-menu">{sub}</ul></li>
+          <li>{a("dich-vu/", "nav.services", "services")}</li>
           <li>{a("tin-tuc/", "nav.news", "news")}</li>
           <li>{a("dat-phong/", "nav.book", "book")}</li>
         </ul>
@@ -111,8 +138,9 @@ def footer(c):
       <h4>{e(c.t("f.quick"))}</h4>
       <ul class="f-links">
         <li><a href="{c.url("gioi-thieu/")}">{e(c.t("nav.about"))}</a></li>
-        <li><a href="{c.home}#packages">{e(c.t("nav.packages"))}</a></li>
-        <li><a href="{c.home}#services">{e(c.t("nav.services"))}</a></li>
+        <li><a href="{c.url("goi-luu-tru/")}">{e(c.t("nav.packages"))}</a></li>
+        <li><a href="{c.url("dich-vu/")}">{e(c.t("nav.services"))}</a></li>
+        <li><a href="{c.url("thu-vien-anh/")}">{e(c.t("gal.title"))}</a></li>
         <li><a href="{c.url("tin-tuc/")}">{e(c.t("nav.news"))}</a></li>
         <li><a href="{c.url("dat-phong/")}">{e(c.t("nav.book"))}</a></li>
       </ul>
@@ -120,7 +148,7 @@ def footer(c):
     <div>
       <h4>{e(c.t("f.policy"))}</h4>
       <ul class="f-links">
-        <li><a href="{c.url("dat-phong/")}">{e(c.t("f.terms"))}</a></li>
+        <li><a href="{c.url("dat-phong/")}#terms">{e(c.t("f.terms"))}</a></li>
         <li><a href="#">{e(c.t("f.pay"))}</a></li>
         <li><a href="#">{e(c.t("f.privacy"))}</a></li>
         <li><a href="#">{e(c.t("f.refund"))}</a></li>
@@ -219,8 +247,8 @@ def services_block(c):
         s, t = e(c.t(f"tile{i}.s")), e(c.t(f"tile{i}.t"))
         tiles += (f'<figure class="tile"><img src="{c.img(img)}" alt="{t}" loading="lazy" width="660" height="440">'
                   f'<figcaption class="tile-cap"><span class="tile-label">{s}</span><strong class="tile-title">{t}</strong></figcaption>'
-                  f'<a class="tile-hover" href="{c.url("dat-phong/")}"><span class="tile-label">{s}</span><strong class="tile-title">{t}</strong></a></figure>')
-    return f'''<section class="svc-head" id="services">
+                  f'<a class="tile-hover" href="{c.url("dich-vu/")}"><span class="tile-label">{s}</span><strong class="tile-title">{t}</strong></a></figure>')
+    return f'''<section class="svc-head">
   <div class="port">
     <h2 class="headline dash">{e(c.t("svc.title"))}</h2>
     <p class="sub-title">{e(c.t("svc.text"))}</p>
@@ -233,21 +261,21 @@ def featured_cards(c, ids):
     out = ""
     for i in ids:
         p, n = P[i], e(c.name(i))
-        out += (f'<article class="post"><a class="post-img" href="{c.url("dat-phong/")}?pkg={i}" data-detail="{i}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
-                f'<div class="post-body"><h3 class="post-title"><a href="{c.url("dat-phong/")}?pkg={i}" data-detail="{i}">{n}</a></h3>'
-                f'<div class="post-btns"><a class="btn" href="{c.url("dat-phong/")}?pkg={i}" data-detail="{i}">{e(c.t("btn.details"))}</a>'
+        out += (f'<article class="post"><a class="post-img" href="{c.pkg(i)}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
+                f'<div class="post-body"><h3 class="post-title"><a href="{c.pkg(i)}">{n}</a></h3>'
+                f'<div class="post-btns"><a class="btn" href="{c.pkg(i)}">{e(c.t("btn.details"))}</a>'
                 f'<a class="btn" href="{c.url("dat-phong/")}?pkg={i}">{e(c.t("btn.book"))}</a></div></div></article>')
     return out
 
 
-def room_cards(c, ids):
+def room_cards(c, ids, wide_from=3):
     out = ""
     for k, i in enumerate(ids):
         p, n = P[i], e(c.name(i))
-        href = f'{c.url("dat-phong/")}?pkg={i}'
-        out += (f'<article class="room{" is-wide" if k > 2 else ""}"><a class="room-img" href="{href}" data-detail="{i}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
-                f'<div class="room-body"><h3 class="room-title"><a href="{href}" data-detail="{i}">{n}</a></h3><p class="room-text">{e(c.pick(p["tag"]))}</p>'
-                f'<div class="room-foot"><a class="btn" href="{href}" data-detail="{i}">{e(c.t("btn.detailsShort"))}</a>'
+        href = c.pkg(i)
+        out += (f'<article class="room{" is-wide" if k >= wide_from else ""}"><a class="room-img" href="{href}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
+                f'<div class="room-body"><h3 class="room-title"><a href="{href}">{n}</a></h3><p class="room-text">{e(c.pick(p["tag"]))}</p>'
+                f'<div class="room-foot"><a class="btn" href="{href}">{e(c.t("btn.detailsShort"))}</a>'
                 f'<div><span class="price-from">{e(c.t("price.from"))}</span><span class="price">USD {p["price"]:,} {e(c.t("u." + p["unit"]))}</span></div></div></div></article>')
     return out
 
@@ -277,7 +305,7 @@ def news_list(c):
 
 def sidebar(c):
     recent = "".join(f'<li><a href="{news_url(c, n)}"><img src="{c.img(n["img"])}" alt="" loading="lazy"><span>{e(c.pick(n["title"]))}</span></a></li>' for n in NEWS)
-    pk = "".join(f'<li><a href="{c.url("dat-phong/")}?pkg={i}"><img src="{c.img(P[i]["img"])}" alt="" loading="lazy"><span>{e(c.name(i))}</span></a></li>' for i in range(1, 8))
+    pk = "".join(f'<li><a href="{c.pkg(i)}"><img src="{c.img(P[i]["img"])}" alt="" loading="lazy"><span>{e(c.name(i))}</span></a></li>' for i in range(1, 8))
     return f'''<aside class="sidebar">
       <section><h3 class="widget-title">{e(c.t("sb.search"))}</h3>
         <form class="search-box" role="search" action="{c.url("tin-tuc/")}" method="get"><input type="search" name="s" placeholder="{e(c.t("sb.looking"))}" aria-label="{e(c.t("sb.search"))}"><button type="submit" aria-label="{e(c.t("sb.search"))}">{SVG["search"]}</button></form></section>
@@ -297,6 +325,132 @@ def article_body(c, n):
             f'<p>{e(thanks)}.</p><p class="article-cta"><a class="btn-navy" href="{c.url("dat-phong/")}">{e(c.t("art.cta"))}</a></p>'
             f'<img class="article-img" src="{c.img(n["img"])}" alt="{e(c.pick(n["title"]))}" loading="lazy" width="1320" height="880">')
 
+
+
+def faq_block(c, n=9):
+    items = "".join(f'<details class="faq-item"><summary>{e(c.t(f"faq.q{i}"))}</summary><p>{e(c.t(f"faq.a{i}"))}</p></details>' for i in range(1, n + 1))
+    data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": c.t(f"faq.q{i}"), "acceptedAnswer": {"@type": "Answer", "text": c.t(f"faq.a{i}")}} for i in range(1, n + 1)]}
+    return f'''<section class="faq-sec">
+  <div class="port">
+    <h2 class="headline dash">{e(c.t("faq.title"))}</h2>
+    <div class="faq">{items}</div>
+  </div>
+</section>
+{jsonld(data)}'''
+
+
+def gallery_grid(c, imgs, uid, cls="gal-grid"):
+    """Thumbnails + CSS-only lightbox (:target), no JS."""
+    alt = e(c.t("intro.title"))
+    thumbs = "".join(f'<a class="gal-item" href="#{uid}-{k}"><img src="{c.img(n)}" alt="{alt} – {k + 1}" loading="lazy" width="660" height="440"></a>' for k, n in enumerate(imgs))
+    boxes = "".join(f'<div class="lb" id="{uid}-{k}"><a class="lb-bg" href="#{uid}" aria-label="Close"></a><img src="{c.img(n)}" alt="{alt} – {k + 1}" loading="lazy">'
+                    f'<a class="lb-x" href="#{uid}" aria-label="Close">&times;</a>'
+                    + (f'<a class="lb-prev" href="#{uid}-{k - 1}" aria-label="Previous"></a>' if k else "")
+                    + (f'<a class="lb-next" href="#{uid}-{k + 1}" aria-label="Next"></a>' if k < len(imgs) - 1 else "") + "</div>" for k, n in enumerate(imgs))
+    return f'<div class="{cls}" id="{uid}">{thumbs}</div>{boxes}'
+
+
+def jsonld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+
+
+def build_packages(lang):
+    # list page, grouped by the collection structure of info-rooms.docx
+    c = Ctx(lang, "goi-luu-tru/")
+    groups = ""
+    for cat in CATS:
+        ids = [i for i in sorted(P) if P[i]["cat"] == cat]
+        fill = "".join(f'<figure class="room room-photo"><img src="{c.img(n)}" alt="{e(c.t("cat." + cat))}" loading="lazy" width="660" height="440"></figure>'
+                       for n in GROUP_FILL[cat][:(3 - len(ids) % 3) % 3])
+        groups += f'''<section class="pk-group">
+  <div class="port">
+    <h2 class="headline dash">{e(c.t("cat." + cat))}</h2>
+    <div class="rooms-grid rooms-grid--list">{room_cards(c, ids, wide_from=99)}{fill}</div>
+  </div>
+</section>'''
+    body = banner_page(c, "suite-sunset", c.t("pk.title")) + f'\n<p class="port pk-intro sub-title">{e(c.t("pk.text"))}</p>\n' + groups + "\n" + faq_block(c)
+    items = [{"@type": "ListItem", "position": k + 1, "url": lang_url(lang, f'goi-luu-tru/{P[i]["slug"]}/'), "name": c.name(i)} for k, i in enumerate(sorted(P))]
+    body += jsonld({"@context": "https://schema.org", "@type": "ItemList", "itemListElement": items})
+    page(c, f'{c.t("pk.title")} | {c.t("intro.title")}', c.t("pk.text"), ["home", "pages"], "packages", body)
+
+    # one page per package
+    for pid in sorted(P):
+        p = P[pid]
+        c = Ctx(lang, f'goi-luu-tru/{p["slug"]}/')
+        name = c.name(pid)
+        incs = "".join(f"<li>{e(c.inc(k, p))}</li>" for k in p["inc"])
+        others = [i for i in sorted(P) if P[i]["cat"] == p["cat"] and i != pid]
+        others += [i for i in sorted(P) if i != pid and i not in others]
+        price = f'USD {p["price"]:,}'
+        body = f'''{banner_page(c, p["img"], name)}
+<section class="pd">
+  <div class="port">
+    <div class="pd-media"><img src="{c.img(p["img"])}" alt="{e(name)}" width="1320" height="880"><a class="pd-ribbon" href="{c.url("dat-phong/")}?pkg={pid}">{e(c.t("btn.book"))}</a></div>
+    {gallery_grid(c, PKG_PHOTOS[pid], "pd-gal", "pd-thumbs")}
+    <div class="pd-row">
+      <div class="pd-main">
+        <p class="pd-tag">{e(c.pick(p["tag"]))}</p>
+        <p class="pd-desc">{e(c.pick(p["desc"]))}</p>
+        <h2 class="pd-h">{e(c.t("incl"))}</h2>
+        <ul class="pd-inc">{incs}</ul>
+        <p class="pd-note">{e(c.t("note.star"))} <a href="{c.url("dat-phong/")}#terms">{e(c.t("pd.terms"))}</a></p>
+      </div>
+      <aside class="pd-side">
+        <ul class="pd-facts">
+          <li><span>{e(c.t("pd.duration"))}:</span> {e(c.nights(p["nights"]))}</li>
+          <li><span>{e(c.t("pd.guests"))}:</span> {e(c.t("gl." + p["g"]))}</li>
+          <li><span>{e(c.t("pd.cat"))}:</span> {e(c.t("cat." + p["cat"]))}</li>
+          <li><span>{e(c.t("pd.badge"))}:</span> {e(c.pick(p["badge"]))}</li>
+        </ul>
+        <div class="pd-buy"><a class="btn btn--lg" href="{c.url("dat-phong/")}?pkg={pid}">{e(c.pick(p["cta"]))}</a><span class="pd-price"><small>{e(c.t("pd.price"))}</small>{price} {e(c.t("u." + p["unit"]))}</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+<section class="pd-others">
+  <div class="port">
+    <h2 class="headline headline--sm dash">{e(c.t("pd.other"))}</h2>
+    <div class="rooms-grid rooms-grid--list">{room_cards(c, others[:6], wide_from=99)}</div>
+  </div>
+</section>'''
+        body += jsonld({"@context": "https://schema.org", "@type": "Offer", "name": name, "description": c.pick(p["desc"]),
+                        "url": lang_url(lang, c.slug), "image": SITE + "/images/" + p["img"] + ".jpg", "price": p["price"], "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock", "category": c.t("cat." + p["cat"]),
+                        "offeredBy": {"@type": "Hotel", "name": "CGP Luxury Hotel Hoi An", "telephone": PHONE_TEL, "email": EMAIL,
+                                      "address": {"@type": "PostalAddress", "streetAddress": "78 Tran Khat Chan", "addressLocality": "Hoi An", "addressRegion": "Quang Nam", "addressCountry": "VN"}}})
+        desc = c.pick(p["desc"])
+        page(c, f'{name} | {c.t("intro.title")}', desc[:157] + ("…" if len(desc) > 157 else ""), ["home", "pages"], "packages", body, og_img=p["img"])
+
+
+def build_gallery(lang):
+    c = Ctx(lang, "thu-vien-anh/")
+    body = f'''{banner_page(c, "grand-suite-arch", c.t("gal.title"))}
+<section class="gal-sec gal-page">
+  <div class="port">
+    <p class="sub-title">{e(c.t("gal.sub"))}</p>
+    {gallery_grid(c, GALLERY, "gal")}
+  </div>
+</section>'''
+    page(c, f'{c.t("gal.title")} | {c.t("intro.title")}', c.t("gal.sub"), ["home", "pages"], "gallery", body, og_img="room-pool-view")
+
+
+def build_services(lang):
+    c = Ctx(lang, "dich-vu/")
+    rows = ""
+    for k, (key, img) in enumerate(SERVICES):
+        t = e(c.t(key + ".t"))
+        text = f'<div class="svc-text"><h2>{t}</h2><p>{e(c.t(key + ".d"))}</p><a class="btn btn--sm" href="{c.url("goi-luu-tru/")}">{e(c.t("svc.cta"))}</a></div>'
+        pic = f'<div class="svc-img"><img src="{c.img(img)}" alt="{t}" loading="lazy" width="660" height="440"></div>'
+        rows += f'<article class="svc-row{" is-rev" if k % 2 else ""}">{pic if k % 2 == 0 else text}{text if k % 2 == 0 else pic}</article>'
+    body = f'''{banner_page(c, "suite-gold", c.t("svc.page"))}
+<section class="svc-page">
+  <div class="port">
+    <p class="sub-title svc-intro">{e(c.t("svc.text"))}</p>
+    {rows}
+  </div>
+</section>'''
+    page(c, f'{c.t("svc.page")} | {c.t("intro.title")}', c.t("svc.text"), ["home", "pages"], "services", body)
 
 # ------------------------------------------------------------------ pages
 def build(lang):
@@ -351,12 +505,15 @@ def build(lang):
 
 {services_block(c)}
 
-<section class="rooms" id="packages">
+<section class="rooms">
   <div class="port">
     <h2 class="headline dash">{e(c.t("pk.title"))}</h2>
     <div class="rooms-grid">{room_cards(c, [1, 5, 8, 7, 11, 12, 13])}</div>
+    <p class="more-row"><a class="btn" href="{c.url("goi-luu-tru/")}">{e(c.t("pk.viewall"))}</a></p>
   </div>
 </section>
+
+{faq_block(c)}
 
 <section class="news-sec">
   <div class="port">
@@ -369,7 +526,7 @@ def build(lang):
     <div class="dots"></div>
   </div>
 </section>'''
-    page(c, f'{c.t("intro.title")} | {c.t("box.sub")}', c.t("intro.text"), ["home"], "home", home)
+    page(c, f'{c.t("intro.title")} | {c.t("box.sub")}', c.t("intro.text"), ["home", "pages"], "home", home)
 
     # About
     c = Ctx(lang, "gioi-thieu/")
@@ -380,12 +537,20 @@ def build(lang):
   </div>
 </section>
 {services_block(c)}
+<section class="gal-sec">
+  <div class="port">
+    <h2 class="headline dash">{e(c.t("gal.title"))}</h2>
+    {gallery_grid(c, GALLERY[:8], "ab-gal", "gal-grid gal-grid--4")}
+    <p class="more-row"><a class="btn" href="{c.url("thu-vien-anh/")}">{e(c.t("gal.more"))}</a></p>
+  </div>
+</section>
+{faq_block(c)}
 <section class="intro" style="padding:40px 0 60px">
   <div class="port">
     {contact_block(c)}
   </div>
 </section>'''
-    page(c, f'{c.t("ab.banner")} | {c.t("intro.title")}', c.t("intro.text"), ["home", "news"], "about", about)
+    page(c, f'{c.t("ab.banner")} | {c.t("intro.title")}', c.t("intro.text"), ["home", "news", "pages"], "about", about)
 
     # News list
     c = Ctx(lang, "tin-tuc/")
@@ -430,9 +595,12 @@ for l in LANGS:
         shutil.rmtree(l)  # regenerated below
 for l in LANGS:
     build(l)
+    build_packages(l)
+    build_services(l)
+    build_gallery(l)
 
 # sitemap with hreflang alternates
-slugs = ["", "gioi-thieu/", "tin-tuc/", "dat-phong/"] + [f'tin-tuc/{n["id"]}/' for n in NEWS]
+slugs = ["", "gioi-thieu/", "goi-luu-tru/", "dich-vu/", "thu-vien-anh/", "tin-tuc/", "dat-phong/"] + [f'goi-luu-tru/{P[i]["slug"]}/' for i in sorted(P)] + [f'tin-tuc/{n["id"]}/' for n in NEWS]
 urls = ""
 for s in slugs:
     for l in LANGS:

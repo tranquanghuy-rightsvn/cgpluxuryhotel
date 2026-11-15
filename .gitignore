@@ -1,0 +1,4 @@
+# local scratch output of the clone tooling (screenshots, diffs, archived scripts)
+html/.work/dump/
+html/.work/old/
+.DS_Store

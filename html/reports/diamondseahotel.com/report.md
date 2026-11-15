@@ -76,3 +76,12 @@ Ghi chú: footer gốc cao hơn 112px vì có ảnh huy hiệu TripAdvisor/Agoda
 - Build: `cd html && python3 .work/build.py` (tự xuất dữ liệu từ `js/i18n.js` + `js/data.js`).
 - Gói lưu trú khớp nguyên văn docx (đã đối chiếu tự động 13/13): danh sách quyền lợi đúng thứ tự và câu chữ, thêm đoạn Description (hiện trong popup "Xem chi tiết" và bước chi tiết gói khi đặt phòng), nút Call to Action riêng từng gói, đủ 8 điều khoản chung. Đã dịch sang 6 ngôn ngữ.
 - Favicon: `favicon.ico`, `seo/favicon.svg`, `seo/apple-touch-icon.png`, `seo/icon-192/512.png`, `seo/site.webmanifest` (logo chữ CGP vàng đồng trên nền navy, tạm thời như logo).
+- Trang riêng thay cho link `#id` và popup JS (HTML dựng sẵn, tốt cho SEO), style theo trang gốc tương ứng:
+  - `/goi-luu-tru/` (theo `/rooms`): 13 gói chia 6 nhóm như docx, có JSON-LD ItemList.
+  - `/goi-luu-tru/<slug>/` × 13 (theo `/rooms/<room>`): ảnh lớn + nhãn "Đặt ngay", mô tả, hộp thông số, giá + nút CTA, "Gói bao gồm" dạng lưới gạch chấm, "Gói lưu trú khác"; JSON-LD Offer.
+  - `/dich-vu/` (theo `/services`): 6 khối ảnh/chữ xen kẽ nền xám.
+  - Menu, footer, sidebar, thẻ gói, ô dịch vụ đều trỏ tới trang thật. Tổng 138 trang (23 × 6 ngôn ngữ), sitemap cập nhật.
+- Sửa dropdown ngôn ngữ không hiện tên (CSS chỉ áp cho `<button>`, nay áp cho cả link).
+- Thêm 19 ảnh thật từ fanpage (tổng 36 ảnh, đều được dùng): trang **Thư viện ảnh** `/thu-vien-anh/` (36 ảnh, phóng to bằng CSS `:target`, không JS), dải 8 ảnh ở trang Giới thiệu, 3 ảnh phụ dưới ảnh chính của mỗi trang gói, ảnh lấp các hàng trống ở trang danh sách gói (ẩn trên mobile). Bỏ 2 ảnh: ảnh có khách lộ mặt và ảnh mờ.
+- **FAQ** 9 câu (6 ngôn ngữ) ở trang chủ, Giới thiệu và danh sách gói; dạng `<details>` thuần HTML + JSON-LD FAQPage. Câu trả lời lấy từ điều khoản trong docx và thông tin liên hệ trên fanpage.
+- Footer thêm link Thư viện ảnh. Tổng 144 trang (24 × 6 ngôn ngữ), 0 link hỏng.
