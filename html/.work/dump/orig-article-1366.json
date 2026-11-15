@@ -1,0 +1,404 @@
+{
+ "banner": {
+  "fontFamily": "Arial, sans-serif",
+  "fontSize": "16px",
+  "fontWeight": "400",
+  "lineHeight": "20.8px",
+  "color": "rgb(34, 34, 34)",
+  "letterSpacing": "normal",
+  "textTransform": "none",
+  "marginTop": "0px",
+  "marginBottom": "0px",
+  "paddingTop": "0px",
+  "paddingBottom": "0px",
+  "backgroundColor": "rgb(51, 51, 51)",
+  "borderTop": "0px none rgb(34, 34, 34)",
+  "borderBottom": "0px none rgb(34, 34, 34)",
+  "width": "1366px",
+  "height": "384.188px",
+  "backgroundImage": "url(\"https://diamondseahotel.com/images/banner.jpg\")",
+  "r": {
+   "x": 0,
+   "y": 0,
+   "width": 1366,
+   "height": 384.1875,
+   "top": 0,
+   "right": 1366,
+   "bottom": 384.1875,
+   "left": 0
+  },
+  "y": 0
+ },
+ "h1": null,
+ "content": [
+  [
+   "SPAN",
+   "headline",
+   "Customer Review Award 2024",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"42px\",\"fontWeight\":\"500\",\"lineHeight\":\"50.4px\",\"color\":\"rgb(255, 255, 255)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":113,\"y\":315.796875,\"width\":515.265625,\"height\":49,\"top\":315.796875,\"right\":628.265625,\"bottom\":364.796875,\"left\":113},\"y\":315.796875}",
+   113,
+   316,
+   515
+  ],
+  [
+   "SPAN",
+   "headline",
+   "Customer Review Award 2024",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"38px\",\"fontWeight\":\"500\",\"lineHeight\":\"45.6px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":444.1875,\"width\":466.1875,\"height\":45,\"top\":444.1875,\"right\":569.1875,\"bottom\":489.1875,\"left\":103},\"y\":444.1875}",
+   103,
+   444,
+   466
+  ],
+  [
+   "SPAN",
+   "",
+   "We are honored to announce that Diamond Sea Hotel ",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":499.78125,\"width\":857.640625,\"height\":36.234375,\"top\":499.78125,\"right\":960.640625,\"bottom\":536.015625,\"left\":103},\"y\":499.78125}",
+   103,
+   500,
+   858
+  ],
+  [
+   "SPAN",
+   "",
+   "This award is a testament to our commitment to del",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":562.328125,\"width\":865.15625,\"height\":56.46875,\"top\":562.328125,\"right\":968.15625,\"bottom\":618.796875,\"left\":103},\"y\":562.328125}",
+   103,
+   562,
+   865
+  ],
+  [
+   "SPAN",
+   "",
+   "We extend our heartfelt gratitude to all our value",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":645.109375,\"width\":859.484375,\"height\":36.234375,\"top\":645.109375,\"right\":962.484375,\"bottom\":681.34375,\"left\":103},\"y\":645.109375}",
+   103,
+   645,
+   859
+  ],
+  [
+   "SPAN",
+   "",
+   "About Customer Review Awards:",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"700\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":707.65625,\"width\":230.796875,\"height\":16,\"top\":707.65625,\"right\":333.796875,\"bottom\":723.65625,\"left\":103},\"y\":707.65625}",
+   103,
+   708,
+   231
+  ],
+  [
+   "SPAN",
+   "",
+   "The Customer Review Awards is one of the prestigio",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":749.96875,\"width\":865.171875,\"height\":76.703125,\"top\":749.96875,\"right\":968.171875,\"bottom\":826.671875,\"left\":103},\"y\":749.96875}",
+   103,
+   750,
+   865
+  ],
+  [
+   "SPAN",
+   "",
+   "Come and experience our award-winning hospitality ",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":852.984375,\"width\":619.265625,\"height\":16,\"top\":852.984375,\"right\":722.265625,\"bottom\":868.984375,\"left\":103},\"y\":852.984375}",
+   103,
+   853,
+   619
+  ],
+  [
+   "SPAN",
+   "",
+   "Sincerely,",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":895.296875,\"width\":63.28125,\"height\":16,\"top\":895.296875,\"right\":166.28125,\"bottom\":911.296875,\"left\":103},\"y\":895.296875}",
+   103,
+   895,
+   63
+  ],
+  [
+   "SPAN",
+   "",
+   "Diamond Sea Hotel Danang",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"14.6667px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.24px\",\"color\":\"rgb(0, 0, 0)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":103,\"y\":915.53125,\"width\":182.5625,\"height\":16,\"top\":915.53125,\"right\":285.5625,\"bottom\":931.53125,\"left\":103},\"y\":915.53125}",
+   103,
+   916,
+   183
+  ],
+  [
+   "SPAN",
+   "",
+   "BOOK YOUR STAY",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"700\",\"lineHeight\":\"22.08px\",\"color\":\"rgb(255, 255, 255)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":444.078125,\"y\":975.359375,\"width\":182.84375,\"height\":42.078125,\"top\":975.359375,\"right\":626.921875,\"bottom\":1017.4375,\"left\":444.078125},\"y\":975.35937",
+   444,
+   975,
+   183
+  ],
+  [
+   "SPAN",
+   "",
+   "Search site",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":988,\"y\":445.1875,\"width\":104.625,\"height\":28,\"top\":445.1875,\"right\":1092.625,\"bottom\":473.1875,\"left\":988},\"y\":445.1875}",
+   988,
+   445,
+   105
+  ],
+  [
+   "SPAN",
+   "",
+   "Recent Posts",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":988,\"y\":577.375,\"width\":123.328125,\"height\":28,\"top\":577.375,\"right\":1111.328125,\"bottom\":605.375,\"left\":988},\"y\":577.375}",
+   988,
+   577,
+   123
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Agoda Gold Circle Award 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":645.5625,\"width\":185,\"height\":43.1875,\"top\":645.5625,\"right\":1263,\"bottom\":688.75,\"left\":1078},\"y\":645.5625}",
+   1078,
+   646,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "DANAFF III - Key Highlights of Da Nang Asian Film ",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":718.921875,\"width\":185,\"height\":43.1875,\"top\":718.921875,\"right\":1263,\"bottom\":762.109375,\"left\":1078},\"y\":718.921875}",
+   1078,
+   719,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Warning: Fake Fanpage of Diamond Sea Hotel Danang",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":802.921875,\"width\":185,\"height\":43.1875,\"top\":802.921875,\"right\":1263,\"bottom\":846.109375,\"left\":1078},\"y\":802.921875}",
+   1078,
+   803,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Customer Review Awards 2023",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":876.234375,\"width\":185,\"height\":43.1875,\"top\":876.234375,\"right\":1263,\"bottom\":919.421875,\"left\":1078},\"y\":876.234375}",
+   1078,
+   876,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Return and refund Policy",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":949.5625,\"width\":181.46875,\"height\":21.59375,\"top\":949.5625,\"right\":1259.46875,\"bottom\":971.15625,\"left\":1078},\"y\":949.5625}",
+   1078,
+   950,
+   181
+  ],
+  [
+   "SPAN",
+   "",
+   "Room List",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":988,\"y\":1055.890625,\"width\":102.015625,\"height\":28,\"top\":1055.890625,\"right\":1090.015625,\"bottom\":1083.890625,\"left\":988},\"y\":1055.890625}",
+   988,
+   1056,
+   102
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Ocean Premier Twin Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1124.078125,\"width\":185,\"height\":43.1875,\"top\":1124.078125,\"right\":1263,\"bottom\":1167.265625,\"left\":1078},\"y\":1124.078125}",
+   1078,
+   1124,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Ocean Premier Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1197.453125,\"width\":185,\"height\":43.1875,\"top\":1197.453125,\"right\":1263,\"bottom\":1240.640625,\"left\":1078},\"y\":1197.453125}",
+   1078,
+   1197,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Superior Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1270.828125,\"width\":168,\"height\":21.59375,\"top\":1270.828125,\"right\":1246,\"bottom\":1292.421875,\"left\":1078},\"y\":1270.828125}",
+   1078,
+   1271,
+   168
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Junior Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1344.203125,\"width\":151,\"height\":21.59375,\"top\":1344.203125,\"right\":1229,\"bottom\":1365.796875,\"left\":1078},\"y\":1344.203125}",
+   1078,
+   1344,
+   151
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Superior Twin Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1417.578125,\"width\":151.421875,\"height\":21.59375,\"top\":1417.578125,\"right\":1229.421875,\"bottom\":1439.171875,\"left\":1078},\"y\":1417.578125}",
+   1078,
+   1418,
+   151
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Ocean Suite 02 bedrooms",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1490.890625,\"width\":185,\"height\":43.1875,\"top\":1490.890625,\"right\":1263,\"bottom\":1534.078125,\"left\":1078},\"y\":1490.890625}",
+   1078,
+   1491,
+   185
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Family Ocean Suite",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":1078,\"y\":1564.25,\"width\":142.984375,\"height\":21.59375,\"top\":1564.25,\"right\":1220.984375,\"bottom\":1585.84375,\"left\":1078},\"y\":1564.25}",
+   1078,
+   1564,
+   143
+  ]
+ ],
+ "imgs": [
+  [
+   "https://diamondseahotel.com/images/banner.jpg",
+   0,
+   0,
+   1366,
+   384
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Award/2024.png",
+   103,
+   1038,
+   865,
+   865
+  ],
+  [
+   "eahotel.com/UploadFile/Chua-co-ten--1920-x-1280-px--1024.png",
+   988,
+   646,
+   90,
+   53
+  ],
+  [
+   "/diamondseahotel.com/UploadFile/News/LHP2025/LHP-banner.webp",
+   988,
+   719,
+   90,
+   64
+  ],
+  [
+   "s://diamondseahotel.com/UploadFile/warning/Page-warning.avif",
+   988,
+   803,
+   90,
+   53
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Award/agoda2023.avif",
+   988,
+   876,
+   90,
+   53
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Logo/logo.png",
+   988,
+   950,
+   90,
+   55
+  ],
+  [
+   "//diamondseahotel.com/UploadFile/Ocean_twin/ocean-twin0.avif",
+   988,
+   1124,
+   90,
+   53
+  ],
+  [
+   "oadFile/Gallery/Rooms/Premier-double/ocean-double1-1280.avif",
+   988,
+   1197,
+   90,
+   53
+  ],
+  [
+   "loadFile/Gallery/Rooms/Superior-double/sup-double1-1280.avif",
+   988,
+   1271,
+   90,
+   53
+  ],
+  [
+   "tel.com/UploadFile/Gallery/Rooms/Junior/10-Junior1-1280.avif",
+   988,
+   1344,
+   90,
+   53
+  ],
+  [
+   "m/UploadFile/Gallery/Rooms/Superior-twin/sup-twin4-1280.avif",
+   988,
+   1418,
+   90,
+   53
+  ],
+  [
+   "ile/Gallery/Rooms/Two-Bedroom-Suite/Two-Bedroom-Suite-1.avif",
+   988,
+   1491,
+   90,
+   53
+  ],
+  [
+   "com/UploadFile/Gallery/Rooms/Family-Ocean-Suite/91-1280.avif",
+   988,
+   1564,
+   90,
+   53
+  ]
+ ],
+ "blocks": [
+  [
+   "SECTION",
+   "bg-cover banner-page valign",
+   0,
+   0,
+   1366,
+   384,
+   "rgb(51, 51, 51)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "SPAN",
+   "",
+   444,
+   975,
+   183,
+   42,
+   "rgb(0, 32, 64)",
+   "0px none rgb(255, 255, 255)",
+   "0px none rgb(255, 255, 255)"
+  ],
+  [
+   "BUTTON",
+   "",
+   1230,
+   470,
+   33,
+   33,
+   "rgb(255, 255, 255)",
+   "0px none rgb(177, 149, 121)",
+   "0px none rgb(177, 149, 121)"
+  ]
+ ]
+}

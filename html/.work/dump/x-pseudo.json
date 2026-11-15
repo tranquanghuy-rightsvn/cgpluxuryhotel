@@ -1,0 +1,305 @@
+{
+ "header.mainHeader": {
+  "self": {
+   "display": "block",
+   "position": "absolute",
+   "bottom": "5295.16px",
+   "width": "1366px",
+   "height": "144px",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1",
+   "zIndex": "1001"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "after": {
+   "content": "\"\"",
+   "display": "table",
+   "position": "absolute",
+   "bottom": "14px",
+   "width": "1366px",
+   "height": "130px",
+   "backgroundImage": "linear-gradient(rgb(39, 39, 39) 0%, rgba(39, 39, 39, 0) 100%)",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1",
+   "zIndex": "-1"
+  },
+  "cls": "mainHeader btClear gutter btDarkSkin"
+ },
+ "header.mainHeader .port": {
+  "self": {
+   "display": "block",
+   "width": "1160px",
+   "height": "144px",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "before": {
+   "content": "\" \"",
+   "display": "block",
+   "width": "1160px",
+   "height": "4px",
+   "backgroundColor": "rgb(255, 255, 255)",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "cls": "port"
+ },
+ ".btLogoArea": {
+  "self": {
+   "display": "block",
+   "position": "relative",
+   "width": "1160px",
+   "height": "140px",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "after": {
+   "content": "\" \"",
+   "display": "table",
+   "width": "1160px",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "cls": "btLogoArea menuHolder btClear"
+ },
+ ".banner-slider": {
+  "self": {
+   "display": "block",
+   "position": "relative",
+   "width": "1366px",
+   "height": "686px",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "banner-slider"
+ },
+ ".site-slider": {
+  "self": {
+   "display": "block",
+   "position": "relative",
+   "width": "1366px",
+   "height": "686px",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "position-relative site-slider slick-initialized slick-slider"
+ },
+ ".btSiteFooterWidgets": {
+  "self": {
+   "display": "block",
+   "width": "1366px",
+   "height": "531.5px",
+   "backgroundColor": "rgb(0, 32, 64)",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "boldSection btSiteFooterWidgets gutter btDoubleRowPadding"
+ },
+ ".btSiteFooterWidgets .port": {
+  "self": {
+   "display": "block",
+   "width": "1160px",
+   "height": "531.5px",
+   "borderTop": "4px solid rgb(177, 149, 121)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "port"
+ },
+ "body": {
+  "self": {
+   "display": "block",
+   "width": "1366px",
+   "height": "5439.16px",
+   "backgroundColor": "rgb(255, 255, 255)",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "page-template-default page page-parent btStickyEnabled btLightSkin btBelowMenu btTopToolsInMenuArea btNoSidebar btSwapHeaderSkin btMenuRight btMenuHorizontal"
+ },
+ ".btPageWrap": {
+  "self": {
+   "display": "block",
+   "position": "relative",
+   "width": "1366px",
+   "height": "5439.16px",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "cls": "btPageWrap"
+ },
+ "#be-search-form": {
+  "self": {
+   "display": "block",
+   "width": "530px",
+   "height": "333px",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "after": {
+   "display": "inline",
+   "borderTop": "0px none rgb(255, 255, 255)",
+   "borderBottom": "0px none rgb(255, 255, 255)",
+   "opacity": "1"
+  },
+  "cls": "be-container"
+ },
+ "scrolled": {
+  "cls": "mainHeader btClear gutter",
+  "self": {
+   "display": "block",
+   "position": "fixed",
+   "bottom": "664px",
+   "width": "1366px",
+   "height": "104px",
+   "backgroundColor": "rgb(255, 255, 255)",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1",
+   "zIndex": "1001",
+   "boxShadow": "rgba(0, 0, 0, 0.2) 0px 1px 10px 0px"
+  },
+  "before": {
+   "display": "inline",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "after": {
+   "content": "\"\"",
+   "position": "absolute",
+   "width": "100%",
+   "height": "130px",
+   "backgroundImage": "linear-gradient(rgb(39, 39, 39) 0%, rgba(39, 39, 39, 0) 100%)",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1",
+   "zIndex": "-1"
+  },
+  "port": {
+   "content": "\" \"",
+   "display": "block",
+   "width": "1160px",
+   "height": "4px",
+   "backgroundColor": "rgb(177, 149, 121)",
+   "borderTop": "0px none rgb(34, 34, 34)",
+   "borderBottom": "0px none rgb(34, 34, 34)",
+   "opacity": "1"
+  },
+  "logo": [
+   "https://diamondseahotel.com/logo/logo-diamondsea.svg block 70",
+   "https://diamondseahotel.com/logo/logo-diamondseahotel.svg none 0"
+  ],
+  "a": "rgb(0, 32, 64)",
+  "aMargin": "15px",
+  "rect": 104,
+  "bodyCls": "page-template-default page page-parent btStickyEnabled btLightSkin btBelowMenu btTopToolsInMenuArea btNoSidebar btSwapHeaderSkin btMenuRight btMenuHorizontal btStickyHeaderActive btStickyHeaderOpen"
+ }
+}

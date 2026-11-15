@@ -1,0 +1,710 @@
+{
+ "banner": {
+  "fontFamily": "Arial, sans-serif",
+  "fontSize": "16px",
+  "fontWeight": "400",
+  "lineHeight": "20.8px",
+  "color": "rgb(34, 34, 34)",
+  "letterSpacing": "normal",
+  "textTransform": "none",
+  "marginTop": "0px",
+  "marginBottom": "0px",
+  "paddingTop": "0px",
+  "paddingBottom": "0px",
+  "backgroundColor": "rgb(51, 51, 51)",
+  "borderTop": "0px none rgb(34, 34, 34)",
+  "borderBottom": "0px none rgb(34, 34, 34)",
+  "width": "1366px",
+  "height": "384.188px",
+  "backgroundImage": "url(\"https://diamondseahotel.com/images/banner.jpg\")",
+  "r": {
+   "x": 0,
+   "y": 0,
+   "width": 1366,
+   "height": 384.1875,
+   "top": 0,
+   "right": 1366,
+   "bottom": 384.1875,
+   "left": 0
+  },
+  "y": 0
+ },
+ "h1": {
+  "fontFamily": "\"Playfair Display\"",
+  "fontSize": "48px",
+  "fontWeight": "400",
+  "lineHeight": "62.4px",
+  "color": "rgb(255, 255, 255)",
+  "letterSpacing": "normal",
+  "textTransform": "none",
+  "marginTop": "0px",
+  "marginBottom": "20px",
+  "paddingTop": "0px",
+  "paddingBottom": "0px",
+  "backgroundColor": "rgba(0, 0, 0, 0)",
+  "borderTop": "0px none rgb(255, 255, 255)",
+  "borderBottom": "0px none rgb(255, 255, 255)",
+  "width": "656.656px",
+  "height": "62.3906px",
+  "r": {
+   "x": 113,
+   "y": 291.796875,
+   "width": 656.65625,
+   "height": 62.390625,
+   "top": 291.796875,
+   "right": 769.65625,
+   "bottom": 354.1875,
+   "left": 113
+  },
+  "y": 291.796875
+ },
+ "content": [
+  [
+   "SPAN",
+   "headline",
+   "News",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"48px\",\"fontWeight\":\"400\",\"lineHeight\":\"62.4px\",\"color\":\"rgb(255, 255, 255)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":113,\"y\":294.796875,\"width\":109.3125,\"height\":55,\"top\":294.796875,\"right\":222.3125,\"bottom\":349.796875,\"left\":113},\"y\":294.796875}",
+   113,
+   295,
+   109
+  ],
+  [
+   "A",
+   "h5",
+   "Agoda Gold Circle Award 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":524.1875,\"width\":266.375,\"height\":24,\"top\":524.1875,\"right\":716.515625,\"bottom\":548.1875,\"left\":450.140625},\"y\":524.1875}",
+   450,
+   524,
+   266
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "May 27, 2026",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":556.375,\"width\":89.625,\"height\":20.796875,\"top\":556.375,\"right\":520.390625,\"bottom\":577.171875,\"left\":430.765625},\"y\":556.375}",
+   431,
+   556,
+   90
+  ],
+  [
+   "A",
+   "h5",
+   "Warning: Fake Fanpage of Diamond Sea Hotel Danang",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":776.1875,\"width\":413.109375,\"height\":49.1875,\"top\":776.1875,\"right\":843.875,\"bottom\":825.375,\"left\":430.765625},\"y\":776.1875}",
+   431,
+   776,
+   413
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Jul 31, 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":833.5625,\"width\":83.390625,\"height\":20.796875,\"top\":833.5625,\"right\":514.15625,\"bottom\":854.359375,\"left\":430.765625},\"y\":833.5625}",
+   431,
+   834,
+   83
+  ],
+  [
+   "P",
+   "",
+   "We would like to alert customers that several fake",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":864.359375,\"width\":438.875,\"height\":41.59375,\"top\":864.359375,\"right\":869.640625,\"bottom\":905.953125,\"left\":430.765625},\"y\":864.359375}",
+   431,
+   864,
+   439
+  ],
+  [
+   "A",
+   "h5",
+   "DANAFF III - Key Highlights of Da Nang Asian Film ",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":1028.1875,\"width\":432.34375,\"height\":49.1875,\"top\":1028.1875,\"right\":863.109375,\"bottom\":1077.375,\"left\":430.765625},\"y\":1028.1875}",
+   431,
+   1028,
+   432
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Jun 26, 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":1085.5625,\"width\":85.171875,\"height\":20.796875,\"top\":1085.5625,\"right\":515.9375,\"bottom\":1106.359375,\"left\":430.765625},\"y\":1085.56",
+   431,
+   1086,
+   85
+  ],
+  [
+   "P",
+   "",
+   "Da Nang is preparing to welcome the return of the ",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":1116.359375,\"width\":438.875,\"height\":41.59375,\"top\":1116.359375,\"right\":869.640625,\"bottom\":1157.953125,\"left\":430.765625},\"y\":1116.359375}",
+   431,
+   1116,
+   439
+  ],
+  [
+   "A",
+   "h5",
+   "Customer Review Award 2024",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":1280.1875,\"width\":257.640625,\"height\":24,\"top\":1280.1875,\"right\":707.78125,\"bottom\":1304.1875,\"left\":450.140625},\"y\":1280.1875}",
+   450,
+   1280,
+   258
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Jul 31, 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":1312.375,\"width\":83.390625,\"height\":20.796875,\"top\":1312.375,\"right\":514.15625,\"bottom\":1333.171875,\"left\":430.765625},\"y\":1312.375",
+   431,
+   1312,
+   83
+  ],
+  [
+   "P",
+   "",
+   "Ending a remarkable year, Diamond Sea Hotel Danang",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":1343.171875,\"width\":438.875,\"height\":41.59375,\"top\":1343.171875,\"right\":869.640625,\"bottom\":1384.765625,\"left\":430.765625},\"y\":1343.171875}",
+   431,
+   1343,
+   439
+  ],
+  [
+   "A",
+   "h5",
+   "Traveller Review Awards 2024",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":1532.1875,\"width\":260.359375,\"height\":24,\"top\":1532.1875,\"right\":710.5,\"bottom\":1556.1875,\"left\":450.140625},\"y\":1532.1875}",
+   450,
+   1532,
+   260
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Sep 18, 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":1564.375,\"width\":83.40625,\"height\":20.796875,\"top\":1564.375,\"right\":514.171875,\"bottom\":1585.171875,\"left\":430.765625},\"y\":1564.375",
+   431,
+   1564,
+   83
+  ],
+  [
+   "P",
+   "",
+   "Diamond Sea Hotel Danang is honored to receive the",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":1595.171875,\"width\":438.875,\"height\":41.59375,\"top\":1595.171875,\"right\":869.640625,\"bottom\":1636.765625,\"left\":430.765625},\"y\":1595.171875}",
+   431,
+   1595,
+   439
+  ],
+  [
+   "A",
+   "h5",
+   "[Official] Danang International Fireworks Festival",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":1784.1875,\"width\":371.015625,\"height\":49.1875,\"top\":1784.1875,\"right\":801.78125,\"bottom\":1833.375,\"left\":430.765625},\"y\":1784.1875}",
+   431,
+   1784,
+   371
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Mar 11, 2024",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":1841.5625,\"width\":90.0625,\"height\":20.796875,\"top\":1841.5625,\"right\":520.828125,\"bottom\":1862.359375,\"left\":430.765625},\"y\":1841.56",
+   431,
+   1842,
+   90
+  ],
+  [
+   "A",
+   "h5",
+   "Customer Review Awards 2023",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":2036.1875,\"width\":265.8125,\"height\":24,\"top\":2036.1875,\"right\":715.953125,\"bottom\":2060.1875,\"left\":450.140625},\"y\":2036.1875}",
+   450,
+   2036,
+   266
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Jul 31, 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":2068.375,\"width\":83.390625,\"height\":20.796875,\"top\":2068.375,\"right\":514.15625,\"bottom\":2089.171875,\"left\":430.765625},\"y\":2068.375",
+   431,
+   2068,
+   83
+  ],
+  [
+   "A",
+   "h5",
+   "Danang International Firework 2019",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":2288.1875,\"width\":307.34375,\"height\":24,\"top\":2288.1875,\"right\":757.484375,\"bottom\":2312.1875,\"left\":450.140625},\"y\":2288.1875}",
+   450,
+   2288,
+   307
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Dec 27, 2022",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":2320.375,\"width\":87.15625,\"height\":20.796875,\"top\":2320.375,\"right\":517.921875,\"bottom\":2341.171875,\"left\":430.765625},\"y\":2320.375",
+   431,
+   2320,
+   87
+  ],
+  [
+   "A",
+   "h5",
+   "New Year Buffet 2019",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":2540.1875,\"width\":188.625,\"height\":24,\"top\":2540.1875,\"right\":638.765625,\"bottom\":2564.1875,\"left\":450.140625},\"y\":2540.1875}",
+   450,
+   2540,
+   189
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Dec 27, 2022",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":2572.375,\"width\":87.15625,\"height\":20.796875,\"top\":2572.375,\"right\":517.921875,\"bottom\":2593.171875,\"left\":430.765625},\"y\":2572.375",
+   431,
+   2572,
+   87
+  ],
+  [
+   "P",
+   "",
+   "A beautiful new year has arrived, Diamond Sea Hote",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":2603.171875,\"width\":438.875,\"height\":41.59375,\"top\":2603.171875,\"right\":869.640625,\"bottom\":2644.765625,\"left\":430.765625},\"y\":2603.171875}",
+   431,
+   2603,
+   439
+  ],
+  [
+   "A",
+   "h5",
+   "Brilliant Christmas Party At Diamond Sea Hotel",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"21px\",\"fontWeight\":\"500\",\"lineHeight\":\"25.2px\",\"color\":\"rgb(177, 149, 121)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":450.140625,\"y\":2792.1875,\"width\":405.984375,\"height\":24,\"top\":2792.1875,\"right\":856.125,\"bottom\":2816.1875,\"left\":450.140625},\"y\":2792.1875}",
+   450,
+   2792,
+   406
+  ],
+  [
+   "SPAN",
+   "btArticleDate",
+   "Dec 27, 2022",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"12px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"uppercase\",\"r\":{\"x\":430.765625,\"y\":2824.375,\"width\":87.15625,\"height\":20.796875,\"top\":2824.375,\"right\":517.921875,\"bottom\":2845.171875,\"left\":430.765625},\"y\":2824.375",
+   431,
+   2824,
+   87
+  ],
+  [
+   "P",
+   "",
+   "On Christmas night 24th, Diamond Sea Hotel Danang ",
+   "{\"fontFamily\":\"Arial, sans-serif\",\"fontSize\":\"16px\",\"fontWeight\":\"400\",\"lineHeight\":\"20.8px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":430.765625,\"y\":2855.171875,\"width\":438.875,\"height\":41.59375,\"top\":2855.171875,\"right\":869.640625,\"bottom\":2896.765625,\"left\":430.765625},\"y\":2855.171875}",
+   431,
+   2855,
+   439
+  ],
+  [
+   "A",
+   "btBtn btBtn btnFilledStyle btnAccentColo",
+   "Load More",
+   "{\"fontFamily\":\"Lato\",\"fontSize\":\"12px\",\"fontWeight\":\"700\",\"lineHeight\":\"12px\",\"color\":\"rgb(255, 255, 255)\",\"letterSpacing\":\"1px\",\"textTransform\":\"uppercase\",\"r\":{\"x\":424.671875,\"y\":3024.1875,\"width\":113.3125,\"height\":46,\"top\":3024.1875,\"right\":537.984375,\"bottom\":3070.1875,\"left\":424.671875},\"y\":3024.1875}",
+   425,
+   3024,
+   113
+  ],
+  [
+   "SPAN",
+   "",
+   "Search site",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":889.65625,\"y\":505.1875,\"width\":104.625,\"height\":28,\"top\":505.1875,\"right\":994.28125,\"bottom\":533.1875,\"left\":889.65625},\"y\":505.1875}",
+   890,
+   505,
+   105
+  ],
+  [
+   "SPAN",
+   "",
+   "Recent Posts",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":889.65625,\"y\":637.375,\"width\":123.328125,\"height\":28,\"top\":637.375,\"right\":1012.984375,\"bottom\":665.375,\"left\":889.65625},\"y\":637.375}",
+   890,
+   637,
+   123
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Agoda Gold Circle Award 2025",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":705.5625,\"width\":228.328125,\"height\":21.59375,\"top\":705.5625,\"right\":1207.984375,\"bottom\":727.15625,\"left\":979.65625},\"y\":705.5625}",
+   980,
+   706,
+   228
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "DANAFF III - Key Highlights of Da Nang Asian Film ",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":778.921875,\"width\":283.328125,\"height\":43.1875,\"top\":778.921875,\"right\":1262.984375,\"bottom\":822.109375,\"left\":979.65625},\"y\":778.921875}",
+   980,
+   779,
+   283
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Warning: Fake Fanpage of Diamond Sea Hotel Danang",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":862.921875,\"width\":283.328125,\"height\":43.1875,\"top\":862.921875,\"right\":1262.984375,\"bottom\":906.109375,\"left\":979.65625},\"y\":862.921875}",
+   980,
+   863,
+   283
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Customer Review Awards 2023",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":936.234375,\"width\":227.84375,\"height\":21.59375,\"top\":936.234375,\"right\":1207.5,\"bottom\":957.828125,\"left\":979.65625},\"y\":936.234375}",
+   980,
+   936,
+   228
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Return and refund Policy",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":1009.5625,\"width\":181.46875,\"height\":21.59375,\"top\":1009.5625,\"right\":1161.125,\"bottom\":1031.15625,\"left\":979.65625},\"y\":1009.5625}",
+   980,
+   1010,
+   181
+  ],
+  [
+   "SPAN",
+   "",
+   "Room List",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"24px\",\"fontWeight\":\"500\",\"lineHeight\":\"31.2px\",\"color\":\"rgb(0, 32, 64)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":889.65625,\"y\":1115.890625,\"width\":102.015625,\"height\":28,\"top\":1115.890625,\"right\":991.671875,\"bottom\":1143.890625,\"left\":889.65625},\"y\":1115.890625}",
+   890,
+   1116,
+   102
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Ocean Premier Twin Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":1184.078125,\"width\":196.875,\"height\":21.59375,\"top\":1184.078125,\"right\":1176.53125,\"bottom\":1205.671875,\"left\":979.65625},\"y\":1184.078125",
+   980,
+   1184,
+   197
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Ocean Premier Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":1257.453125,\"width\":213.453125,\"height\":21.59375,\"top\":1257.453125,\"right\":1193.109375,\"bottom\":1279.046875,\"left\":979.65625},\"y\":1257.45",
+   980,
+   1257,
+   213
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Superior Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":1330.828125,\"width\":168,\"height\":21.59375,\"top\":1330.828125,\"right\":1147.65625,\"bottom\":1352.421875,\"left\":979.65625},\"y\":1330.828125}",
+   980,
+   1331,
+   168
+  ],
+  [
+   "A",
+   "h6 fix-title",
+   "Junior Double Room",
+   "{\"fontFamily\":\"\\\"Playfair Display\\\"\",\"fontSize\":\"18px\",\"fontWeight\":\"500\",\"lineHeight\":\"21.6px\",\"color\":\"rgb(34, 34, 34)\",\"letterSpacing\":\"normal\",\"textTransform\":\"none\",\"r\":{\"x\":979.65625,\"y\":1404.203125,\"width\":151,\"height\":21.59375,\"top\":1404.203125,\"right\":1130.65625,\"bottom\":1425.796875,\"left\":979.65625},\"y\":1404.203125}",
+   980,
+   1404,
+   151
+  ]
+ ],
+ "imgs": [
+  [
+   "https://diamondseahotel.com/images/banner.jpg",
+   0,
+   0,
+   1366,
+   384
+  ],
+  [
+   "eahotel.com/UploadFile/Chua-co-ten--1920-x-1280-px--1024.png",
+   103,
+   504,
+   308,
+   205
+  ],
+  [
+   "s://diamondseahotel.com/UploadFile/warning/Page-warning.avif",
+   103,
+   756,
+   308,
+   205
+  ],
+  [
+   "/diamondseahotel.com/UploadFile/News/LHP2025/LHP-banner.webp",
+   103,
+   1008,
+   308,
+   246
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Award/2024.avif",
+   103,
+   1260,
+   308,
+   308
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Article/Booking.jpg",
+   103,
+   1512,
+   308,
+   308
+  ],
+  [
+   "lich-thi-dau-le-hoi-phao-hoa-quoc-te-da-nang-2024-diff-5.jpg",
+   103,
+   1764,
+   308,
+   205
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Award/agoda2023.avif",
+   103,
+   2016,
+   308,
+   205
+  ],
+  [
+   "ile/49818568-1992289834140753-3481185922437873664-o-1280.jpg",
+   103,
+   2268,
+   308,
+   207
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/-MG-8929-1280.JPG",
+   103,
+   2520,
+   308,
+   205
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/-MG-8738-1280.JPG",
+   103,
+   2772,
+   308,
+   205
+  ],
+  [
+   "eahotel.com/UploadFile/Chua-co-ten--1920-x-1280-px--1024.png",
+   890,
+   706,
+   90,
+   53
+  ],
+  [
+   "/diamondseahotel.com/UploadFile/News/LHP2025/LHP-banner.webp",
+   890,
+   779,
+   90,
+   64
+  ],
+  [
+   "s://diamondseahotel.com/UploadFile/warning/Page-warning.avif",
+   890,
+   863,
+   90,
+   53
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Award/agoda2023.avif",
+   890,
+   936,
+   90,
+   53
+  ],
+  [
+   "https://diamondseahotel.com/UploadFile/Logo/logo.png",
+   890,
+   1010,
+   90,
+   55
+  ],
+  [
+   "//diamondseahotel.com/UploadFile/Ocean_twin/ocean-twin0.avif",
+   890,
+   1184,
+   90,
+   53
+  ],
+  [
+   "oadFile/Gallery/Rooms/Premier-double/ocean-double1-1280.avif",
+   890,
+   1257,
+   90,
+   53
+  ],
+  [
+   "loadFile/Gallery/Rooms/Superior-double/sup-double1-1280.avif",
+   890,
+   1331,
+   90,
+   53
+  ],
+  [
+   "tel.com/UploadFile/Gallery/Rooms/Junior/10-Junior1-1280.avif",
+   890,
+   1404,
+   90,
+   53
+  ]
+ ],
+ "blocks": [
+  [
+   "SECTION",
+   "bg-cover banner-page position-relative v",
+   0,
+   0,
+   1366,
+   384,
+   "rgb(51, 51, 51)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   504,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   756,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   1008,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   1260,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   1512,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   1764,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   2016,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   2268,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   2520,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "DIV",
+   "bpbItem mhfix4 bg-cover-top",
+   103,
+   2772,
+   308,
+   207,
+   "rgb(0, 32, 64)",
+   "0px none rgb(34, 34, 34)",
+   "0px none rgb(34, 34, 34)"
+  ],
+  [
+   "A",
+   "btBtn btBtn btnFilledStyle btnAccentColo",
+   425,
+   3024,
+   113,
+   46,
+   "rgb(177, 149, 121)",
+   "2px solid rgb(177, 149, 121)",
+   "2px solid rgb(177, 149, 121)"
+  ],
+  [
+   "BUTTON",
+   "",
+   1230,
+   530,
+   33,
+   33,
+   "rgb(255, 255, 255)",
+   "0px none rgb(177, 149, 121)",
+   "0px none rgb(177, 149, 121)"
+  ]
+ ]
+}

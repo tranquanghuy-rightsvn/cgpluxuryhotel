@@ -1,0 +1,1 @@
+JSON.stringify([...document.querySelectorAll('.room-title')].map(t=>{const r=t.closest('.room').querySelector('.room-img').getBoundingClientRect(), q=t.getBoundingClientRect(); return t.textContent+' gap '+Math.round(q.top-r.bottom)}).concat([Math.round(document.querySelectorAll('.room.is-wide')[0].getBoundingClientRect().top+scrollY)]))

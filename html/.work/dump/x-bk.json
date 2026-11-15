@@ -1,0 +1,62 @@
+[
+ {
+  "src": "",
+  "name": "tlFrame0.3690342557590378",
+  "id": "tlFrame0.3690342557590378",
+  "r": {
+   "x": 0,
+   "y": 0,
+   "width": 0,
+   "height": 0,
+   "top": 0,
+   "right": 0,
+   "bottom": 0,
+   "left": 0
+  }
+ },
+ {
+  "src": "https://vn-ibe.hopenapi.com/booking2/hotel/index.gge.html?int=true&accommodationMode=auto&adults=2&providerId=500614&theme=500614_2022-12-23&defaultAdults=2&language=en&width=100%25&tlTrackerUser=324286930380649478&tlTrackerSession=324286930380649478&globalUserId=324286929599401001&profileUserId=324286929598358822&intervalSessionId=324286929599401001&intervalStartTimestamp=1794729492959&browserSessionId=324286929591554656&conId=4483347106600024&contWidth=1180&origin=https%3A%2F%2Fdiamondseahotel.com",
+  "name": "tlFrame0.8041653517837487",
+  "id": "tlFrame0.8041653517837487",
+  "r": {
+   "x": 93,
+   "y": 524.984375,
+   "width": 1180,
+   "height": 744,
+   "top": 524.984375,
+   "right": 1273,
+   "bottom": 1268.984375,
+   "left": 93
+  }
+ },
+ {
+  "src": "https://vn-ibe.hopenapi.com/booking2/hotel/index.gge.html?int=true&accommodationMode=auto&adults=2&providerId=500614&theme=500614_2022-12-23&defaultAdults=2&language=en&width=100%25&tlTrackerUser=324286930380649478&tlTrackerSession=324286930380649478&globalUserId=324286929599401001&profileUserId=324286929598358822&intervalSessionId=324286929599401001&intervalStartTimestamp=1794729492959&browserSessionId=324286929591554656&autoScroll=none&conId=8086315095027756&contWidth=1180&origin=https%3A%2F%2Fdiamondseahotel.com&path=%2Fs%2Fcart",
+  "name": "tlFrame0.18904838253896317",
+  "id": "tlFrame0.18904838253896317",
+  "r": {
+   "x": 93,
+   "y": 767,
+   "width": 1180,
+   "height": 1,
+   "top": 767,
+   "right": 1273,
+   "bottom": 768,
+   "left": 93
+  }
+ },
+ {
+  "src": "",
+  "name": "tlFrame0.03141632030501618",
+  "id": "tlFrame0.03141632030501618",
+  "r": {
+   "x": 12,
+   "y": 678,
+   "width": 456,
+   "height": 226,
+   "top": 678,
+   "right": 468,
+   "bottom": 904,
+   "left": 12
+  }
+ }
+]

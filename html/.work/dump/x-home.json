@@ -1,0 +1,77 @@
+[
+ {
+  "src": "",
+  "name": "tlFrame0.4308785201306492",
+  "id": "tlFrame0.4308785201306492",
+  "r": {
+   "x": 0,
+   "y": 0,
+   "width": 0,
+   "height": 34,
+   "top": 0,
+   "right": 0,
+   "bottom": 34,
+   "left": 0
+  }
+ },
+ {
+  "src": "",
+  "name": "tlFrame0.5941790813428657",
+  "id": "tlFrame0.5941790813428657",
+  "r": {
+   "x": 0,
+   "y": 0,
+   "width": 0,
+   "height": 1,
+   "top": 0,
+   "right": 0,
+   "bottom": 1,
+   "left": 0
+  }
+ },
+ {
+  "src": "",
+  "name": "tlFrame0.8197767085823806",
+  "id": "tlFrame0.8197767085823806",
+  "r": {
+   "x": 713,
+   "y": 160,
+   "width": 530,
+   "height": 333,
+   "top": 160,
+   "right": 1243,
+   "bottom": 493,
+   "left": 713
+  }
+ },
+ {
+  "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.9811372619392!2d108.24510719999999!3d16.0664686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421783ecacb2cd%3A0x1b3ab65dcfd4ff59!2sDiamond%20Sea%20Hotel!5e0!3m2!1svi!2s!4v1772265301352!5m2!1svi!2s",
+  "name": "",
+  "id": "",
+  "r": {
+   "x": 103,
+   "y": 1237,
+   "width": 766.65625,
+   "height": 400,
+   "top": 1237,
+   "right": 869.65625,
+   "bottom": 1637,
+   "left": 103
+  }
+ },
+ {
+  "src": "",
+  "name": "tlFrame0.22762549072712646",
+  "id": "tlFrame0.22762549072712646",
+  "r": {
+   "x": 12,
+   "y": 452,
+   "width": 456,
+   "height": 226,
+   "top": 452,
+   "right": 468,
+   "bottom": 678,
+   "left": 12
+  }
+ }
+]

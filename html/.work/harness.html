@@ -1,0 +1,5 @@
+<!DOCTYPE html><meta charset="utf-8"><body style="margin:0;background:#444;display:flex;gap:16px;align-items:flex-start">
+<script>
+const q=new URLSearchParams(location.search);
+(q.get('w')||'375').split(',').forEach(w=>{const f=document.createElement('iframe');f.src=q.get('src');f.style.cssText='border:0;background:#fff;flex:none;width:'+w+'px;height:'+(q.get('h')||650)+'px';document.body.appendChild(f)});
+</script>
