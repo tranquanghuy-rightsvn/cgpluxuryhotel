@@ -42,9 +42,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .site-header .port::before { display: none; }
 .header-bar { display: flex; align-items: flex-start; padding: 20px 0; }
 .logo { flex: none; width: 145px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; line-height: 1; }
-.logo-mark { font: 400 44px/1 var(--serif); letter-spacing: 3px; }
-.logo-name { margin-top: 2px; font: 400 13px/1 var(--serif); letter-spacing: 5px; text-transform: uppercase; }
-.logo-stars { margin-top: 6px; font-size: 10px; letter-spacing: 4px; color: var(--gold); }
+.logo img { display: block; width: auto; height: 90px; max-width: 100%; object-fit: contain; }
 .nav { margin-left: auto; display: flex; align-items: flex-start; }
 .menu { display: flex; gap: 24px; }
 .menu > li { position: relative; }
@@ -75,9 +73,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .site-header.is-sticky::after { display: none; }
 .site-header.is-sticky .header-bar { padding: 0; align-items: center; height: 100px; }
 .site-header.is-sticky .logo { height: 70px; }
-.site-header.is-sticky .logo-mark { font-size: 30px; }
-.site-header.is-sticky .logo-name { font-size: 10px; letter-spacing: 4px; }
-.site-header.is-sticky .logo-stars { margin-top: 3px; font-size: 8px; }
+.site-header.is-sticky .logo img { height: 64px; }
 .site-header.is-sticky .lang-btn { color: var(--gold); }
 @keyframes headerIn { from { transform: translateY(-100%); } }
 
@@ -142,8 +138,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
   .site-header .port::before { display: none; }
   .header-bar, .site-header.is-sticky .header-bar { height: 100px; padding: 0; align-items: center; justify-content: center; position: relative; }
   .logo, .site-header.is-sticky .logo { height: 80px; }
-  .logo-mark, .site-header.is-sticky .logo-mark { font-size: 34px; }
-  .logo-name, .site-header.is-sticky .logo-name { font-size: 11px; letter-spacing: 4px; }
+  .logo img, .site-header.is-sticky .logo img { height: 72px; }
   .nav-toggle { display: grid; gap: 5px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 34px; padding: 6px 4px; }
   .nav-toggle span { display: block; height: 3px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
   .nav { margin: 0; }

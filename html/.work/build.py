@@ -106,7 +106,7 @@ def header(c, cur):
   <div class="port">
     <div class="header-bar">
       <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <a class="logo" href="{c.home}" aria-label="CGP Luxury Hotel"><span class="logo-mark">CGP</span><span class="logo-name">Luxury Hotel</span><span class="logo-stars">★★★★</span></a>
+      <a class="logo" href="{c.home}" aria-label="CGP Luxury Hotel"><img src="{c.R}images/logo.png" alt="CGP Luxury Hotel" width="353" height="226"></a>
       <nav class="nav">
         <ul class="menu">
           <li>{a("", "nav.home", "home")}</li>
