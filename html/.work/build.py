@@ -604,7 +604,7 @@ def _fmt(s, kw):
 def build(lang):
     # Home
     c = Ctx(lang, "")
-    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-day", "hero-night", "exterior-night", "suite-sunset", "balcony-view", "room-twin-window", "suite-gold"])
+    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "hero-guests", "suite-sunset"])
     adults = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{e(c.t("g.a" + str(n)) + c.t("g.c0"))}</option>' for n in (1, 2, 3, 4))
     home = f'''<section class="banner" data-fade=".banner-slide" data-auto="6000" data-loop="1">
   {slides}
