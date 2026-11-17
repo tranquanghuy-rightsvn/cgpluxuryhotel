@@ -33,7 +33,7 @@ FB = "https://www.facebook.com/profile.php?id=61564529174870"
 PHONE, PHONE_TEL, EMAIL = "(+84) 905 926 638", "+84905926638", "cgpluxuryhotelhoian@gmail.com"
 PKG_MENU = [6, 2, 3, 4, 9, 10, 11]
 CATS = ["relax", "romance", "family", "long", "sig", "solo"]
-GALLERY = ["exterior-night", "exterior-day", "room-pool-view", "suite-arch-romantic", "town-view-window", "room-petals-balcony",
+GALLERY = ["hero-facade-night", "hero-facade-day", "room-pool-view", "suite-arch-romantic", "town-view-window", "room-petals-balcony",
            "grand-suite-arch", "suite-onyx-front", "towel-hearts", "bath-glass-view", "family-ricefield-view", "balcony-view",
            "deluxe-gold-panel", "suite-onyx", "bath-rose", "marble-double", "family-twin-balcony", "suite-sunset",
            "suite-gold", "room-romantic", "bathtub", "suite-onyx-window", "suite-sofa-curtains", "marble-room",
@@ -49,7 +49,7 @@ PKG_PHOTOS = {1: ["room-pool-view", "town-view-window", "bath-glass-view"], 2: [
 GROUP_FILL = {"relax": ["room-pool-view", "town-view-window"], "family": ["family-twin-balcony", "family-ricefield-view"],
               "long": ["marble-double", "suite-onyx-window"], "sig": ["grand-suite-arch", "suite-onyx-front"],
               "romance": ["towel-hearts", "suite-arch-romantic"], "solo": ["suite-sofa-curtains", "suite-onyx"]}
-SERVICES = [("s1", "pool"), ("s2", "balcony-view"), ("s3", "bathtub"), ("s4", "room-romantic"), ("s5", "exterior-night"), ("s6", "room-desk")]
+SERVICES = [("s1", "pool"), ("s2", "balcony-view"), ("s3", "bathtub"), ("s4", "room-romantic"), ("s5", "hero-facade-night"), ("s6", "room-desk")]
 
 
 SVG = {
@@ -214,7 +214,7 @@ def banner_page(c, img, text, cls=""):
 
 def intro_block(c, h="h1"):
     imgs = "".join(f'\n        <img src="{c.img(n)}" alt="{e(c.t("intro.title"))}" loading="lazy" width="1320" height="880">'
-                   for n in ["room-double-balcony", "suite-gold", "exterior-day", "room-twin-window", "suite-lounge"])
+                   for n in ["room-double-balcony", "suite-gold", "hero-facade-day", "room-twin-window", "suite-lounge"])
     return f'''<div class="intro-row">
       <div class="intro-card">
         <{h} class="headline dash">{e(c.t("intro.title"))}</{h}>
@@ -678,7 +678,7 @@ def build(lang):
 
     # About
     c = Ctx(lang, "gioi-thieu/")
-    about = f'''{banner_page(c, "exterior-night", c.t("ab.banner"))}
+    about = f'''{banner_page(c, "hero-facade-night", c.t("ab.banner"))}
 <section class="intro about-sec">
   <div class="port">
     {intro_block(c, "h2")}
