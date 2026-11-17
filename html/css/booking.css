@@ -22,14 +22,14 @@
 .hb-lang { position: relative; }
 .hb-lang ul { position: absolute; right: 0; top: 36px; z-index: 5; min-width: 150px; padding: 6px 0; background: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, .16); display: none; }
 .hb-lang.is-open ul { display: block; }
-.hb-lang li button { display: flex; gap: 8px; align-items: center; width: 100%; padding: 6px 14px; font-size: 14px; color: var(--c-text); }
-.hb-lang li button:hover { background: #eff1f3; }
+.hb-lang li button, .hb-lang li a { display: flex; gap: 8px; align-items: center; width: 100%; padding: 6px 14px; font-size: 14px; color: var(--c-text); }
+.hb-lang li button:hover, .hb-lang li a:hover { background: #eff1f3; }
 .hb-lang li img { width: 18px; height: 12px; }
 .x-hcp.is-locked .hb { background: #c4c7cc; color: #8f9298; pointer-events: none; }
 
 /* Title row + progress bar (x-hnp) */
 .x-hnp { position: relative; padding: 18px 32px; text-align: center; }
-.x-hnp h1 { font-size: 22px; font-weight: 400; line-height: 28px; }
+.x-hnp h1, .x-hnp h2 { font-size: 22px; font-weight: 400; line-height: 28px; }
 .x-hnp__back { position: absolute; left: 8px; top: 12px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: var(--c-link); font-size: 16px; line-height: 16px; }
 .x-hnp__back::before { content: ""; width: 7px; height: 7px; border: solid currentColor; border-width: 0 0 2px 2px; transform: rotate(45deg); }
 .x-hnp__bar { height: 4px; background: #8fa0ba; }
@@ -197,7 +197,7 @@
 .done { max-width: 640px; margin: 0 auto; padding: 30px 0 90px; text-align: center; }
 .done-ico { width: 64px; height: 64px; margin: 0 auto 20px; border-radius: 50%; background: #84adef; display: grid; place-items: center; }
 .done-ico::after { content: ""; width: 14px; height: 26px; margin-top: -6px; border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg); }
-.done h2 { font-size: 24px; font-weight: 400; line-height: 32px; }
+.done h2, .done h3 { font-size: 24px; font-weight: 400; line-height: 32px; }
 .done p { margin-top: 12px; }
 .done-code { margin: 24px auto; padding: 16px; background: #f9fafb; border: 1px solid #fff; }
 .done-code b { display: block; font-size: 24px; letter-spacing: 2px; margin-top: 4px; color: var(--c-link); }
@@ -244,3 +244,10 @@
 .mybk-total .row strong, .mybk-total .row b { white-space: nowrap; }
 
 .rate-desc { margin-top: 10px; max-width: 640px; font-size: 14px; line-height: 21px; color: #2f3135; }
+
+/* Static pre-rendered booking steps (text is in the HTML, JS only toggles) */
+.tl [hidden] { display: none !important; }
+.hb--promo { background: none; text-transform: none; font-weight: 400; }
+.x-input .pl-icon { padding-left: 40px; }
+.psf-extra-row, .done-home { margin-top: 24px; }
+.done-home .tl-btn { text-decoration: none; }

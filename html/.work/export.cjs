@@ -1,6 +1,6 @@
 // Load js/i18n.js + js/data.js once per language in a fake browser context and dump what the static build needs.
 const fs = require("fs"), vm = require("vm");
-const src = ["js/i18n.js", "js/data.js"].map((f) => fs.readFileSync(f, "utf8"));
+const src = [".work/src/i18n.js", ".work/src/data.js"].map((f) => fs.readFileSync(f, "utf8"));
 function load(lang) {
   const ctx = { window: {}, location: { search: "" }, URLSearchParams,
     document: { documentElement: { lang }, addEventListener() {}, querySelector() { return null; }, querySelectorAll() { return []; } } };

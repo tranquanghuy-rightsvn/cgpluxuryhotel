@@ -4,7 +4,8 @@
 Every language gets its own pre-rendered pages (SEO):
   vi -> /            en -> /en/   ko -> /ko/   zh -> /zh/   ru -> /ru/   de -> /de/
   pages: ""  gioi-thieu/  tin-tuc/  tin-tuc/<id>/  dat-phong/
-Text comes from js/i18n.js + js/data.js (exported by .work/export.cjs -> .work/i18n.json).
+Text comes from .work/src/i18n.js + .work/src/data.js (exported by .work/export.cjs -> .work/i18n.json).
+All text is written into the HTML at build time; the site ships no translation JS.
 Run from the html/ folder:  node .work/export.cjs && python3 .work/build.py
 """
 import html as H, json, os, re, shutil, subprocess, time
@@ -27,9 +28,9 @@ NAMES = {"vi": "Tiếng Việt", "en": "English", "ko": "한국어", "zh": "中�
 FLAGS = {"vi": "vi.png", "en": "en.png", "ko": "ko.svg", "zh": "zh.svg", "ru": "ru.svg", "de": "de.svg"}
 LOCALE = {"vi": "vi_VN", "en": "en_GB", "ko": "ko_KR", "zh": "zh_CN", "ru": "ru_RU", "de": "de_DE"}
 
-MAP = "https://www.google.com/maps?q=78+Tr%E1%BA%A7n+Kh%C3%A1t+Ch%C3%A2n,+H%E1%BB%99i+An,+Qu%E1%BA%A3ng+Nam&z=15&output=embed"
+MAP = "https://www.google.com/maps?q=67+L%C3%BD+Th%C6%B0%E1%BB%9Dng+Ki%E1%BB%87t,+H%E1%BB%99i+An,+Qu%E1%BA%A3ng+Nam&z=15&output=embed"
 FB = "https://www.facebook.com/profile.php?id=61564529174870"
-PHONE, PHONE_TEL, EMAIL = "(+84) 98 924 46 24", "+84989244624", "cgpluxuryhotelhoian@gmail.com"
+PHONE, PHONE_TEL, EMAIL = "(+84) 905 926 638", "+84905926638", "cgpluxuryhotelhoian@gmail.com"
 PKG_MENU = [6, 2, 3, 4, 9, 10, 11]
 CATS = ["relax", "romance", "family", "long", "sig", "solo"]
 GALLERY = ["exterior-night", "exterior-day", "room-pool-view", "suite-arch-romantic", "town-view-window", "room-petals-balcony",
@@ -166,9 +167,9 @@ def footer(c):
 </footer>'''
 
 
-def page(c, title, desc, css, cur, body, scripts=(), og_img="exterior-night"):
+def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-facade"):
     links = "".join(f'<link rel="stylesheet" href="{c.R}css/{x}.css?v={VER}">\n' for x in ["fonts", "main"] + list(css))
-    js = "".join(f'<script src="{c.R}js/{s}.js?v={VER}"></script>\n' for s in ["i18n", "data", "main"] + list(scripts))
+    js = "".join(f'<script src="{c.R}js/{s}.js?v={VER}"></script>\n' for s in ["main"] + list(scripts))
     alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{lang_url(l, c.slug)}">\n' for l in LANGS)
     alt += f'<link rel="alternate" hreflang="x-default" href="{lang_url(DEFAULT, c.slug)}">\n'
     doc = f'''<!DOCTYPE html>
@@ -418,7 +419,7 @@ def build_packages(lang):
                         "url": lang_url(lang, c.slug), "image": SITE + "/images/" + p["img"] + ".jpg", "price": p["price"], "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock", "category": c.t("cat." + p["cat"]),
                         "offeredBy": {"@type": "Hotel", "name": "CGP Luxury Hotel Hoi An", "telephone": PHONE_TEL, "email": EMAIL,
-                                      "address": {"@type": "PostalAddress", "streetAddress": "78 Tran Khat Chan", "addressLocality": "Hoi An", "addressRegion": "Quang Nam", "addressCountry": "VN"}}})
+                                      "address": {"@type": "PostalAddress", "streetAddress": "67 Ly Thuong Kiet", "addressLocality": "Hoi An", "addressRegion": "Quang Nam", "addressCountry": "VN"}}})
         desc = c.pick(p["desc"])
         page(c, f'{name} | {c.t("intro.title")}', desc[:157] + ("…" if len(desc) > 157 else ""), ["home", "pages"], "packages", body, og_img=p["img"])
 
@@ -452,11 +453,158 @@ def build_services(lang):
 </section>'''
     page(c, f'{c.t("svc.page")} | {c.t("intro.title")}', c.t("svc.text"), ["home", "pages"], "services", body)
 
+# ------------------------------------------------------------------ booking widget (static)
+BK_ICON = {
+    "cal": SVG["cal"],
+    "user": SVG["user"],
+    "plus": '<svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg>',
+    "lock": '<svg viewBox="0 0 24 24" width="14" height="14" fill="#3c6098"><path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2zm-7-2a2 2 0 1 1 4 0v2h-4V7z"/></svg>',
+    "guests": '<svg viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zm7 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM9 13c-2.7 0-7 1.3-7 4v2h14v-2c0-2.7-4.3-4-7-4zm7 0c-.3 0-.7 0-1.1.1 1.3.9 2.1 2.2 2.1 3.9v2h5v-2c0-2.7-4.3-4-6-4z"/></svg>',
+    "moon": '<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>',
+    "mail": '<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>',
+    "back": '<svg viewBox="0 0 24 24"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>',
+    "card": '<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>',
+    "qr": '<svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v3h-3v-3zm-5 0h3v3h-3v-3zm3 3h3v3h-3v-3zm-3 3h3v2h-3v-2zm5 0h3v2h-3v-2z"/></svg>',
+    "phone": '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>',
+}
+GUESTS = {"g1": 1, "g2": 2, "g12": 2, "fam": 4}
+
+
+def booking_widget(c):
+    """Every step of the booking engine pre-rendered in this page's language.
+    js/booking.js only switches steps, filters/sorts cards and fills in the guest's own choices (dates, package)."""
+    t = lambda k: e(c.t(k))
+    fmt = lambda k, **kw: e(_fmt(c.t(k), kw))
+    ic = lambda k, cls: BK_ICON[k].replace("<svg", f'<svg class="{cls}"', 1)
+    usd = lambda n: f"USD {n:,}"
+
+    def title(step, key, back=None):
+        b = f'<button type="button" class="x-hnp__back" data-go="{back[1]}">{t(back[0])}</button>' if back else ""
+        return f'<div class="x-hnp">{b}<h2>{t(key)}</h2></div>'
+
+    def bar(pct):
+        return f'<div class="x-hnp__bar"{"" if pct else " hidden"}><i style="width:{pct}%"></i></div>'
+
+    langs = "".join(f'<li><a href="{c.R + ("" if l == DEFAULT else l + "/") + c.slug}" hreflang="{l}" lang="{l}"><img src="{c.R}images/flags/{FLAGS[l]}" alt="">{NAMES[l]}</a></li>' for l in LANGS)
+    top = (f'<div class="x-hcp"><div class="x-hcp__crit" data-steps="1 2 3 4">'
+           f'<button type="button" class="x-scb" data-go="0"><small>{t("tl.cico")}</small><b data-v="range"></b></button>'
+           f'<button type="button" class="x-scb" data-go="0"><small>{t("box.guests")}</small><b data-v="guests"></b></button></div>'
+           f'<div class="x-hcp__tools"><button type="button" class="hb hb--promo" data-go="0" data-promo="1" data-steps="1 2">{BK_ICON["lock"]}{t("tl.promoBtn")}</button>'
+           f'<div class="hb-lang"><button type="button" class="hb" data-langmenu aria-label="Language"><img src="{c.R}images/flags/{FLAGS[c.lang]}" alt=""></button><ul>{langs}</ul></div>'
+           f'<span class="hb">USD</span></div></div>')
+
+    # step 0 — details of your stay
+    ad = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{t("g.a" + str(n))}</option>' for n in (1, 2, 3, 4))
+    ch = f'<option value="0">{t("tl.child")}</option>' + "".join(f'<option value="{n}">{t("tl.c" + str(n))}</option>' for n in (1, 2))
+    step0 = (title(0, "tl.details") + bar(0) +
+             f'<form class="tl-body" id="f-search" novalidate><div class="psf">'
+             f'<div class="psf-row"><label><span class="psf-label">{t("tl.ci")}</span><span class="x-input"><output data-for="s-ci"></output><input class="x-native" type="date" id="s-ci" required>{ic("cal", "ico-r")}</span></label>'
+             f'<label><span class="psf-label">{t("tl.co")}</span><span class="x-input"><output data-for="s-co"></output><input class="x-native" type="date" id="s-co" required>{ic("cal", "ico-r")}</span></label></div>'
+             f'<hr><span class="psf-label">{t("tl.stay")}</span><p class="psf-note">{t("tl.aged")}</p>'
+             f'<div class="psf-row"><label class="x-input has-icon">{ic("user", "ico-l")}<select id="s-ad">{ad}</select><i class="chev"></i></label>'
+             f'<label class="x-input has-icon">{ic("plus", "ico-l")}<select id="s-ch">{ch}</select><i class="chev"></i></label></div>'
+             f'<p class="psf-extra-row"><button type="button" class="psf-extra" data-extra>{t("tl.extra")}{BK_ICON["plus"]}</button></p><p class="psf-note" id="s-extra" hidden>{t("tl.extraNote")}</p>'
+             f'<hr><label class="x-check"><input type="checkbox" id="s-hp"><span>{t("tl.promo")}</span></label>'
+             f'<label class="x-input psf-promo" hidden><input type="text" id="s-promo" maxlength="20" placeholder="{t("tl.promoBtn")}" autocomplete="off"></label>'
+             f'<button type="submit" class="tl-btn tl-btn--lg">{t("tl.check")}</button><p class="tl-error" id="s-err" hidden>{t("tl.dates")}</p></div></form>')
+
+    # step 1 — select a package
+    def card(p):
+        n = e(c.name(p["id"]))
+        badge = f'<span class="rcard-badge">🏆 {t("tl.best1")}</span>' if p["id"] == 6 else ""
+        incs = "".join(f"<li>{e(c.inc(k, p))}</li>" for k in p["inc"])
+        return (f'<article class="rcard" data-card="{p["id"]}" data-cat="{p["cat"]}" data-guests="{GUESTS[p["g"]]}">'
+                f'<div class="rcard-img"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440">{badge}</div>'
+                f'<div class="rcard-body"><div class="rcard-name"><h3>{n}</h3><button type="button" class="round-btn" data-expand aria-label="+"></button></div>'
+                f'<div class="rcard-meta"><span>{BK_ICON["guests"]}{fmt("tl.upto", n=GUESTS[p["g"]])}</span><span>{BK_ICON["moon"]}{e(c.nights(p["nights"]))}</span></div>'
+                f'<p class="rcard-tag">{e(c.pick(p["tag"]))}</p><ul class="rcard-more">{incs}</ul>'
+                f'<div class="rcard-price"><small>{t("tl.from")} </small><b>{usd(p["price"])}</b><em>{e(c.nights(p["nights"]))} / {t("gl." + p["g"])}</em></div>'
+                f'<button type="button" class="tl-btn" data-pick="{p["id"]}">{t("tl.sel")}</button></div></article>')
+    cats = "".join(f'<button type="button" class="chip{" is-active" if k == "all" else ""}" data-cat="{k}">{t("cat." + k)}</button>' for k in ["all"] + CATS)
+    near = (f'<aside class="near"><h6>{t("tl.near")}</h6><ul>' + "".join(f"<li>{t(k)}</li>" for k in ("tl.n1", "tl.n2", "tl.n3")) + "</ul>"
+            f'<h6>{t("tl.top")}</h6><ul>' + "".join(f"<li>{t(k)}</li>" for k in ("am1", "am7", "tile1.t", "am3", "am6", "am8")) + "</ul></aside>")
+    cards = [card(P[i]) for i in sorted(P)]
+    cards.insert(2, near)
+    step1 = (title(1, "tl.select") + bar(20) +
+             f'<div class="tl-body"><div class="x-bpg"><div class="x-bpg__label">{t("tl.best")}</div><div class="x-bpg__items">'
+             + "".join(f"<span><i></i>{t(k)}</span>" for k in ("tl.b1", "tl.b2", "tl.b3")) +
+             f'</div><div class="x-bpg__price"><small>{t("tl.ourbest")}</small><b>{usd(min(p["price"] for p in P.values()))}</b></div></div>'
+             f'<div class="filters">{cats}</div><div class="rooms-grid-tl">{"".join(cards)}</div></div>')
+
+    # step 2 — package details, one block per package
+    def rate(p):
+        pid, n = p["id"], e(c.name(p["id"]))
+        chips = "".join(f"<span>{e(c.inc(k, p))}</span>" for k in p["inc"][:4]) + (f'<span>+ {len(p["inc"]) - 4}</span>' if len(p["inc"]) > 4 else "")
+        incs = "".join(f"<li>{e(c.inc(k, p))}</li>" for k in p["inc"])
+        return (f'<div class="rp-pkg" data-pkg="{pid}" data-nights="{p["nights"]}" hidden>'
+                f'<div class="rp-room"><img src="{c.img(p["img"])}" alt="" loading="lazy"><div><h3 data-k="name">{n}</h3>'
+                f'<div class="rp-meta"><span>{fmt("tl.upto", n=GUESTS[p["g"]])}</span><span data-k="nights">{e(c.nights(p["nights"]))}</span><span data-k="badge">{e(c.pick(p["badge"]))}</span></div>'
+                f'<div class="rp-amen">{chips}</div></div><span></span></div>'
+                f'<div class="rate"><div><h4>{e(c.pick(p["tag"]))}</h4><p class="rate-desc">{e(c.pick(p["desc"]))}</p><ul class="rate-list">{incs}</ul>'
+                f'<p class="rate-terms">{t("note.star")}</p></div>'
+                f'<div class="rate-side"><small>{fmt("tl.priceFor", n=c.nights(p["nights"]))}</small><div class="row"><b data-k="price">{usd(p["price"])}</b>'
+                f'<button type="button" class="tl-btn" data-go="3">{t("tl.sel")}</button></div>'
+                f'<p class="rate-terms" data-minstay hidden>{fmt("tl.minStay", n=c.nights(p["nights"]))}<br><span data-v="range"></span></p></div></div></div>')
+    terms = "".join(f"<li>• {t('terms.' + str(k))}</li>" for k in range(1, 9))
+    step2 = title(2, "tl.rate", ("tl.backRooms", 1)) + bar(48) + f'<div class="tl-body">{"".join(rate(P[i]) for i in sorted(P))}<ul class="rate-terms">{terms}</ul></div>'
+
+    # step 3 — guest details + payment
+    def field(fid, key, typ, icon=None):
+        pre = ic(icon, "ico-l") if icon else ""
+        return f'<label class="x-input{" has-icon" if icon else ""}">{pre}<input type="{typ}" id="{fid}" placeholder="{t(key)}"{" class=pl-icon" if icon else ""}></label>'
+
+    def opt(v, key, desc, icon):
+        return f'<label class="pay-opt"><input type="radio" name="pay" value="{v}"{" checked" if v == "card" else ""}><strong>{BK_ICON[icon]}{t(key)}</strong><p>{t(desc)}</p></label>'
+    terms_link = f'<a href="#terms">{t("f.terms")}</a>'
+    mybk = (f'<aside class="mybk"><h2>{t("tl.mybk")}</h2><div class="mybk-n" data-v="nights"></div>'
+            f'<div class="mybk-dates"><div><i data-v="ci-d"></i> <span data-v="ci-m"></span><em data-v="ci-w"></em><small>{t("tl.fromT")}</small></div><span class="mybk-sep">—</span>'
+            f'<div><i data-v="co-d"></i> <span data-v="co-m"></span><em data-v="co-w"></em><small>{t("tl.tillT")}</small></div></div>'
+            f'<div class="mybk-room"><div class="row"><b>{t("tl.pkg")}</b><b data-v="price"></b></div><a href="#" data-go="2" data-v="name"></a></div>'
+            f'<div class="mybk-lines"><div class="row"><strong data-v="guests"></strong></div><div class="row"><span data-v="badge"></span><span data-v="price"></span></div>'
+            f'<div class="row"><strong>{t("tl.svc")}</strong></div><div class="row"><span>{t("am1")}</span><span>{t("tl.incl")}</span></div>'
+            f'<div class="row" data-promo-row hidden><span>{t("sum.promo")}</span><span data-v="promo"></span></div></div>'
+            f'<div class="mybk-total"><div class="row"><strong>{t("tl.total")}</strong><b data-v="price"></b></div><hr><div class="row"><strong>{t("tl.paynow")}</strong><b data-v="price"></b></div>'
+            f'<button type="button" class="tl-btn" id="b-book">{t("pay.btn")}</button><p class="tl-error" id="d-err" hidden>{t("tl.invalid")}</p></div>'
+            f'<div class="mybk-foot">{t("tl.summary")}</div></aside>')
+    step3 = (title(3, "tl.enter", ("tl.backRate", 2)) + bar(80) +
+             f'<div class="tl-body"><div class="details"><div>'
+             f'<section class="plate"><h3 class="plate-cap">{t("tl.customer")}</h3><div class="plate-body">'
+             f'<div>{t("tl.bookfor")}<span class="seg"><label><input type="radio" name="for" value="me" checked>{t("tl.me")}</label><label><input type="radio" name="for" value="else">{t("tl.else")}</label></span></div>'
+             f'<p class="small-note">{t("tl.primary")}</p><hr>'
+             f'<div class="f-grid">{field("d-first", "tl.first", "text")}{field("d-last", "tl.last", "text")}{field("d-phone", "fm.phone", "tel", "phone")}{field("d-email", "c.email", "email", "mail")}</div>'
+             f'<div class="f-country"><span>{t("fm.country")}</span>{field("d-country", "fm.country", "text")}</div>'
+             f'<div class="consents"><p class="info">{BK_ICON["mail"]}{t("tl.conf")}</p>'
+             f'<label class="x-check"><input type="checkbox" id="d-news"><span>{t("tl.cons1")}</span></label>'
+             f'<label class="x-check" id="d-agree-l"><input type="checkbox" id="d-agree"><span>{t("tl.cons2").replace(t("f.terms"), terms_link)}</span></label></div></div></section>'
+             f'<section class="plate"><h3 class="plate-cap">{t("tl.add")}</h3><div class="plate-body"><h4 class="h4">{t("tl.times")}</h4>'
+             f'<div class="times"><span class="x-input"><small>{t("box.checkin")}</small><b>14:00 — <em>{t("tl.free")}</em></b></span><span class="x-input is-disabled"><small>{t("box.checkout")}</small><b>12:00</b></span></div>'
+             f'<hr><h4 class="h4">{t("tl.req")}</h4><textarea class="x-textarea" id="d-note" placeholder="{t("tl.reqph")}"></textarea></div></section>'
+             f'<section class="plate"><h3 class="plate-cap">{t("tl.paym")}</h3><div class="plate-body"><p class="pay-info">{BK_ICON["back"]}{t("tl.payinfo")}</p>'
+             + opt("card", "pay.card", "tl.payCardD", "card") + opt("atm", "pay.atm", "tl.payAtmD", "card") + opt("qr", "pay.qr", "tl.payQrD", "qr") +
+             f'<p class="pay-demo">{t("pay.demo")}</p></div></section></div>{mybk}</div></div>')
+
+    # step 4 — confirmation
+    step4 = (title(4, "ok.title") + bar(100) +
+             f'<div class="tl-body"><div class="done"><div class="done-ico"></div><h3>{t("ok.title")}</h3><p>{t("ok.text")}</p>'
+             f'<div class="done-code">{t("ok.code")}<b data-v="code"></b></div>'
+             f'<p><span data-v="name"></span> · <span data-v="range"></span> · <span data-v="price"></span></p>'
+             f'<p class="done-home"><a class="tl-btn" href="{c.home}">{t("ok.home")}</a></p></div></div>')
+
+    steps = "".join(f'<div class="tl-step" data-step="{k}"{" hidden" if k else ""}>{s}</div>' for k, s in enumerate([step0, step1, step2, step3, step4]))
+    return top + steps + '<p class="tl-copy">© CGP Luxury Hotel Booking Engine (demo)</p>'
+
+
+def _fmt(s, kw):
+    for k, v in kw.items():
+        s = s.replace("{" + k + "}", str(v))
+    return s
+
+
 # ------------------------------------------------------------------ pages
 def build(lang):
     # Home
     c = Ctx(lang, "")
-    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["exterior-night", "suite-sunset", "balcony-view", "room-twin-window", "suite-gold"])
+    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-facade", "exterior-night", "suite-sunset", "balcony-view", "room-twin-window", "suite-gold"])
     adults = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{e(c.t("g.a" + str(n)) + c.t("g.c0"))}</option>' for n in (1, 2, 3, 4))
     home = f'''<section class="banner" data-fade=".banner-slide" data-auto="6000" data-loop="1">
   {slides}
@@ -536,6 +684,12 @@ def build(lang):
     {intro_block(c, "h2")}
   </div>
 </section>
+<section class="ab-story">
+  <div class="port">
+    <h2 class="headline dash">{e(c.t("ab.story.t"))}</h2>
+    <div class="ab-story-body">{"".join(f"<p>{e(c.t(f'ab.story.p{i}'))}</p>" for i in range(1, 6))}</div>
+  </div>
+</section>
 {services_block(c)}
 <section class="gal-sec">
   <div class="port">
@@ -583,7 +737,7 @@ def build(lang):
 <section class="bk-sec" id="terms">
   <div class="port">
     <p class="bk-save">{e(c.t("box.sub"))}</p>
-    <div class="tl" id="tl"><noscript><p style="padding:32px">{e(c.t("bk.bannersub"))} — {PHONE} · {EMAIL}</p></noscript></div>
+    <div class="tl" id="tl">{booking_widget(c)}</div>
   </div>
 </section>
 <div class="gateway" id="gateway" hidden><div><i></i><p>{e(c.t("pay.proc"))}</p></div></div>'''

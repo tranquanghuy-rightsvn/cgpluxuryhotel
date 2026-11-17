@@ -1,18 +1,8 @@
 /* Shared behaviour. All text is pre-rendered per language in the HTML (SEO);
    JS only handles interaction: sticky header, menus, sliders, carousels, package modal, news search. */
 (function () {
-  var I = window.I18N, C = window.CGP;
-  var root = document.body.dataset.root || "./";
-  var base = document.body.dataset.base || root;
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
-  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-  var money = function (n) { return "USD " + n.toLocaleString("en-US"); };
-  var img = function (name) { return root + "images/" + name + ".jpg"; };
-  var FLAGS = { vi: "vi.png", en: "en.png", ko: "ko.svg", zh: "zh.svg", ru: "ru.svg", de: "de.svg" };
-  var flag = function (l) { return root + "images/flags/" + FLAGS[l]; };
-  var bookUrl = function (id) { return base + "dat-phong/" + (id ? "?pkg=" + id : ""); };
-  window.I18N_NAMES = { vi: "Tiếng Việt", en: "English", ko: "한국어", zh: "中文", ru: "Русский", de: "Deutsch" };
 
   /* ---------- Sticky header ---------- */
   var header = $(".site-header");
@@ -31,8 +21,6 @@
     if (document.body.classList.contains("nav-open") && !e.target.closest(".menu, .nav-toggle")) document.body.classList.remove("nav-open");
     var lb = e.target.closest(".lang-btn");
     $$(".lang").forEach(function (box) { box.classList.toggle("is-open", !!lb && box.contains(lb) && !box.classList.contains("is-open")); });
-    var b = e.target.closest("button[data-lang]");
-    if (b) I.set(b.dataset.lang);
   });
 
   /* ---------- Fade slider: banner + intro gallery ---------- */
@@ -89,8 +77,6 @@
   }
   $$(".carousel").forEach(carousel);
 
-  function meta(p) { return I.nights(p.nights) + " · " + I.t("gl." + p.g); }
-
   /* ---------- Home search form ---------- */
   var sfl = $(".sfl");
   if (sfl) {
@@ -124,5 +110,4 @@
     $$(".search-box input").forEach(function (i) { i.value = q; });
   }
 
-  window.CGPUI = { money: money, img: img, esc: esc, meta: meta, flag: flag, base: base };
 })();

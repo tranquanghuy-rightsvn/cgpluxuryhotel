@@ -30,3 +30,10 @@
 @media (max-width: 1200px) { .with-sidebar.is-article { grid-template-columns: 2fr 1fr; } }
 @media (max-width: 991px) { .with-sidebar.is-article { grid-template-columns: 1fr; padding-top: 40px; } }
 @media (max-width: 600px) { .news-item h2 { margin-top: 0; } }
+
+/* About — hotel story (text from CGP brochure) */
+.ab-story { padding: 20px 0 60px; }
+.ab-story .headline { text-align: center; }
+.ab-story .dash::after { margin: 18px auto 30px; }
+.ab-story-body { max-width: 900px; margin: 0 auto; columns: 2 380px; column-gap: 40px; }
+.ab-story-body p { break-inside: avoid; margin-bottom: 18px; font: 400 16px/1.6 var(--serif); color: var(--text); text-align: justify; }
