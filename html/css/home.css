@@ -4,7 +4,6 @@
 .banner { position: relative; height: calc(100vh - 82px); min-height: 560px; overflow: hidden; background: var(--navy); }
 .banner-slide { position: absolute; inset: 0; background: center/cover no-repeat; opacity: 0; transition: opacity 1s; }
 .banner-slide.is-active { opacity: 1; }
-.banner-slide:first-child { background-position: center 35%; }
 .banner .slick-arrow { position: absolute; z-index: 1002; top: 50%; margin-top: -24px; width: 50px; height: 50px; border-radius: 50%; background: rgba(33, 33, 33, .3) center/auto 24px no-repeat; }
 .banner .slick-prev { left: 24px; background-image: url(../images/icon-backslide.png); }
 .banner .slick-next { right: 24px; background-image: url(../images/icon-nextslide.png); }
