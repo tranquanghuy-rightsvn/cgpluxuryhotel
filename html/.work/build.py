@@ -167,7 +167,7 @@ def footer(c):
 </footer>'''
 
 
-def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-facade"):
+def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-day"):
     links = "".join(f'<link rel="stylesheet" href="{c.R}css/{x}.css?v={VER}">\n' for x in ["fonts", "main"] + list(css))
     js = "".join(f'<script src="{c.R}js/{s}.js?v={VER}"></script>\n' for s in ["main"] + list(scripts))
     alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{lang_url(l, c.slug)}">\n' for l in LANGS)
@@ -604,7 +604,7 @@ def _fmt(s, kw):
 def build(lang):
     # Home
     c = Ctx(lang, "")
-    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-facade", "exterior-night", "suite-sunset", "balcony-view", "room-twin-window", "suite-gold"])
+    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-day", "hero-night", "exterior-night", "suite-sunset", "balcony-view", "room-twin-window", "suite-gold"])
     adults = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{e(c.t("g.a" + str(n)) + c.t("g.c0"))}</option>' for n in (1, 2, 3, 4))
     home = f'''<section class="banner" data-fade=".banner-slide" data-auto="6000" data-loop="1">
   {slides}
