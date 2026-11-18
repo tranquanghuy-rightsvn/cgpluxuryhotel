@@ -5,11 +5,12 @@
   --text: #222;
   --serif: "Playfair Display", "Noto Serif KR", "Songti SC", Georgia, serif;
   --lato: Lato, Arial, sans-serif;
+  --sans: "Open Sans", Arial, sans-serif;
   --port: 1160px;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; font: 400 16px/1.3 Arial, sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+body { margin: 0; font: 400 16px/1.3 var(--sans); color: var(--text); background: #fff; overflow-x: hidden; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4, h5, h6, p, ul, figure { margin: 0; }
@@ -113,10 +114,10 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .site-footer { background: var(--navy); color: #fff; }
 .site-footer .port { margin-top: -4px; border-top: 4px solid var(--gold); padding: 80px 0; display: grid; grid-template-columns: 373px 177px 275px 275px; column-gap: 20px; }
 .site-footer h4 { margin-bottom: 25px; font: 500 25px/42.5px var(--serif); color: var(--gold); }
-.f-info p { font: 400 15px/24px Arial, sans-serif; margin-bottom: 8px; }
+.f-info p { font: 400 15px/24px var(--sans); margin-bottom: 8px; }
 .f-info strong { display: block; font-weight: 700; margin-bottom: 12px; }
 .f-links { list-style: disc; padding-left: 20px; }
-.f-links a { font: 400 16px/32px Arial, sans-serif; }
+.f-links a { font: 400 16px/32px var(--sans); }
 .f-links a:hover, .f-info a:hover { color: var(--gold); }
 .social { display: flex; gap: 8px; padding-left: 4px; }
 .social a { width: 35px; height: 35px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; transition: background .3s; }

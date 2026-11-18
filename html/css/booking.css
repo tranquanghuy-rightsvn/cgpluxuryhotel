@@ -1,10 +1,10 @@
 /* ===== Booking page — clone of the Exely booking engine embedded on diamondseahotel.com/booking ===== */
 .bk-sec { padding: 120px 0 56px; }
 .bk-sec > .port { width: min(1180px, 100% - 40px); }
-.bk-save { font: 400 16px/20.8px Arial, sans-serif; color: var(--text); margin-bottom: 2px; }
+.bk-save { font: 400 16px/20.8px var(--sans); color: var(--text); margin-bottom: 2px; }
 
 .tl { --c-text: #2f3135; --c-link: #3c6098; --c-blue: #5178b7; --c-btn: #b2967b; --c-muted: #75787d;
-  background: #efece4; font: 400 14px/20px "Open Sans", Arial, sans-serif; color: var(--c-text); border-radius: 4px; overflow: clip; }
+  background: #efece4; font: 400 14px/20px "Open Sans", var(--sans); color: var(--c-text); border-radius: 4px; overflow: clip; }
 .tl button { font-family: inherit; }
 .tl a { color: var(--c-link); text-decoration: underline; }
 
