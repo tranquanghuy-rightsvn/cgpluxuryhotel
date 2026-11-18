@@ -39,17 +39,44 @@ for _n in NEWS:
     _n.update(X.NEWS_EXTRA.get(_n["id"], {}))
 NEWS = X.NEWS_NEW + NEWS
 
-# web thumbnails (images/thumbs/<name>.jpg, 720px long edge) + intrinsic sizes for width/height attributes
-DIMS = {}
+# responsive images: images/webp/<name>-<w>.webp at several widths (never upscaled) + intrinsic sizes
+# news images keep the plain JPEG (+ images/thumbs/<name>.jpg) as before.
+from concurrent.futures import ThreadPoolExecutor
+WIDTHS = (480, 640, 800, 1200, 1600)
+DIMS, VARIANTS = {}, {}
+for _line in subprocess.run(["magick", "identify", "-format", "%t %w %h\n"] + sorted(f"images/{f}" for f in os.listdir("images") if f.endswith(".jpg")),
+                            capture_output=True, text=True, check=True).stdout.split("\n"):
+    if _line.strip():
+        _n, _w, _h = _line.split()
+        DIMS[_n] = (int(_w), int(_h))
+        VARIANTS[_n] = [w for w in WIDTHS if w < int(_w)] + [min(int(_w), WIDTHS[-1])]
+os.makedirs("images/webp", exist_ok=True)
+_jobs, _keep = [], set()
+for _n, _ws in VARIANTS.items():
+    for _w in _ws:
+        _dst = f"images/webp/{_n}-{_w}.webp"
+        _keep.add(os.path.basename(_dst))
+        if not os.path.exists(_dst) or os.path.getmtime(_dst) < os.path.getmtime(f"images/{_n}.jpg"):
+            _jobs.append((f"images/{_n}.jpg", _dst, _w))
+def _webp(job):
+    src, dst, w = job
+    subprocess.run(["cwebp", "-quiet", "-q", "78", "-m", "5", "-resize", str(w), "0", src, "-o", dst], check=True)
+with ThreadPoolExecutor(8) as _ex:
+    list(_ex.map(_webp, _jobs))
+for _f in os.listdir("images/webp"):
+    if _f not in _keep:
+        os.remove("images/webp/" + _f)
+
+# JPEG thumbnails only for the news pages
+_news_imgs = {x for n in NEWS for x in [n["img"]] + n.get("imgs", [])} | {p["img"] for p in P.values()}  # + package photos in the news sidebar
 os.makedirs("images/thumbs", exist_ok=True)
-for _f in sorted(os.listdir("images")):
-    if not _f.endswith(".jpg"):
-        continue
-    _src, _dst = "images/" + _f, "images/thumbs/" + _f
+for _n in _news_imgs:
+    _src, _dst = f"images/{_n}.jpg", f"images/thumbs/{_n}.jpg"
     if not os.path.exists(_dst) or os.path.getmtime(_dst) < os.path.getmtime(_src):
         subprocess.run(["magick", _src, "-resize", "720x720>", "-strip", "-quality", "78", "-interlace", "Plane", _dst], check=True)
-    _w, _h = subprocess.run(["magick", "identify", "-format", "%w %h", _dst], capture_output=True, text=True, check=True).stdout.split()
-    DIMS[_f[:-4]] = (int(_w), int(_h))
+for _f in os.listdir("images/thumbs"):
+    if _f[:-4] not in _news_imgs:
+        os.remove("images/thumbs/" + _f)
 NAMES = {"vi": "Tiếng Việt", "en": "English", "ko": "한국어", "zh": "中文", "ru": "Русский", "de": "Deutsch"}
 FLAGS = {"vi": "vi.png", "en": "en.png", "ko": "ko.svg", "zh": "zh.svg", "ru": "ru.svg", "de": "de.svg"}
 LOCALE = {"vi": "vi_VN", "en": "en_GB", "ko": "ko_KR", "zh": "zh_CN", "ru": "ru_RU", "de": "de_DE"}
@@ -154,6 +181,15 @@ class Ctx:
     def img(self, n): return f"{self.R}images/{n}.jpg"
     def th(self, n): return f"{self.R}images/thumbs/{n}.jpg"
     def wh(self, n): w, h = DIMS[n]; return f'width="{w}" height="{h}"'
+    def webp(self, n, w): return f"{self.R}images/webp/{n}-{w}.webp"
+    def srcset(self, n): return ", ".join(f"{self.webp(n, w)} {w}w" for w in VARIANTS[n])
+    def pic(self, n, sizes):
+        """src (JPEG fallback) + WebP srcset + sizes + intrinsic width/height."""
+        return f'src="{self.img(n)}" srcset="{self.srcset(n)}" sizes="{sizes}" {self.wh(n)}'
+    def bgimg(self, n, eager=False):
+        """Full-bleed responsive background photo (sits under the banner content, object-fit: cover)."""
+        load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+        return f'<img class="bg-img" {self.pic(n, "100vw")} alt="" {load}>'
     def pkg(self, pid): return self.url(f'goi-luu-tru/{P[pid]["slug"]}/')
     def inc(self, k, p): return D["INC"][k][self.i].replace("{N}", self.nights(p["nights"])).replace("{n}", str(p["nights"]))
 
@@ -276,14 +312,18 @@ def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-day"):
 
 
 # ------------------------------------------------------------------ blocks
-def banner_page(c, img, text, cls=""):
+def banner_page(c, img, text, cls="", webp=True):
+    if webp:
+        return f'''<section class="banner-page">{c.bgimg(img, eager=True)}
+  <div class="port"><h1 class="{cls}">{e(text)}</h1></div>
+</section>'''
     return f'''<section class="banner-page" style="background-image:url({c.img(img)})">
   <div class="port"><h1 class="{cls}">{e(text)}</h1></div>
 </section>'''
 
 
 def intro_block(c, h="h1"):
-    imgs = "".join(f'\n        <img src="{c.img(n)}" alt="{e(c.t("intro.title"))}" loading="lazy" width="1320" height="880">'
+    imgs = "".join(f'\n        <img {c.pic(n, "(max-width: 991px) 100vw, 767px")} alt="{e(c.t("intro.title"))}" loading="lazy">'
                    for n in ["hero-facade-day", "lobby-2", "pool-day-3", "room-500-2", "room-301-2", "room-101-1", "garden-cafe-1", "suite-gold"])
     return f'''<div class="intro-row">
       <div class="intro-card">
@@ -316,7 +356,7 @@ def services_block(c):
     tiles = ""
     for i, img in enumerate(["pool", "balcony-view", "bathtub", "suite-gold"], 1):
         s, t = e(c.t(f"tile{i}.s")), e(c.t(f"tile{i}.t"))
-        tiles += (f'<figure class="tile"><img src="{c.img(img)}" alt="{t}" loading="lazy" width="660" height="440">'
+        tiles += (f'<figure class="tile"><img {c.pic(img, "(max-width: 991px) 50vw, 25vw")} alt="{t}" loading="lazy">'
                   f'<figcaption class="tile-cap"><span class="tile-label">{s}</span><strong class="tile-title">{t}</strong></figcaption>'
                   f'<a class="tile-hover" href="{c.url("dich-vu/")}"><span class="tile-label">{s}</span><strong class="tile-title">{t}</strong></a></figure>')
     return f'''<section class="svc-head">
@@ -332,7 +372,7 @@ def featured_cards(c, ids):
     out = ""
     for i in ids:
         p, n = P[i], e(c.name(i))
-        out += (f'<article class="post"><a class="post-img" href="{c.pkg(i)}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
+        out += (f'<article class="post"><a class="post-img" href="{c.pkg(i)}"><img {c.pic(p["img"], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{n}" loading="lazy"></a>'
                 f'<div class="post-body"><h3 class="post-title"><a href="{c.pkg(i)}">{n}</a></h3>'
                 f'<div class="post-btns"><a class="btn" href="{c.pkg(i)}">{e(c.t("btn.details"))}</a>'
                 f'<a class="btn" href="{c.url("dat-phong/")}?pkg={i}">{e(c.t("btn.book"))}</a></div></div></article>')
@@ -344,7 +384,7 @@ def room_cards(c, ids, wide_from=3):
     for k, i in enumerate(ids):
         p, n = P[i], e(c.name(i))
         href = c.pkg(i)
-        out += (f'<article class="room{" is-wide" if k >= wide_from else ""}"><a class="room-img" href="{href}"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440"></a>'
+        out += (f'<article class="room{" is-wide" if k >= wide_from else ""}"><a class="room-img" href="{href}"><img {c.pic(p["img"], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, " + ("570px" if k >= wide_from else "373px"))} alt="{n}" loading="lazy"></a>'
                 f'<div class="room-body"><h3 class="room-title"><a href="{href}">{n}</a></h3><p class="room-text">{e(c.pick(p["tag"]))}</p>'
                 f'<div class="room-foot"><a class="btn" href="{href}">{e(c.t("btn.detailsShort"))}</a>'
                 f'<div><span class="price-from">{e(c.t("price.from"))}</span><span class="price">USD {p["price"]:,} {e(c.t("u." + p["unit"]))}</span></div></div></div></article>')
@@ -396,7 +436,7 @@ def article_body(c, n):
             f'<p>{e(thanks)}.</p><p class="article-cta"><a class="btn-navy" href="{c.url("dat-phong/")}">{e(c.t("art.cta"))}</a></p>'
             f'<img class="article-img" src="{c.img(n["img"])}" alt="{e(c.pick(n["title"]))}" loading="lazy" {c.wh(n["img"])}>'
             + (f'<p>{e(c.pick(n["more"]))}</p>' if n.get("more") else "")
-            + (f'<h3 class="article-h">{e(c.t("art.gal"))}</h3>' + gallery_grid(c, n["imgs"], "art-gal", "gal-grid art-gal") if n.get("imgs") else ""))
+            + (f'<h3 class="article-h">{e(c.t("art.gal"))}</h3>' + gallery_grid(c, n["imgs"], "art-gal", "gal-grid art-gal", webp=False) if n.get("imgs") else ""))
 
 
 
@@ -413,11 +453,14 @@ def faq_block(c, n=9):
 {jsonld(data)}'''
 
 
-def gallery_grid(c, imgs, uid, cls="gal-grid"):
-    """Thumbnails + CSS-only lightbox (:target), no JS."""
+def gallery_grid(c, imgs, uid, cls="gal-grid", sizes="(max-width: 991px) 50vw, 380px", webp=True):
+    """Thumbnails + CSS-only lightbox (:target), no JS. `sizes` may be a function of the item index."""
     alt = e(c.t("intro.title"))
-    thumbs = "".join(f'<a class="gal-item" href="#{uid}-{k}"><img src="{c.th(n)}" alt="{alt} – {k + 1}" loading="lazy" {c.wh(n)}></a>' for k, n in enumerate(imgs))
-    boxes = "".join(f'<div class="lb" id="{uid}-{k}"><a class="lb-bg" href="#{uid}" aria-label="Close"></a><img src="{c.img(n)}" alt="{alt} – {k + 1}" loading="lazy">'
+    sz = sizes if callable(sizes) else (lambda k: sizes)
+    thumb = (lambda k, n: c.pic(n, sz(k))) if webp else (lambda k, n: f'src="{c.th(n)}" {c.wh(n)}')
+    full = (lambda n: c.pic(n, "(max-width: 1100px) 100vw, 1100px")) if webp else (lambda n: f'src="{c.img(n)}"')
+    thumbs = "".join(f'<a class="gal-item" href="#{uid}-{k}"><img {thumb(k, n)} alt="{alt} – {k + 1}" loading="lazy"></a>' for k, n in enumerate(imgs))
+    boxes = "".join(f'<div class="lb" id="{uid}-{k}"><a class="lb-bg" href="#{uid}" aria-label="Close"></a><img {full(n)} alt="{alt} – {k + 1}" loading="lazy">'
                     f'<a class="lb-x" href="#{uid}" aria-label="Close">&times;</a>'
                     + (f'<a class="lb-prev" href="#{uid}-{k - 1}" aria-label="Previous"></a>' if k else "")
                     + (f'<a class="lb-next" href="#{uid}-{k + 1}" aria-label="Next"></a>' if k < len(imgs) - 1 else "") + "</div>" for k, n in enumerate(imgs))
@@ -435,7 +478,7 @@ def feature_block(c, key, paras, imgs, pics_cls, rev=False):
     return f'''<section class="ft{" is-rev" if rev else ""}">
   <div class="port ft-row">
     <div class="ft-text"><h2 class="headline dash">{e(c.t(key + ".t"))}</h2>{ps}</div>
-    {gallery_grid(c, imgs, uid, "ft-pics " + pics_cls)}
+    {gallery_grid(c, imgs, uid, "ft-pics " + pics_cls, lambda k: ("(max-width: 991px) 100vw, 640px" if k == 0 and "lead" in pics_cls else "(max-width: 991px) 33vw, 210px"))}
   </div>
 </section>'''
 
@@ -445,7 +488,7 @@ def video_block(c):
     return f'''<section class="vd-sec">
   <div class="port vd-row">
     <div class="vd-media">
-      <video class="vd-video" src="{c.R}videos/hotel-intro.mp4" poster="{c.R}images/video-poster.jpg" preload="metadata" playsinline width="480" height="848"></video>
+      <video class="vd-video" src="{c.R}videos/hotel-intro.mp4" poster="{c.webp("video-poster", 480)}" preload="metadata" playsinline width="480" height="848"></video>
       <button type="button" class="vd-play" aria-label="{e(c.t("vd.play"))}"><span class="vd-play-ring"></span><span class="vd-play-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vd-play-label">{e(c.t("vd.play"))}</span></button>
     </div>
     <div class="vd-text">
@@ -465,7 +508,7 @@ def rooms_teaser(c):
     for key, imgs in ROOMS:
         href = c.url(f"phong-nghi/#{key}")
         n = e(c.t(key + ".t"))
-        cards += (f'<article class="rm-card"><a class="rm-card-img" href="{href}"><img src="{c.th(imgs[0])}" alt="{n}" loading="lazy" {c.wh(imgs[0])}>'
+        cards += (f'<article class="rm-card"><a class="rm-card-img" href="{href}"><img {c.pic(imgs[0], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{n}" loading="lazy">'
                   f'<span class="rm-count">{len(imgs)} {e(c.t("rm.photos"))}</span></a>'
                   f'<div class="rm-card-body"><h3><a href="{href}">{n}</a></h3><p>{e(c.t(key + ".tag"))}</p>'
                   f'<a class="rm-link" href="{href}">{e(c.t("rm.view"))}</a></div></article>')
@@ -480,7 +523,7 @@ def rooms_teaser(c):
 
 
 def experience_block(c):
-    tiles = "".join(f'<figure class="ex-tile"><img src="{c.th(img)}" alt="{e(c.t(k + ".t"))}" loading="lazy" {c.wh(img)}>'
+    tiles = "".join(f'<figure class="ex-tile"><img {c.pic(img, "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{e(c.t(k + ".t"))}" loading="lazy">'
                     f'<figcaption><strong>{e(c.t(k + ".t"))}</strong><span>{e(c.t(k + ".d"))}</span></figcaption></figure>' for k, img in EXPERIENCES)
     return f'''<section class="ex-sec">
   <div class="port">
@@ -500,7 +543,7 @@ def build_rooms(lang):
         rest = len(imgs) - 5
         secs += f'''<section class="rm-sec{" is-rev" if k % 2 else ""}" id="{key}">
   <div class="port rm-row">
-    <div class="rm-media" data-more="+{rest} {e(c.t("rm.photos"))}">{gallery_grid(c, imgs, "g" + key, "rm-gal")}</div>
+    <div class="rm-media" data-more="+{rest} {e(c.t("rm.photos"))}">{gallery_grid(c, imgs, "g" + key, "rm-gal", lambda k: "(max-width: 991px) 100vw, 620px" if k == 0 else "(max-width: 991px) 25vw, 150px")}</div>
     <div class="rm-text">
       <h2 class="headline headline--sm dash">{name}</h2>
       <p class="pd-tag">{e(c.t(key + ".tag"))}</p>
@@ -518,7 +561,7 @@ def build_rooms(lang):
   <div class="port">
     <h2 class="headline dash">{e(c.t("rm.amen.t"))}</h2>
     <p class="sub-title">{e(c.t("rm.amen.d"))}</p>
-    {gallery_grid(c, AMENITIES, "amen", "amen-grid")}
+    {gallery_grid(c, AMENITIES, "amen", "amen-grid", "(max-width: 991px) 33vw, 190px")}
   </div>
 </section>
 <section class="rm-cta">
@@ -533,7 +576,7 @@ def build_packages(lang):
     groups = ""
     for cat in CATS:
         ids = [i for i in sorted(P) if P[i]["cat"] == cat]
-        fill = "".join(f'<figure class="room room-photo"><img src="{c.th(n)}" alt="{e(c.t("cat." + cat))}" loading="lazy" width="660" height="440"></figure>'
+        fill = "".join(f'<figure class="room room-photo"><img {c.pic(n, "(max-width: 991px) 50vw, 373px")} alt="{e(c.t("cat." + cat))}" loading="lazy"></figure>'
                        for n in GROUP_FILL[cat][:(3 - len(ids) % 3) % 3])
         groups += f'''<section class="pk-group">
   <div class="port">
@@ -558,7 +601,7 @@ def build_packages(lang):
         body = f'''{banner_page(c, p["img"], name)}
 <section class="pd">
   <div class="port">
-    <div class="pd-media"><img src="{c.img(p["img"])}" alt="{e(name)}" width="1320" height="880"><a class="pd-ribbon" href="{c.url("dat-phong/")}?pkg={pid}">{e(c.t("btn.book"))}</a></div>
+    <div class="pd-media"><img {c.pic(p["img"], "(max-width: 1200px) 100vw, 1160px")} alt="{e(name)}"><a class="pd-ribbon" href="{c.url("dat-phong/")}?pkg={pid}">{e(c.t("btn.book"))}</a></div>
     {gallery_grid(c, PKG_PHOTOS[pid], "pd-gal", "pd-thumbs")}
     <div class="pd-row">
       <div class="pd-main">
@@ -600,7 +643,7 @@ def build_gallery(lang):
     secs = "".join(f'''<div class="gal-cat" id="{key}">
       <h2 class="headline headline--sm dash">{e(c.t("gal." + key))} <small>{len(imgs)} {e(c.t("rm.photos"))}</small></h2>
       <p class="sub-title">{e(c.t("gal." + key + "d"))}</p>
-      {gallery_grid(c, imgs, "gal-" + key, "gal-masonry")}
+      {gallery_grid(c, imgs, "gal-" + key, "gal-masonry", "(max-width: 991px) 50vw, 290px")}
     </div>''' for key, imgs in GAL_SECTIONS)
     nav = "".join(f'<a href="#{key}">{e(c.t("gal." + key))}</a>' for key, _ in GAL_SECTIONS)
     body = f'''{banner_page(c, "pool-day-3", c.t("gal.title"))}
@@ -619,9 +662,9 @@ def build_services(lang):
     rows = ""
     for k, (key, img, more) in enumerate(SERVICES):
         t = e(c.t(key + ".t"))
-        strip = gallery_grid(c, [img] + more, f"svc{k + 1}", "svc-thumbs")
+        strip = gallery_grid(c, [img] + more, f"svc{k + 1}", "svc-thumbs", "(max-width: 991px) 25vw, 140px")
         text = f'<div class="svc-text"><h2>{t}</h2><p>{e(c.t(key + ".d"))}</p>{strip}<a class="btn btn--sm" href="{c.url("goi-luu-tru/")}">{e(c.t("svc.cta"))}</a></div>'
-        pic = f'<div class="svc-img"><img src="{c.img(img)}" alt="{t}" loading="lazy" width="660" height="440"></div>'
+        pic = f'<div class="svc-img"><img {c.pic(img, "(max-width: 991px) 100vw, 580px")} alt="{t}" loading="lazy"></div>'
         rows += f'<article class="svc-row{" is-rev" if k % 2 else ""}">{pic if k % 2 == 0 else text}{text if k % 2 == 0 else pic}</article>'
     body = f'''{banner_page(c, "pool-day-2", c.t("svc.page"))}
 <section class="svc-page">
@@ -693,7 +736,7 @@ def booking_widget(c):
         badge = f'<span class="rcard-badge">🏆 {t("tl.best1")}</span>' if p["id"] == 6 else ""
         incs = "".join(f"<li>{e(c.inc(k, p))}</li>" for k in p["inc"])
         return (f'<article class="rcard" data-card="{p["id"]}" data-cat="{p["cat"]}" data-guests="{GUESTS[p["g"]]}">'
-                f'<div class="rcard-img"><img src="{c.img(p["img"])}" alt="{n}" loading="lazy" width="660" height="440">{badge}</div>'
+                f'<div class="rcard-img"><img {c.pic(p["img"], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 380px")} alt="{n}" loading="lazy">{badge}</div>'
                 f'<div class="rcard-body"><div class="rcard-name"><h3>{n}</h3><button type="button" class="round-btn" data-expand aria-label="+"></button></div>'
                 f'<div class="rcard-meta"><span>{BK_ICON["guests"]}{fmt("tl.upto", n=GUESTS[p["g"]])}</span><span>{BK_ICON["moon"]}{e(c.nights(p["nights"]))}</span></div>'
                 f'<p class="rcard-tag">{e(c.pick(p["tag"]))}</p><ul class="rcard-more">{incs}</ul>'
@@ -716,7 +759,7 @@ def booking_widget(c):
         chips = "".join(f"<span>{e(c.inc(k, p))}</span>" for k in p["inc"][:4]) + (f'<span>+ {len(p["inc"]) - 4}</span>' if len(p["inc"]) > 4 else "")
         incs = "".join(f"<li>{e(c.inc(k, p))}</li>" for k in p["inc"])
         return (f'<div class="rp-pkg" data-pkg="{pid}" data-nights="{p["nights"]}" hidden>'
-                f'<div class="rp-room"><img src="{c.img(p["img"])}" alt="" loading="lazy"><div><h3 data-k="name">{n}</h3>'
+                f'<div class="rp-room"><img {c.pic(p["img"], "(max-width: 600px) 100vw, 160px")} alt="" loading="lazy"><div><h3 data-k="name">{n}</h3>'
                 f'<div class="rp-meta"><span>{fmt("tl.upto", n=GUESTS[p["g"]])}</span><span data-k="nights">{e(c.nights(p["nights"]))}</span><span data-k="badge">{e(c.pick(p["badge"]))}</span></div>'
                 f'<div class="rp-amen">{chips}</div></div><span></span></div>'
                 f'<div class="rate"><div><h4>{e(c.pick(p["tag"]))}</h4><p class="rate-desc">{e(c.pick(p["desc"]))}</p><ul class="rate-list">{incs}</ul>'
@@ -783,7 +826,7 @@ def _fmt(s, kw):
 def build(lang):
     # Home
     c = Ctx(lang, "")
-    slides = "".join(f'<div class="banner-slide" style="background-image:url({c.img(n)})"></div>' for n in ["hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "hero-guests", "pool-day-3", "room-500-2", "suite-sunset"])
+    slides = "".join(f'<div class="banner-slide">{c.bgimg(n, eager=(k == 0))}</div>' for k, n in enumerate( ["hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "hero-guests", "pool-day-3", "room-500-2", "suite-sunset"]))
     adults = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{e(c.t("g.a" + str(n)) + c.t("g.c0"))}</option>' for n in (1, 2, 3, 4))
     home = f'''<section class="banner" data-fade=".banner-slide" data-auto="6000" data-loop="1">
   {slides}
@@ -902,7 +945,7 @@ def build(lang):
 
     # News list
     c = Ctx(lang, "tin-tuc/")
-    news = f'''{banner_page(c, "garden-cafe-1", c.t("nw.banner"))}
+    news = f'''{banner_page(c, "garden-cafe-1", c.t("nw.banner"), webp=False)}
 <section>
   <div class="port with-sidebar">
     <div><ul class="news-list">{news_list(c)}</ul></div>
@@ -915,7 +958,7 @@ def build(lang):
     for n in NEWS:
         c = Ctx(lang, f'tin-tuc/{n["id"]}/')
         title = c.pick(n["title"])
-        art = f'''{banner_page(c, n["img"], title, "is-post")}
+        art = f'''{banner_page(c, n["img"], title, "is-post", webp=False)}
 <section>
   <div class="port with-sidebar is-article">
     <article class="article"><h2 class="headline">{e(title)}</h2><div class="article-body">{article_body(c, n)}</div></article>

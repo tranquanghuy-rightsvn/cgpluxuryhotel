@@ -161,3 +161,8 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
   .site-footer .port { grid-template-columns: 1fr; }
   .lang-btn span { display: none; }
 }
+
+/* Responsive background photos: <img class="bg-img" srcset> under the banner content */
+.banner-page { isolation: isolate; }
+.bg-img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
+.banner-slide .bg-img { z-index: 0; }
