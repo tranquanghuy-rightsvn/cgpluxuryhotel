@@ -2,3 +2,5 @@
 html/.work/dump/
 html/.work/old/
 .DS_Store
+raw-photos/
+__pycache__/

@@ -202,7 +202,6 @@
 .done-code { margin: 24px auto; padding: 16px; background: #f9fafb; border: 1px solid #fff; }
 .done-code b { display: block; font-size: 24px; letter-spacing: 2px; margin-top: 4px; color: var(--c-link); }
 
-.tl-copy { padding: 0 32px 14px; font-size: 11px; color: #a9acb2; }
 .gateway { position: fixed; inset: 0; z-index: 3000; display: grid; place-items: center; background: rgba(239, 236, 228, .94); text-align: center; font-family: "Open Sans", Arial, sans-serif; color: #2f3135; }
 .gateway i { display: block; width: 76px; height: 76px; margin: 0 auto 24px; border-radius: 50%; border: 4px solid #d6d6d6; border-top-color: #8f9298; animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }

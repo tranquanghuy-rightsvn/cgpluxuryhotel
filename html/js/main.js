@@ -110,4 +110,14 @@
     $$(".search-box input").forEach(function (i) { i.value = q; });
   }
 
+  /* ---------- Intro video: never autoplays; the play button starts it, pause/end brings the button back ---------- */
+  $$(".vd-media").forEach(function (box) {
+    var v = $("video", box), b = $(".vd-play", box);
+    if (!v || !b) return;
+    b.addEventListener("click", function () { v.controls = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); });
+    v.addEventListener("play", function () { box.classList.add("is-playing"); });
+    v.addEventListener("pause", function () { if (!v.ended) { box.classList.remove("is-playing"); v.controls = false; } });
+    v.addEventListener("ended", function () { box.classList.remove("is-playing"); v.controls = false; v.currentTime = 0; });
+  });
+
 })();
