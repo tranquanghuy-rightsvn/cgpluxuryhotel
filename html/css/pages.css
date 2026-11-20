@@ -235,3 +235,5 @@
   .vd-media { width: min(400px, 100%); margin: 0 auto; }
 }
 @media (max-width: 600px) { .vd-feats { grid-template-columns: 1fr; } }
+.rm-no { display: block; margin-bottom: 6px; font: 700 12px/14px var(--lato); letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.rm-text .rm-no { margin-bottom: 8px; }

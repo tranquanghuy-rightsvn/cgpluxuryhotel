@@ -32,6 +32,7 @@ import extra_i18n as X
 for _k, _v in X.T.items():
     for _i, _l in enumerate(LANGS):
         D["T"][_l][_k] = _v[_i]
+D["INC"]["famroom"] = X.FAMROOM
 for _iso, _v in X.SHORT.items():
     for _i, _l in enumerate(LANGS):
         D["short"][_l][_iso] = _v[_i]
@@ -81,7 +82,13 @@ NAMES = {"vi": "Tiếng Việt", "en": "English", "ko": "한국어", "zh": "中�
 FLAGS = {"vi": "vi.png", "en": "en.png", "ko": "ko.svg", "zh": "zh.svg", "ru": "ru.svg", "de": "de.svg"}
 LOCALE = {"vi": "vi_VN", "en": "en_GB", "ko": "ko_KR", "zh": "zh_CN", "ru": "ru_RU", "de": "de_DE"}
 
-MAP = "https://www.google.com/maps?q=67+L%C3%BD+Th%C6%B0%E1%BB%9Dng+Ki%E1%BB%87t,+H%E1%BB%99i+An,+Qu%E1%BA%A3ng+Nam&z=15&output=embed"
+# Google Maps: official embed endpoint (/maps/embed?pb=...) — the old "?q=...&output=embed" form 301-redirects with
+# X-Frame-Options: SAMEORIGIN, which some mobile browsers (Android) refuse to show inside an iframe.
+import base64 as _b64, urllib.parse as _up
+MAP_QUERY = "CGP Luxury Hotel, 67 Lý Thường Kiệt, Hội An"
+MAP = "https://www.google.com/maps/embed?pb=!1m3!2m1!1z" + _b64.b64encode(MAP_QUERY.encode()).decode().rstrip("=") + "!6i16"
+# Maps URLs API: opens the Google Maps app on Android/iOS, the website elsewhere
+MAP_LINK = "https://www.google.com/maps/search/?api=1&query=" + _up.quote(MAP_QUERY)
 FB = "https://www.facebook.com/profile.php?id=61564529174870"
 PHONE, PHONE_TEL, EMAIL = "(+84) 905 926 638", "+84905926638", "cgpluxuryhotelhoian@gmail.com"
 PKG_MENU = [6, 2, 3, 4, 9, 10, 11]
@@ -110,6 +117,8 @@ GROUP_FILL = {"relax": ["pool-day-3", "lobby-2"], "family": ["room-501-3", "kids
               "romance": ["couple-suite", "couple-bed-breakfast-2"], "solo": ["guest-suite-sofa", "balcony-reading"]}
 SERVICES = [("s1", "pool", ["pool-day-2", "pool-day-4", "guest-poolside-2"]),
             ("s2", "breakfast-table", ["breakfast-couple-1", "couple-bed-breakfast-2", "breakfast-couple-3"]),
+            ("s13", "restaurant-1", ["buffet-1", "buffet-2", "dish-egg-baguette"]),
+            ("s14", "dish-chicken-rice", ["dish-herb-platter", "dish-fried-pastry", "dish-sandwich"]),
             ("s3", "bathtub", ["room-500-7", "room-500-15", "room-301-11"]),
             ("s4", "room-romantic", ["couple-bed-breakfast-3", "couple-arch-door", "couple-balcony-1"]),
             ("s5", "hero-facade-night", ["facade-bougainvillea-2", "lobby-1", "reception-desk"]),
@@ -131,9 +140,10 @@ EXPERIENCES = [("ex1", "floating-breakfast-2"), ("ex2", "breakfast-table"), ("ex
 GAL_SECTIONS = [
     ("c1", ["hero-facade-night", "hero-facade-day", "facade-bougainvillea-1", "facade-bougainvillea-2", "facade-bougainvillea-3",
             "facade-bougainvillea-4", "facade-bougainvillea-5", "pool-day-1", "pool-day-2", "pool-day-3", "pool-day-4", "pool",
-            "hero-pool-night", "lobby-1", "lobby-2", "lobby-3", "lobby-4", "lobby-5", "garden-cafe-1", "garden-cafe-2", "garden-cafe-3"]),
+            "hero-pool-night", "lobby-1", "lobby-2", "lobby-3", "lobby-4", "lobby-5", "garden-cafe-1", "garden-cafe-2", "garden-cafe-3", "restaurant-1"]),
     ("c2", [n for _, imgs in ROOMS for n in imgs] + AMENITIES + GALLERY_OLD[2:]),
-    ("c3", ["floating-breakfast-1", "floating-breakfast-2", "floating-breakfast-3", "breakfast-table", "breakfast-couple-1",
+    ("c3", ["buffet-1", "buffet-2", "dish-chicken-rice", "dish-herb-platter", "dish-fried-pastry", "dish-egg-baguette", "dish-sandwich",
+            "floating-breakfast-1", "floating-breakfast-2", "floating-breakfast-3", "breakfast-table", "breakfast-couple-1",
             "breakfast-couple-2", "breakfast-couple-3", "couple-bed-breakfast-1", "couple-bed-breakfast-2", "couple-bed-breakfast-3",
             "drink-orange", "drink-watermelon", "drink-tea", "bike-couple-1", "guest-balcony-rice", "balcony-view-1", "balcony-view-2",
             "balcony-reading", "guest-window-coffee", "couple-balcony-1", "couple-balcony-2", "couple-suite", "couple-arch-door",
@@ -343,11 +353,12 @@ def intro_block(c, h="h1"):
 
 def contact_block(c):
     return f'''<div class="contact-row">
-      <div class="map"><iframe src="{MAP}" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="map"><iframe src="{MAP}" title="{e(c.t("map.title"))}" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
       <div class="contact-card">
         <div class="c-item"><i>{SVG["pin"]}</i><div><h3>{e(c.t("c.addr"))}</h3><p>{e(c.t("c.addrv"))}</p></div></div>
         <div class="c-item"><i>{SVG["phone"]}</i><div><h3>{e(c.t("c.phone"))}</h3><a href="tel:{PHONE_TEL}">{PHONE}</a></div></div>
         <div class="c-item"><i>{SVG["mail"]}</i><div><h3>{e(c.t("c.email"))}</h3><a href="mailto:{EMAIL}">{EMAIL}</a></div></div>
+        <a class="btn btn--sm map-open" href="{MAP_LINK}" target="_blank" rel="noopener">{e(c.t("map.open"))}</a>
       </div>
     </div>'''
 
@@ -508,9 +519,10 @@ def rooms_teaser(c):
     for key, imgs in ROOMS:
         href = c.url(f"phong-nghi/#{key}")
         n = e(c.t(key + ".t"))
-        cards += (f'<article class="rm-card"><a class="rm-card-img" href="{href}"><img {c.pic(imgs[0], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{n}" loading="lazy">'
+        no = e(c.t(key + ".no"))
+        cards += (f'<article class="rm-card"><a class="rm-card-img" href="{href}"><img {c.pic(imgs[0], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{n} – {no}" loading="lazy">'
                   f'<span class="rm-count">{len(imgs)} {e(c.t("rm.photos"))}</span></a>'
-                  f'<div class="rm-card-body"><h3><a href="{href}">{n}</a></h3><p>{e(c.t(key + ".tag"))}</p>'
+                  f'<div class="rm-card-body"><span class="rm-no">{no}</span><h3><a href="{href}">{n}</a></h3><p>{e(c.t(key + ".tag"))}</p>'
                   f'<a class="rm-link" href="{href}">{e(c.t("rm.view"))}</a></div></article>')
     return f'''<section class="rm-teaser">
   <div class="port">
@@ -545,6 +557,7 @@ def build_rooms(lang):
   <div class="port rm-row">
     <div class="rm-media" data-more="+{rest} {e(c.t("rm.photos"))}">{gallery_grid(c, imgs, "g" + key, "rm-gal", lambda k: "(max-width: 991px) 100vw, 620px" if k == 0 else "(max-width: 991px) 25vw, 150px")}</div>
     <div class="rm-text">
+      <p class="rm-no">{e(c.t(key + ".no"))}</p>
       <h2 class="headline headline--sm dash">{name}</h2>
       <p class="pd-tag">{e(c.t(key + ".tag"))}</p>
       <p class="rm-desc">{e(c.t(key + ".d"))}</p>

@@ -173,3 +173,4 @@
 .contact-row > *, .intro-row > * { min-width: 0; }
 
 .modal-desc { margin: -4px 0 16px; font: 400 15px/22px var(--sans); color: #444; }
+.map-open { align-self: flex-start; }

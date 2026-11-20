@@ -26,7 +26,8 @@ T = {
         "Не знаете, какой номер выбрать? Сообщите даты и количество гостей — стойка регистрации подберёт для вас подходящий номер и пакет.",
         "Unsicher, welches Zimmer passt? Nennen Sie uns Reisedaten und Personenzahl – unsere Rezeption empfiehlt Ihnen das passende Zimmer und Paket."],
 
-    "r1.t": ["Phòng 101 & 102", "Rooms 101 & 102", "101호 & 102호", "101 & 102 号房", "Номера 101 и 102", "Zimmer 101 & 102"],
+    "r1.t": ["King Suite Pool Access – Garden View"] * 6,
+    "r1.no": ["Phòng 101 & 102", "Rooms 101 & 102", "101호 & 102호", "101 & 102 号房", "Номера 101 и 102", "Zimmer 101 & 102"],
     "r1.tag": ["Mở cửa là bước ra hồ bơi", "Slide the door open and step onto the pool deck", "문을 열면 바로 수영장 데크", "推开门即是泳池木平台", "Откройте дверь — и вы у бассейна", "Tür auf und direkt aufs Pooldeck"],
     "r1.d": [
         "Nằm ở tầng trệt (phòng 101 và 102), phòng có cửa kính lùa lớn mở thẳng ra hiên gỗ cạnh hồ bơi và mảng cây xanh. Đầu giường ốp đá vân mây, sàn đá xanh ngọc, giường đôi lớn trải ga trắng với khăn trang trí thêu logo CGP. Phòng tắm đứng vách kính với bồn cầu dáng trứng và lavabo đá cẩm thạch tròn – sạch sẽ, hiện đại và rất riêng tư.",
@@ -43,7 +44,8 @@ T = {
         "Большая двуспальная кровать|Двери на террасу бассейна|Стена из облачного мрамора|Стеклянная душевая|Smart TV и туалетный столик",
         "Großes Doppelbett|Schiebetüren zum Pooldeck|Wolkenmarmor-Wand|Ebenerdige Glasdusche|Smart-TV & Schminktisch"],
 
-    "r2.t": ["Phòng 103", "Room 103", "103호", "103 号房", "Номер 103", "Zimmer 103"],
+    "r2.t": ["Superior Room"] * 6,
+    "r2.no": ["Phòng 103", "Room 103", "103호", "103 号房", "Номер 103", "Zimmer 103"],
     "r2.tag": ["Ấm cúng, gọn gàng cho chuyến đi ngắn ngày", "Cosy and well-arranged for short stays", "짧은 여행에 딱 맞는 아늑한 객실", "温馨整洁，适合短住", "Уютный номер для коротких поездок", "Gemütlich und durchdacht für Kurztrips"],
     "r2.d": [
         "Phòng 103 mang tông gỗ trầm kết hợp sàn đá xanh mát, phía trên đầu giường là bức tranh sơn dầu đồng lúa Việt Nam. Tủ quần áo, bàn làm việc có gương, tủ lạnh mini và ấm đun nước được bố trí gọn gàng ngay cạnh lối vào. Phòng tắm sáng với vòi sen, lavabo đá và khăn tắm CGP xếp sẵn – lựa chọn hợp lý cho khách công tác hoặc cặp đôi ở vài đêm.",
@@ -60,7 +62,8 @@ T = {
         "Двуспальная кровать|Вьетнамская живопись|Стол и шкаф|Мини-холодильник и чайник|Ванная с тропическим душем",
         "Doppelbett|Vietnamesisches Ölgemälde|Schreibtisch & Schrank|Minikühlschrank & Wasserkocher|Bad mit Regendusche"],
 
-    "r3.t": ["Phòng 301", "Room 301", "301호", "301 号房", "Номер 301", "Zimmer 301"],
+    "r3.t": ["King Suite Balcony – City View"] * 6,
+    "r3.no": ["Phòng 301", "Room 301", "301호", "301 号房", "Номер 301", "Zimmer 301"],
     "r3.tag": ["Cửa sổ hai mặt, ngập tràn ánh sáng", "Windows on two sides, filled with light", "양면 창으로 가득한 햇살", "两面开窗，光线充盈", "Окна на две стороны и много света", "Fenster an zwei Seiten, voller Licht"],
     "r3.d": [
         "Phòng 301 là căn góc với dãy cửa sổ kiểu Pháp nhìn ra mái ngói phố Hội An và cánh đồng phía xa. Sofa da trắng đặt ngay chân giường, thảm xanh vân sóng, vách gỗ viền chỉ vàng tạo cảm giác sang trọng mà vẫn ấm áp. Phòng tắm có bồn tắm nằm và ô kính lớn nhìn vào phòng ngủ, buổi tối kéo rèm lại là có ngay một góc thư giãn riêng tư.",
@@ -77,7 +80,8 @@ T = {
         "Кровать king-size|Белый кожаный диван|Ванна и стеклянная стена|Окна на две стороны|Деревянные панели с золотом",
         "Kingsize-Bett|Weißes Ledersofa|Badewanne & Glaswand|Fenster zu zwei Seiten|Holzpaneele mit Goldkante"],
 
-    "r4.t": ["Phòng 500", "Room 500", "500호", "500 号房", "Номер 500", "Zimmer 500"],
+    "r4.t": ["King Suite Balcony – City View"] * 6,
+    "r4.no": ["Phòng 500", "Room 500", "500호", "500 号房", "Номер 500", "Zimmer 500"],
     "r4.tag": ["Cửa vòm cổ điển, ban công và bồn tắm nhìn trời", "Classic arched windows, a balcony and a sky-view tub", "클래식 아치 창, 발코니, 하늘이 보이는 욕조", "古典拱窗、阳台与观景浴缸", "Арочные окна, балкон и ванна с видом на небо", "Bogenfenster, Balkon und Wanne mit Himmelsblick"],
     "r4.d": ["Phòng 500 có những ô cửa vòm trắng mở ra ban công lan can, nhìn bao quát phố Hội An và bầu trời xanh. Đầu giường bọc da kem, vách ốp vải xen chỉ vàng, sofa giường rộng đủ cho cả nhà ngồi trò chuyện. Bồn tắm đặt sát ô kính lớn – nằm ngâm mình vẫn ngắm được khung cửa vòm và nắng chiều. Bộ amenities gốm sứ, khăn thêu CGP và đồ dùng cao cấp được chuẩn bị sẵn.", "In room 500, white arched windows open onto a balustraded balcony with sweeping views over Hoi An and the open sky. A cream leather headboard, fabric panels lined with gold and a generous sofa bed make it easy to relax together. The bathtub sits right by a large glass window, so you can soak while gazing at the arches and the afternoon sun. Porcelain amenities, CGP-embroidered towels and premium toiletries are all prepared for you.", "500호의 흰 아치형 창을 열면 난간 발코니가 나오고, 호이안 시내와 푸른 하늘이 한눈에 펼쳐집니다. 크림색 가죽 헤드보드, 금색 라인이 들어간 패브릭 벽, 넉넉한 소파베드로 함께 쉬기 좋습니다. 욕조는 큰 유리창 바로 옆에 있어 몸을 담근 채 아치 창과 오후 햇살을 감상할 수 있습니다. 도자기 어메니티와 CGP 자수 타월, 프리미엄 세면도구가 준비되어 있습니다.", "500 号房的白色拱窗通往带栏杆的阳台，会安城景与蓝天尽收眼底。奶油色皮质床头、嵌金线的布艺墙板和宽敞的沙发床，适合一同放松。浴缸紧邻大玻璃窗，泡澡时也能欣赏拱窗与午后阳光。陶瓷洗漱套装、CGP 刺绣毛巾和高端用品均已备好。", "В номере 500 белые арочные окна выходят на балкон с балюстрадой и панорамой Хойана и неба. Изголовье из кремовой кожи, тканевые панели с золотом и просторный диван-кровать располагают к отдыху вдвоём или всей семьёй. Ванна стоит у большого стеклянного окна — можно нежиться, любуясь арками и вечерним солнцем. Фарфоровые аксессуары, полотенца с вышивкой CGP и премиальная косметика уже ждут вас.", "In Zimmer 500 öffnen sich weiße Bogenfenster auf einen Balkon mit Balustrade und weitem Blick über Hoi An und den Himmel. Ein cremefarbenes Lederkopfteil, Stoffpaneele mit Goldlinien und ein großzügiges Schlafsofa laden zum gemeinsamen Entspannen ein. Die Badewanne steht direkt an einem großen Glasfenster – baden und dabei die Bögen und die Nachmittagssonne genießen. Porzellan-Accessoires, CGP-Handtücher und hochwertige Pflegeprodukte liegen bereit."],
     "r4.f": [
@@ -88,7 +92,8 @@ T = {
         "Кровать king-size|Арочные окна и балкон|Ванна у стеклянного окна|Просторный диван-кровать|Премиальные аксессуары",
         "Kingsize-Bett|Bogenfenster & eigener Balkon|Badewanne am Glasfenster|Großes Schlafsofa|Premium-Pflegeset"],
 
-    "r5.t": ["Phòng 501", "Room 501", "501호", "501 号房", "Номер 501", "Zimmer 501"],
+    "r5.t": ["Deluxe Double"] * 6,
+    "r5.no": ["Phòng 501", "Room 501", "501호", "501 号房", "Номер 501", "Zimmer 501"],
     "r5.tag": ["Hai giường, một ban công nhìn cánh đồng", "Two beds and a balcony over the fields", "두 개의 침대, 들판이 보이는 발코니", "两张床，一座面向田野的阳台", "Две кровати и балкон с видом на поля", "Zwei Betten und ein Balkon über den Feldern"],
     "r5.d": [
         "Phòng 501 có một giường đôi và một giường đơn với đầu giường bọc nệm màu cam đất, rất hợp cho gia đình có con nhỏ hoặc nhóm bạn. Cửa kính mở ra ban công lan can kiểu Pháp, phía xa là cánh đồng lúa xanh và mái nhà Hội An. Tủ dài, TV, khu pha trà – cà phê và phòng tắm vách kính với khăn CGP giúp cả nhà sinh hoạt thoải mái suốt kỳ nghỉ.",
@@ -105,7 +110,8 @@ T = {
         "1 двуспальная + 1 односпальная|Балкон с видом на поля|Для семьи из 3 человек|Уголок для чая и кофе|Ванная со стеклом",
         "1 Doppel- + 1 Einzelbett|Balkon zu den Feldern|Ideal für 3 Personen|Tee- & Kaffee-Ecke|Bad mit Glaswand"],
 
-    "r6.t": ["Phòng 502", "Room 502", "502호", "502 号房", "Номер 502", "Zimmer 502"],
+    "r6.t": ["Deluxe Double"] * 6,
+    "r6.no": ["Phòng 502", "Room 502", "502호", "502 号房", "Номер 502", "Zimmer 502"],
     "r6.tag": ["Cửa vòm trắng, nắng sớm và ban công riêng", "A white arched door, morning sun and your own balcony", "흰 아치 도어, 아침 햇살, 전용 발코니", "白色拱门、晨光与私人阳台", "Белая арочная дверь, утреннее солнце и свой балкон", "Weiße Bogentür, Morgensonne und eigener Balkon"],
     "r6.d": [
         "Phòng 502 nổi bật với khung cửa vòm kính lớn mở ra ban công, ánh sáng tự nhiên tràn ngập căn phòng từ sáng đến chiều. Giường đôi đầu bọc nệm cam đất, vách TV ốp gỗ vân sẫm, bàn trà và quầy minibar có sẵn nước uống. Phòng tắm hiện đại với cửa sổ thông gió, vòi sen và đầy đủ đồ dùng cá nhân – lựa chọn lý tưởng cho cặp đôi muốn một căn phòng sáng, thoáng và yên tĩnh.",
@@ -212,6 +218,22 @@ T = {
         "泳池旁的绿荫棚架下，花园咖啡供应越南咖啡、鲜榨橙汁与西瓜汁、水果茶和轻食。这里也是会友或在开阔空间轻松办公的好地方。",
         "Под зелёной перголой у бассейна кафе в саду предлагает вьетнамский кофе, свежевыжатые апельсиновый и арбузный соки, фруктовый чай и лёгкие закуски. Отличное место для встреч с друзьями или работы на свежем воздухе.",
         "Unter der grünen Pergola am Pool serviert das Gartencafé vietnamesischen Kaffee, frischen Orangen- und Wassermelonensaft, Früchtetees und kleine Speisen. Ein schöner Ort, um Freunde zu treffen oder an der frischen Luft etwas zu arbeiten."],
+    "s13.t": ["Nhà hàng CGP & buffet sáng", "CGP Restaurant & breakfast buffet", "CGP 레스토랑 & 조식 뷔페", "CGP 餐厅与自助早餐", "Ресторан CGP и завтрак-буфет", "CGP Restaurant & Frühstücksbuffet"],
+    "s13.d": [
+        "Nhà hàng của khách sạn nằm ngay tầng trệt với trần cây xanh mát, ghế mây vàng và những bức tranh sơn dầu rực rỡ. Mỗi sáng, quầy buffet bày sẵn bánh mì nướng, trứng, xúc xích, thịt nguội, rau củ tươi, trái cây theo mùa như dưa hấu, thanh long, xoài cùng nước ép cam, dưa hấu, cà phê và trà. Dịch vụ thêm: ăn sáng buffet tại khu nhà hàng của khách sạn – vui lòng báo lễ tân khi đặt phòng hoặc nhận phòng.",
+        "The hotel restaurant sits on the ground floor beneath a leafy green ceiling, with golden rattan chairs and vivid oil paintings. Every morning the buffet is laid out with toasted bread, eggs, sausages, cold cuts, fresh vegetables, seasonal fruit such as watermelon, dragon fruit and mango, plus orange and watermelon juice, coffee and tea. Additional service: breakfast buffet at the hotel restaurant – simply let reception know when you book or check in.",
+        "호텔 레스토랑은 1층에 있으며 초록 잎 천장, 황금빛 라탄 의자, 화사한 유화가 어우러져 있습니다. 매일 아침 뷔페에는 토스트, 달걀, 소시지, 햄, 신선한 채소, 수박·용과·망고 등 제철 과일과 오렌지·수박 주스, 커피, 차가 준비됩니다. 추가 서비스: 호텔 레스토랑 조식 뷔페 – 예약 또는 체크인 시 리셉션에 말씀해 주세요.",
+        "酒店餐厅位于一楼，绿叶天花板、金色藤椅与色彩明艳的油画相映成趣。每天早晨，自助台摆满烤面包、鸡蛋、香肠、冷切肉、新鲜蔬菜，以及西瓜、火龙果、芒果等时令水果，并供应橙汁、西瓜汁、咖啡和茶。附加服务：酒店餐厅自助早餐——预订或入住时告知前台即可。",
+        "Ресторан отеля расположен на первом этаже: зелёный «лиственный» потолок, золотистые ротанговые кресла и яркие картины маслом. Каждое утро на буфете — тосты, яйца, сосиски, мясная нарезка, свежие овощи, сезонные фрукты (арбуз, питахайя, манго), апельсиновый и арбузный соки, кофе и чай. Дополнительная услуга: завтрак-буфет в ресторане отеля — просто сообщите на ресепшене при бронировании или заселении.",
+        "Das Hotelrestaurant liegt im Erdgeschoss unter einer grünen Blätterdecke, mit goldenen Rattanstühlen und farbenfrohen Ölgemälden. Jeden Morgen bietet das Buffet Toast, Eier, Würstchen, Aufschnitt, frisches Gemüse, saisonales Obst wie Wassermelone, Drachenfrucht und Mango sowie Orangen- und Wassermelonensaft, Kaffee und Tee. Zusatzleistung: Frühstücksbuffet im Hotelrestaurant – sagen Sie einfach bei der Buchung oder beim Check-in an der Rezeption Bescheid."],
+    "s14.t": ["Món ngon tại nhà hàng", "Dishes from our kitchen", "레스토랑의 메뉴", "餐厅美食", "Блюда нашей кухни", "Gerichte aus unserer Küche"],
+    "s14.d": [
+        "Bếp CGP phục vụ cả món Việt lẫn món Âu, dọn ra bàn cạnh hồ bơi hoặc trong nhà hàng: cơm gà Hội An vàng óng ăn kèm rau răm và đồ chua, mẹt bún với rau sống và nước chấm đậm đà, bánh chiên giòn rụm, bánh mì ốp la nóng hổi và sandwich kèm khoai tây chiên cho bữa nhẹ. Thực đơn có thể điều chỉnh theo khẩu vị hoặc chế độ ăn – hãy cho chúng tôi biết khi gọi món.",
+        "The CGP kitchen serves both Vietnamese and Western dishes, at a table by the pool or in the restaurant: golden Hoi An chicken rice with Vietnamese coriander and pickles, a tray of rice noodles with fresh herbs and a rich dipping sauce, crispy fried pastries, sizzling eggs with baguette, and a sandwich with fries for a light bite. Dishes can be adjusted to your taste or dietary needs – just let us know when ordering.",
+        "CGP 주방은 베트남 요리와 양식을 모두 준비하며, 수영장 옆 테이블이나 레스토랑에서 즐길 수 있습니다. 황금빛 호이안 치킨라이스와 라우람·절임채소, 신선한 허브와 진한 소스를 곁들인 쌀국수 플래터, 바삭한 튀김 페이스트리, 갓 구운 계란 프라이와 바게트, 가벼운 식사로 좋은 샌드위치와 감자튀김까지. 취향이나 식단에 맞게 조정해 드리니 주문 시 말씀해 주세요.",
+        "CGP 厨房提供越南菜与西餐，可在泳池边或餐厅用餐：金黄的会安鸡饭配叻沙叶与腌菜、配新鲜香草和浓郁蘸汁的米线拼盘、香脆炸点心、热腾腾的煎蛋法棍，以及适合轻食的三明治配薯条。菜品可按口味或饮食需求调整——点餐时告诉我们即可。",
+        "Кухня CGP готовит вьетнамские и европейские блюда — их подают у бассейна или в ресторане: золотистый рис с курицей по-хойански с вьетнамской кинзой и соленьями, поднос рисовой лапши со свежей зеленью и насыщенным соусом, хрустящие жареные пирожки, яичница с багетом и сэндвич с картофелем фри для лёгкого перекуса. Блюда можно адаптировать под ваш вкус или диету — просто скажите при заказе.",
+        "Die CGP-Küche serviert vietnamesische und westliche Gerichte, am Tisch am Pool oder im Restaurant: goldener Hoi-An-Hühnerreis mit vietnamesischem Koriander und Pickles, eine Platte Reisnudeln mit frischen Kräutern und kräftigem Dip, knusprig frittierte Teigtaschen, Spiegeleier mit Baguette und ein Sandwich mit Pommes für den kleinen Hunger. Gerichte passen wir gern an Geschmack oder Ernährungsweise an – sagen Sie uns einfach bei der Bestellung Bescheid."],
     "s10.t": ["Dọn phòng hằng ngày", "Daily housekeeping", "매일 하우스키핑", "每日客房清洁", "Ежедневная уборка", "Tägliches Housekeeping"],
     "s10.d": [
         "Phòng được dọn dẹp, thay khăn và bổ sung đồ dùng mỗi ngày. Bạn có thể chọn giờ dọn phòng phù hợp hoặc treo biển “Không làm phiền” – đội ngũ buồng phòng luôn tôn trọng sự riêng tư của bạn.",
@@ -267,6 +289,8 @@ T = {
         "Marmorwände & Goldakzente|Badewanne am großen Glasfenster|Bogenfenster & eigener Balkon|CGP-bestickte Wäsche & Handtücher"],
     "vd.play": ["Phát video", "Play video", "영상 재생", "播放视频", "Смотреть видео", "Video abspielen"],
 
+    "map.title": ["Bản đồ CGP Luxury Hotel", "Map of CGP Luxury Hotel", "CGP 럭셔리 호텔 지도", "CGP 奢华酒店地图", "Карта CGP Luxury Hotel", "Karte CGP Luxury Hotel"],
+    "map.open": ["Mở trong Google Maps", "Open in Google Maps", "Google 지도에서 열기", "在 Google 地图中打开", "Открыть в Google Maps", "In Google Maps öffnen"],
     "art.gal": ["Hình ảnh", "Photos", "사진", "图片", "Фотографии", "Bilder"],
 }
 
@@ -352,3 +376,6 @@ NEWS_EXTRA = {
             "По приезде просто назовите своё имя на ресепшене — данные бронирования уже у нас, и заселение займёт несколько минут. Пока ждёте, отдохните на диване в лобби с приветственным напитком. Особые пожелания из онлайн-бронирования — ранний приезд, оформление к годовщине или дополнительная кровать — подготовим заранее.",
             "Bei der Ankunft nennen Sie an der Rezeption einfach Ihren Namen – Ihre Buchung liegt bereits vor und der Check-in dauert nur wenige Minuten. Während Sie warten, entspannen Sie mit einem Willkommensgetränk auf den Lobbysofas. Sonderwünsche aus der Online-Buchung wie frühe Ankunft, Jubiläumsdekoration oder Zustellbett werden vorab vorbereitet."]},
 }
+
+# package inclusion override: family room category name
+FAMROOM = ["Hạng phòng Junior Family", "Junior Family room category", "주니어 패밀리 객실", "Junior Family 房型", "Номер категории Junior Family", "Zimmerkategorie Junior Family"]
