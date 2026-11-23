@@ -14,7 +14,7 @@ def slugify(t):
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
 
 
-SITE = ""  # set to "https://your-domain" before going live (hreflang/canonical need absolute URLs)
+SITE = "https://cgpgrouphotel.com"  # absolute base for canonical / hreflang / sitemap / og / JSON-LD
 VER = time.strftime("%Y%m%d%H%M")
 subprocess.run(["node", ".work/export.cjs"], check=True, stdout=subprocess.DEVNULL)
 D = json.load(open(".work/i18n.json", encoding="utf-8"))
@@ -78,6 +78,54 @@ for _n in _news_imgs:
 for _f in os.listdir("images/thumbs"):
     if _f[:-4] not in _news_imgs:
         os.remove("images/thumbs/" + _f)
+
+# Banners: one pre-cropped WebP per screen class (mobile <=600 / tablet <=991 / desktop), served with <picture>.
+# Each crop ratio is the *narrowest* box ratio of that class (measured: home banner 508px tall on mobile, 600px on
+# tablet; page banner 260px tall up to 991px, 384px above), so object-fit: cover shows exactly what it showed with
+# the full photo -- only the pixels that were never visible are dropped.
+BANNER_MQ = ("(max-width: 600px)", "(min-width: 601px) and (max-width: 991px)", "(min-width: 992px)")
+BANNER_CROPS = {"hero": ((0.55, 480), (0.98, 1100), (0, 1920)),   # (min width/height ratio, max output width)
+                "page": ((1.2, 640), (2.3, 1200), (2.55, 1920))}
+os.makedirs("images/banner", exist_ok=True)
+_banner_keep = set()
+def banner_file(n, kind, k):
+    """images/banner/<n>-<kind>-<m|t|d>.webp -> (path from root, width, height); generated when missing/stale."""
+    a, cap = BANNER_CROPS[kind][k]
+    W, H = DIMS[n]
+    cw, ch = (round(H * a), H) if a and W / H > a else ((W, round(W / a)) if a and W / H < a else (W, H))
+    ow = min(cw, cap); oh = round(ch * ow / cw)
+    rel = f"images/banner/{n}-{kind}-{'mtd'[k]}.webp"
+    _banner_keep.add(os.path.basename(rel))
+    if not os.path.exists(rel) or os.path.getmtime(rel) < os.path.getmtime(f"images/{n}.jpg"):
+        subprocess.run(["magick", f"images/{n}.jpg", "-gravity", "center", "-crop", f"{cw}x{ch}+0+0", "+repage",
+                        "-resize", f"{ow}x", "-strip", "-quality", "76", "-define", "webp:method=6", rel], check=True)
+    return rel, ow, oh
+
+# social share images: 1200x630 JPEG (the size Facebook / Zalo / X expect)
+os.makedirs("images/og", exist_ok=True)
+def og_file(n):
+    rel = f"images/og/{n}.jpg"
+    if not os.path.exists(rel) or os.path.getmtime(rel) < os.path.getmtime(f"images/{n}.jpg"):
+        subprocess.run(["magick", f"images/{n}.jpg", "-resize", "1200x630^", "-gravity", "center", "-extent", "1200x630",
+                        "-strip", "-quality", "82", "-interlace", "Plane", rel], check=True)
+    return rel
+
+# branded share image (every page's og:image): .work/og-share.html rendered by headless Chrome -> images/og/share.jpg
+SHARE_IMG = "images/og/share.jpg"
+_tpl = ".work/og-share.html"
+if not os.path.exists(SHARE_IMG) or os.path.getmtime(SHARE_IMG) < max(os.path.getmtime(_tpl), os.path.getmtime("images/hero-facade-night.jpg")):
+    _png = "images/og/_share.png"
+    subprocess.run(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "--headless=new", "--disable-gpu", "--hide-scrollbars",
+                    "--force-device-scale-factor=1", "--window-size=1200,630", "--virtual-time-budget=3000", "--allow-file-access-from-files",
+                    "--screenshot=" + os.path.abspath(_png), "file://" + os.path.abspath(_tpl)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["magick", _png, "-strip", "-quality", "86", "-interlace", "Plane", SHARE_IMG], check=True)
+    os.remove(_png)
+SHARE_ALT = "CGP Group - CGP Luxury Hotel Hoi An"
+
+# header logo: shown 90px tall (~140px wide) -> 420px WebP covers 3x screens (the PNG is 557px / 105 KB)
+if not os.path.exists("images/logo.webp") or os.path.getmtime("images/logo.webp") < os.path.getmtime("images/logo.png"):
+    subprocess.run(["magick", "images/logo.png", "-resize", "420x", "-strip", "-quality", "90", "-define", "webp:method=6", "images/logo.webp"], check=True)
+LOGO_WH = tuple(int(x) for x in subprocess.run(["magick", "identify", "-format", "%w %h", "images/logo.webp"], capture_output=True, text=True, check=True).stdout.split())
 NAMES = {"vi": "Tiếng Việt", "en": "English", "ko": "한국어", "zh": "中文", "ru": "Русский", "de": "Deutsch"}
 FLAGS = {"vi": "vi.png", "en": "en.png", "ko": "ko.svg", "zh": "zh.svg", "ru": "ru.svg", "de": "de.svg"}
 LOCALE = {"vi": "vi_VN", "en": "en_GB", "ko": "ko_KR", "zh": "zh_CN", "ru": "ru_RU", "de": "de_DE"}
@@ -168,6 +216,7 @@ SVG = {
     "date": '<svg viewBox="0 0 448 512" aria-hidden="true"><path d="M12 192h424v280c0 22-18 40-40 40H52c-22 0-40-18-40-40V192zm424-44v-36c0-22-18-40-40-40h-40V20c0-6-6-12-12-12h-40c-6 0-12 6-12 12v52H156V20c0-6-6-12-12-12h-40c-6 0-12 6-12 12v52H52c-22 0-40 18-40 40v36c0 6 6 12 12 12h400c6 0 12-6 12-12z"/></svg>',
 }
 
+BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACw="
 e = lambda s: H.escape(str(s), quote=True)
 
 
@@ -181,6 +230,7 @@ class Ctx:
         self.R = "../" * depth          # site root (assets)
         self.L = self.R + prefix        # link base for this language
         self.home = self.L or "./"
+        self.preload = ""               # <link rel=preload> for the LCP banner, filled by banner()
 
     def t(self, k): return D["T"][self.lang][k]
     def pick(self, arr): return arr[self.i]
@@ -200,6 +250,19 @@ class Ctx:
         """Full-bleed responsive background photo (sits under the banner content, object-fit: cover)."""
         load = 'fetchpriority="high"' if eager else 'loading="lazy"'
         return f'<img class="bg-img" {self.pic(n, "100vw")} alt="" {load}>'
+    def banner(self, n, kind, eager=False, defer=False):
+        """Banner photo: <picture> with one WebP per screen class (mobile / tablet / desktop), see BANNER_CROPS."""
+        files = [banner_file(n, kind, k) for k in range(3)]
+        srcs = "".join(f'<source media="{BANNER_MQ[k]}" srcset="{self.R}{f}" width="{w}" height="{h}">' for k, (f, w, h) in enumerate(files[:2]))
+        f, w, h = files[2]
+        if eager:
+            self.preload += "".join(f'<link rel="preload" as="image" type="image/webp" href="{self.R}{p}" media="{BANNER_MQ[k]}" fetchpriority="high">\n'
+                                    for k, (p, _, _) in enumerate(files))
+        load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+        if defer:  # hidden slider slides: js/main.js swaps data-* in after window "load", so they never compete with the LCP photo
+            srcs = srcs.replace(" srcset=", " data-srcset=")
+            return f'<picture>{srcs}<img class="bg-img" src="{BLANK}" data-src="{self.R}{f}" width="{w}" height="{h}" alt="" decoding="async"></picture>'
+        return f'<picture>{srcs}<img class="bg-img" src="{self.R}{f}" width="{w}" height="{h}" alt="" {load} decoding="async"></picture>'
     def pkg(self, pid): return self.url(f'goi-luu-tru/{P[pid]["slug"]}/')
     def inc(self, k, p): return D["INC"][k][self.i].replace("{N}", self.nights(p["nights"])).replace("{n}", str(p["nights"]))
 
@@ -221,7 +284,7 @@ def header(c, cur):
   <div class="port">
     <div class="header-bar">
       <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <a class="logo" href="{c.home}" aria-label="CGP Luxury Hotel"><img src="{c.R}images/logo.png" alt="CGP Luxury Hotel" width="557" height="360"></a>
+      <a class="logo" href="{c.home}" aria-label="CGP Luxury Hotel"><img src="{c.R}images/logo.webp" alt="CGP Luxury Hotel" width="{LOGO_WH[0]}" height="{LOGO_WH[1]}"></a>
       <nav class="nav">
         <ul class="menu">
           <li>{a("", "nav.home", "home")}</li>
@@ -283,11 +346,75 @@ def footer(c):
 </footer>'''
 
 
-def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-day"):
+# ------------------------------------------------------------------ SEO
+HOTEL_ID, SITE_ID = SITE + "/#hotel", SITE + "/#website"
+SECTIONS = {"gioi-thieu/": "nav.about", "phong-nghi/": "nav.rooms", "goi-luu-tru/": "nav.packages", "dich-vu/": "nav.services",
+            "thu-vien-anh/": "gal.title", "tin-tuc/": "nav.news", "dat-phong/": "nav.book"}
+ROBOTS = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+
+
+def clip(s, n=158):
+    """Meta description length: cut at a word boundary, add an ellipsis."""
+    s = " ".join(str(s).split())
+    if len(s) <= n:
+        return s
+    cut = s[:n].rsplit(" ", 1)[0] if " " in s[:n] else s[:n]
+    return cut.rstrip(" ,.;:–-") + "…"
+
+
+def hotel_ld(c, rooms=False):
+    """Hotel entity (schema.org/Hotel) in the page language; rooms=True adds the room types."""
+    h = {"@type": "Hotel", "@id": HOTEL_ID, "name": "CGP Luxury Hotel Hoi An", "alternateName": ["CGP Luxury Hotel", "Premium CGP Hotel Hoi An"],
+         "url": lang_url(c.lang, ""), "description": c.t("intro.text"),
+         "logo": SITE + "/images/logo.png", "image": [f"{SITE}/{og_file(n)}" for n in ("hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "room-500-2")],
+         "telephone": PHONE_TEL, "email": EMAIL,
+         "address": {"@type": "PostalAddress", "streetAddress": "67 Lý Thường Kiệt", "addressLocality": "Hội An",
+                     "addressRegion": "Quảng Nam", "addressCountry": "VN"},
+         "hasMap": MAP_LINK, "sameAs": [FB], "numberOfRooms": 23, "checkinTime": "14:00", "checkoutTime": "12:00",
+         "currenciesAccepted": "USD, VND", "availableLanguage": ["vi", "en", "ko", "zh", "ru", "de"],
+         "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": c.t(k + ".t"), "value": True} for k, _, _ in SERVICES],
+         "potentialAction": {"@type": "ReserveAction", "target": lang_url(c.lang, "dat-phong/")}}
+    if rooms:
+        h["containsPlace"] = [{"@type": "HotelRoom", "name": c.t(k + ".t"), "description": c.t(k + ".d"),
+                               "url": lang_url(c.lang, "phong-nghi/") + "#" + k, "image": f"{SITE}/images/{imgs[0]}.jpg"} for k, imgs in ROOMS]
+    return h
+
+
+def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-facade-day", og_type="website", ld=(), rooms_ld=False, published=None):
     links = "".join(f'<link rel="stylesheet" href="{c.R}css/{x}.css?v={VER}">\n' for x in ["fonts", "main"] + list(css))
     js = "".join(f'<script src="{c.R}js/{s}.js?v={VER}"></script>\n' for s in ["main"] + list(scripts))
     alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{lang_url(l, c.slug)}">\n' for l in LANGS)
     alt += f'<link rel="alternate" hreflang="x-default" href="{lang_url(DEFAULT, c.slug)}">\n'
+    url, desc = lang_url(c.lang, c.slug), clip(desc)
+    og = f"{SITE}/{SHARE_IMG}"  # one branded share image site-wide (og_img still feeds the per-page JSON-LD)
+    og_alt = "".join(f'<meta property="og:locale:alternate" content="{LOCALE[l]}">\n' for l in LANGS if l != c.lang)
+    art = (f'<meta property="article:published_time" content="{published}T08:00:00+07:00">\n'
+           f'<meta property="article:modified_time" content="{published}T08:00:00+07:00">\n') if published else ""
+
+    # JSON-LD graph: website + hotel + this page + breadcrumb (+ page-specific nodes)
+    name = title.split(" | ")[0]
+    crumbs = [(c.t("nav.home"), lang_url(c.lang, ""))]
+    if c.slug:
+        top = c.slug.split("/")[0] + "/"
+        crumbs.append((c.t(SECTIONS[top]), lang_url(c.lang, top)))
+        if c.slug != top:
+            crumbs.append((name, url))
+    page_type = {"": "WebPage", "gioi-thieu/": "AboutPage", "thu-vien-anh/": "CollectionPage", "tin-tuc/": "CollectionPage",
+                 "goi-luu-tru/": "CollectionPage", }.get(c.slug, "WebPage")
+    graph = [
+        {"@type": "WebSite", "@id": SITE_ID, "url": SITE + "/", "name": "CGP Luxury Hotel Hoi An", "inLanguage": LANGS, "publisher": {"@id": HOTEL_ID}},
+        hotel_ld(c, rooms_ld),
+        {"@type": page_type, "@id": url + "#webpage", "url": url, "name": title, "description": desc, "inLanguage": c.lang,
+         "isPartOf": {"@id": SITE_ID}, "about": {"@id": HOTEL_ID},
+         "primaryImageOfPage": {"@type": "ImageObject", "url": f"{SITE}/{og_file(og_img)}", "width": 1200, "height": 630},
+         **({"breadcrumb": {"@id": url + "#breadcrumb"}} if c.slug else {})},
+    ]
+    if c.slug:
+        graph.append({"@type": "BreadcrumbList", "@id": url + "#breadcrumb", "itemListElement": [
+            {"@type": "ListItem", "position": k + 1, "name": n_, "item": u_} for k, (n_, u_) in enumerate(crumbs)]})
+    graph += list(ld)
+    schema = jsonld({"@context": "https://schema.org", "@graph": graph})
+
     doc = f'''<!DOCTYPE html>
 <html lang="{c.lang}">
 <head>
@@ -295,18 +422,31 @@ def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-day"):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{lang_url(c.lang, c.slug)}">
-{alt}<meta property="og:type" content="website">
+<meta name="robots" content="{ROBOTS}">
+<link rel="canonical" href="{url}">
+{alt}<meta property="og:type" content="{og_type}">
+<meta property="og:site_name" content="CGP Luxury Hotel Hoi An">
+<meta property="og:url" content="{url}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:locale" content="{LOCALE[c.lang]}">
-<meta property="og:image" content="{SITE}/images/{og_img}.jpg">
-<link rel="icon" href="{c.R}favicon.ico" sizes="any">
+{og_alt}<meta property="og:image" content="{og}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{e(SHARE_ALT)}">
+<meta name="twitter:image:alt" content="{e(SHARE_ALT)}">
+{art}<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(title)}">
+<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:image" content="{og}">
+{c.preload}<link rel="icon" href="{c.R}favicon.ico" sizes="any">
 <link rel="icon" href="{c.R}seo/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{c.R}seo/apple-touch-icon.png">
 <link rel="manifest" href="{c.R}seo/site.webmanifest">
 <meta name="theme-color" content="#002040">
-{links}</head>
+{links}{schema}
+</head>
 <body data-root="{c.R or "./"}" data-base="{c.home}">
 {header(c, cur)}
 <main>
@@ -322,12 +462,8 @@ def page(c, title, desc, css, cur, body, scripts=(), og_img="hero-day"):
 
 
 # ------------------------------------------------------------------ blocks
-def banner_page(c, img, text, cls="", webp=True):
-    if webp:
-        return f'''<section class="banner-page">{c.bgimg(img, eager=True)}
-  <div class="port"><h1 class="{cls}">{e(text)}</h1></div>
-</section>'''
-    return f'''<section class="banner-page" style="background-image:url({c.img(img)})">
+def banner_page(c, img, text, cls=""):
+    return f'''<section class="banner-page">{c.banner(img, "page", eager=True)}
   <div class="port"><h1 class="{cls}">{e(text)}</h1></div>
 </section>'''
 
@@ -580,7 +716,7 @@ def build_rooms(lang):
 <section class="rm-cta">
   <div class="port"><p>{e(c.t("rm.cta"))}</p><div class="btns"><a class="btn" href="{c.url("dat-phong/")}">{e(c.t("nav.book"))}</a><a class="btn" href="{c.url("goi-luu-tru/")}">{e(c.t("pk.viewall"))}</a></div></div>
 </section>'''
-    page(c, f'{c.t("rm.banner")} | {c.t("intro.title")}', c.t("rm.sub")[:157] + "…", ["home", "pages"], "rooms", body, og_img="room-500-2")
+    page(c, f'{c.t("rm.banner")} | {c.t("intro.title")}', c.t("rm.sub"), ["home", "pages"], "rooms", body, og_img="room-500-2", rooms_ld=True)
 
 
 def build_packages(lang):
@@ -645,10 +781,9 @@ def build_packages(lang):
         body += jsonld({"@context": "https://schema.org", "@type": "Offer", "name": name, "description": c.pick(p["desc"]),
                         "url": lang_url(lang, c.slug), "image": SITE + "/images/" + p["img"] + ".jpg", "price": p["price"], "priceCurrency": "USD",
                         "availability": "https://schema.org/InStock", "category": c.t("cat." + p["cat"]),
-                        "offeredBy": {"@type": "Hotel", "name": "CGP Luxury Hotel Hoi An", "telephone": PHONE_TEL, "email": EMAIL,
-                                      "address": {"@type": "PostalAddress", "streetAddress": "67 Ly Thuong Kiet", "addressLocality": "Hoi An", "addressRegion": "Quang Nam", "addressCountry": "VN"}}})
+                        "offeredBy": {"@id": HOTEL_ID}})
         desc = c.pick(p["desc"])
-        page(c, f'{name} | {c.t("intro.title")}', desc[:157] + ("…" if len(desc) > 157 else ""), ["home", "pages"], "packages", body, og_img=p["img"])
+        page(c, f'{name} | {c.t("intro.title")}', desc, ["home", "pages"], "packages", body, og_img=p["img"])
 
 
 def build_gallery(lang):
@@ -667,7 +802,7 @@ def build_gallery(lang):
     {secs}
   </div>
 </section>'''
-    page(c, f'{c.t("gal.title")} | {c.t("intro.title")}', c.t("gal.sub"), ["home", "pages"], "gallery", body, og_img="room-pool-view")
+    page(c, f'{c.t("gal.title")} | {c.t("intro.title")}', c.t("gal.sub") + ". " + c.t("intro.text"), ["home", "pages"], "gallery", body, og_img="room-pool-view")
 
 
 def build_services(lang):
@@ -839,7 +974,7 @@ def _fmt(s, kw):
 def build(lang):
     # Home
     c = Ctx(lang, "")
-    slides = "".join(f'<div class="banner-slide">{c.bgimg(n, eager=(k == 0))}</div>' for k, n in enumerate( ["hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "hero-guests", "pool-day-3", "room-500-2", "suite-sunset"]))
+    slides = "".join(f'<div class="banner-slide">{c.banner(n, "hero", eager=(k == 0), defer=(k > 0))}</div>' for k, n in enumerate( ["hero-facade-night", "hero-facade-day", "hero-pool-night", "hero-lobby", "hero-guests", "pool-day-3", "room-500-2", "suite-sunset"]))
     adults = "".join(f'<option value="{n}"{" selected" if n == 2 else ""}>{e(c.t("g.a" + str(n)) + c.t("g.c0"))}</option>' for n in (1, 2, 3, 4))
     home = f'''<section class="banner" data-fade=".banner-slide" data-auto="6000" data-loop="1">
   {slides}
@@ -958,20 +1093,20 @@ def build(lang):
 
     # News list
     c = Ctx(lang, "tin-tuc/")
-    news = f'''{banner_page(c, "garden-cafe-1", c.t("nw.banner"), webp=False)}
+    news = f'''{banner_page(c, "garden-cafe-1", c.t("nw.banner"))}
 <section>
   <div class="port with-sidebar">
     <div><ul class="news-list">{news_list(c)}</ul></div>
     {sidebar(c)}
   </div>
 </section>'''
-    page(c, f'{c.t("nw.title")} | {c.t("intro.title")}', c.t("nw.bannersub"), ["home", "news", "pages"], "news", news)
+    page(c, f'{c.t("nw.title")} | {c.t("intro.title")}', c.t("nw.bannersub") + ". " + c.t("intro.text"), ["home", "news", "pages"], "news", news)
 
     # Articles
     for n in NEWS:
         c = Ctx(lang, f'tin-tuc/{n["id"]}/')
         title = c.pick(n["title"])
-        art = f'''{banner_page(c, n["img"], title, "is-post", webp=False)}
+        art = f'''{banner_page(c, n["img"], title, "is-post")}
 <section>
   <div class="port with-sidebar is-article">
     <article class="article"><h2 class="headline">{e(title)}</h2><div class="article-body">{article_body(c, n)}</div></article>
@@ -979,7 +1114,12 @@ def build(lang):
   </div>
 </section>'''
         desc = c.pick(n["body"])
-        page(c, f'{title} | {c.t("intro.title")}', desc[:157] + ("…" if len(desc) > 157 else ""), ["home", "news", "pages"], "news", art, og_img=n["img"])
+        u = lang_url(lang, c.slug)
+        post = {"@type": "BlogPosting", "@id": u + "#article", "headline": title, "description": clip(desc), "inLanguage": lang,
+                "image": [f'{SITE}/{og_file(n["img"])}', f'{SITE}/images/{n["img"]}.jpg'], "datePublished": n["date"] + "T08:00:00+07:00",
+                "dateModified": n["date"] + "T08:00:00+07:00", "author": {"@id": HOTEL_ID}, "publisher": {"@id": HOTEL_ID},
+                "mainEntityOfPage": {"@id": u + "#webpage"}, "isPartOf": {"@id": SITE_ID}}
+        page(c, f'{title} | {c.t("intro.title")}', desc, ["home", "news", "pages"], "news", art, og_img=n["img"], og_type="article", ld=[post], published=n["date"])
 
     # Booking (interactive widget rendered by js/booking.js in this page's language)
     c = Ctx(lang, "dat-phong/")
@@ -990,7 +1130,7 @@ def build(lang):
   </div>
 </section>
 <div class="gateway" id="gateway" hidden><div><i></i><p>{e(c.t("pay.proc"))}</p></div></div>'''
-    page(c, f'{c.t("bk.banner")} | {c.t("intro.title")}', c.t("bk.bannersub"), ["booking"], "book", booking, scripts=["booking"])
+    page(c, f'{c.t("bk.banner")} | {c.t("intro.title")}', c.t("bk.bannersub") + ". " + c.t("intro.text"), ["booking"], "book", booking, scripts=["booking"])
 
 
 for l in LANGS:
@@ -1005,11 +1145,28 @@ for l in LANGS:
 
 # sitemap with hreflang alternates
 slugs = ["", "gioi-thieu/", "phong-nghi/", "goi-luu-tru/", "dich-vu/", "thu-vien-anh/", "tin-tuc/", "dat-phong/"] + [f'goi-luu-tru/{P[i]["slug"]}/' for i in sorted(P)] + [f'tin-tuc/{n["id"]}/' for n in NEWS]
+TODAY = time.strftime("%Y-%m-%d")
+NEWS_DATE = {f'tin-tuc/{n["id"]}/': n["date"] for n in NEWS}
+PRIO = {"": "1.0", "dat-phong/": "0.9", "phong-nghi/": "0.9", "goi-luu-tru/": "0.8", "gioi-thieu/": "0.8", "dich-vu/": "0.7", "thu-vien-anh/": "0.6", "tin-tuc/": "0.6"}
 urls = ""
 for s in slugs:
+    alts = "".join(f'<xhtml:link rel="alternate" hreflang="{x}" href="{lang_url(x, s)}"/>' for x in LANGS)
+    alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{lang_url(DEFAULT, s)}"/>'
     for l in LANGS:
-        alts = "".join(f'<xhtml:link rel="alternate" hreflang="{x}" href="{lang_url(x, s)}"/>' for x in LANGS)
-        urls += f"  <url><loc>{lang_url(l, s)}</loc>{alts}</url>\n"
+        urls += (f"  <url><loc>{lang_url(l, s)}</loc><lastmod>{NEWS_DATE.get(s, TODAY)}</lastmod>"
+                 f"<changefreq>{'weekly' if s in ('', 'tin-tuc/') else 'monthly'}</changefreq><priority>{PRIO.get(s, '0.5')}</priority>{alts}</url>\n")
 open("sitemap.xml", "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + urls + "</urlset>\n")
+
+open("robots.txt", "w", encoding="utf-8").write(f"""User-agent: *
+Allow: /
+Disallow: /.work/
+Disallow: /reports/
+
+Sitemap: {SITE}/sitemap.xml
+""")
+
+for _f in os.listdir("images/banner"):
+    if _f not in _banner_keep:
+        os.remove("images/banner/" + _f)
 print("built", len(LANGS), "languages x", len(slugs), "pages")

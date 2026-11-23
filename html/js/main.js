@@ -45,6 +45,13 @@
   }
   $$("[data-fade]").forEach(fadeSlider);
 
+  /* ---------- Deferred banner slides: load after the page (first slide = LCP) ---------- */
+  function hydrate() {
+    $$("source[data-srcset]").forEach(function (s) { s.srcset = s.dataset.srcset; s.removeAttribute("data-srcset"); });
+    $$("img[data-src]").forEach(function (i) { i.src = i.dataset.src; i.removeAttribute("data-src"); });
+  }
+  if (document.readyState === "complete") hydrate(); else window.addEventListener("load", hydrate);
+
   /* ---------- Carousel (one card per step) ---------- */
   function carousel(box) {
     var track = $(".carousel-track", box), dots = box.nextElementSibling, i = 0;

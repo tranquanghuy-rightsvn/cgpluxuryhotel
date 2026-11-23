@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /.work/
+Disallow: /reports/
+
+Sitemap: https://cgpgrouphotel.com/sitemap.xml
