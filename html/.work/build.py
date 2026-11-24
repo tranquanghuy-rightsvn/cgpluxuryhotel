@@ -40,6 +40,36 @@ for _n in NEWS:
     _n.update(X.NEWS_EXTRA.get(_n["id"], {}))
 NEWS = X.NEWS_NEW + NEWS
 
+# Smart content news (replaces the short news above): ../content/tin-tuc/<slug>/<lang>.html, each starting with
+# <!-- smart-content\ntitle: ...\ndescription: ...\ncover: <image name>\ndate: YYYY-MM-DD\n--> followed by the
+# designed article body (tv-* blocks, css/blocks.css). Placeholders expanded per page by smart_html():
+#   <img data-img="name" [data-sizes="..."] alt="...">  -> responsive WebP <img>
+#   href="@/path/"                                       -> link in the page's language
+#   <div data-gallery="a b c"></div>                     -> thumbnail grid + lightbox
+#   <i data-ic="name"></i>                               -> inline SVG icon (SC_ICONS)
+SMART_DIR = "../content/tin-tuc"
+def _smart_meta(path):
+    raw = open(path, encoding="utf-8").read()
+    m = re.match(r"\s*<!--\s*smart-content\s*\n(.*?)-->\s*", raw, re.S)
+    meta = dict(l.split(":", 1) for l in m.group(1).strip().split("\n"))
+    return {k.strip(): v.strip() for k, v in meta.items()}, raw[m.end():]
+if os.path.isdir(SMART_DIR):
+    _smart = []
+    for _slug in sorted(os.listdir(SMART_DIR)):
+        _dir = f"{SMART_DIR}/{_slug}"
+        if not os.path.isfile(f"{_dir}/vi.html"):
+            continue
+        _vi, _ = _smart_meta(f"{_dir}/vi.html")
+        _n = {"id": _slug, "date": _vi["date"], "img": _vi["cover"], "title": [], "body": [], "html": [], "smart": True}
+        for _l in LANGS:
+            _f = f"{_dir}/{_l}.html" if os.path.isfile(f"{_dir}/{_l}.html") else f"{_dir}/vi.html"
+            _m, _html = _smart_meta(_f)
+            _n["title"].append(_m["title"]); _n["body"].append(_m["description"]); _n["html"].append(_html)
+        _n["imgs"] = []  # gallery photos come from the body itself
+        _smart.append(_n)
+    if _smart:
+        NEWS = sorted(_smart, key=lambda n: n["date"], reverse=True)
+
 # responsive images: images/webp/<name>-<w>.webp at several widths (never upscaled) + intrinsic sizes
 # news images keep the plain JPEG (+ images/thumbs/<name>.jpg) as before.
 from concurrent.futures import ThreadPoolExecutor
@@ -236,7 +266,14 @@ class Ctx:
     def pick(self, arr): return arr[self.i]
     def name(self, pid): return self.pick(P[pid]["names"])
     def nights(self, n): return D["nights"][self.lang][str(n)]
-    def date(self, iso): return D["short"][self.lang][iso]
+    def date(self, iso):
+        if iso in D["short"][self.lang]:
+            return D["short"][self.lang][iso]
+        y, m, d = (int(x) for x in iso.split("-"))
+        ru = ["янв.", "февр.", "мар.", "апр.", "мая", "июн.", "июл.", "авг.", "сент.", "окт.", "нояб.", "дек."]
+        de = ["Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."]
+        return {"vi": f"{d} thg {m}, {y}", "en": f"{d} {time.strftime('%b', time.strptime(str(m), '%m'))} {y}", "ko": f"{y}년 {m}월 {d}일",
+                "zh": f"{y}年{m}月{d}日", "ru": f"{d} {ru[m - 1]} {y} г.", "de": f"{d}. {de[m - 1]} {y}"}[self.lang]
     def url(self, slug=""): return self.L + slug if (self.L + slug) else "./"
     def img(self, n): return f"{self.R}images/{n}.jpg"
     def th(self, n): return f"{self.R}images/thumbs/{n}.jpg"
@@ -572,7 +609,64 @@ def sidebar(c):
     </aside>'''
 
 
+SC_ICONS = {
+    "pin": '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "bed": '<path d="M3 18V7M3 14h18v4M21 14v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11" r="2"/>',
+    "sun": '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    "rain": '<path d="M7 15a4 4 0 0 1-.6-8A6 6 0 0 1 18 8a3.5 3.5 0 0 1-.5 7z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>',
+    "star": '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>',
+    "heart": '<path d="M12 20s-7.5-4.6-9.3-9.3A5 5 0 0 1 12 6a5 5 0 0 1 9.3 4.7C19.5 15.4 12 20 12 20z"/>',
+    "bike": '<circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l2 7M13 6h3"/>',
+    "food": '<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 1.5-3 4-3 7v3h3"/>',
+    "pool": '<path d="M2 18c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M8 15V5a2 2 0 0 1 4 0M16 15V5a2 2 0 0 0-4 0M8 9h8"/>',
+    "plane": '<path d="M10 14 3 12l1.5-1.5L11 11l4-5.5c1-1.3 3.5-2 4.2-1.3.7.7 0 3.2-1.3 4.2L12.5 13l.5 6.5L11.5 21l-2-7z"/>',
+    "check": '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+    "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+    "wallet": '<path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l12-3v3"/><circle cx="16.5" cy="13.5" r="1.2"/>',
+    "users": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8-.3 5 1.4 5.5 4.4"/>',
+    "camera": '<path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.5"/>',
+    "lantern": '<path d="M12 2v3M9 5h6M8 8c0-1.7 1.8-3 4-3s4 1.3 4 3v7c0 1.7-1.8 3-4 3s-4-1.3-4-3zM8 11.5h8M10 18v2h4v-2M12 20v2"/>',
+}
+
+
+CREDITS = json.load(open("../content/image-credits.json", encoding="utf-8")) if os.path.exists("../content/image-credits.json") else {}
+PHOTO = {"vi": "Ảnh", "en": "Photo", "ko": "사진", "zh": "图片", "ru": "Фото", "de": "Foto"}
+
+
+def credit(c, name):
+    """Attribution line for a Wikimedia Commons photo (required by CC BY / CC BY-SA)."""
+    cr = CREDITS.get(name)
+    if not cr:
+        return ""
+    return (f'<small class="tv-credit">{PHOTO[c.lang]}: {e(cr["artist"])} / Wikimedia Commons, '
+            f'<a href="{e(cr["source"])}" target="_blank" rel="noopener">{e(cr["license"])}</a></small>')
+
+
+def smart_html(c, n):
+    html = n["html"][c.i]
+    def _img(m):
+        attrs = m.group(1)
+        name = re.search(r'data-img="([^"]+)"', attrs).group(1)
+        sz = re.search(r'data-sizes="([^"]+)"', attrs)
+        rest = re.sub(r'\s*data-(img|sizes)="[^"]*"', "", attrs)
+        return f'<img {c.pic(name, sz.group(1) if sz else "(max-width: 991px) 100vw, 865px")}{rest} loading="lazy" decoding="async">' + credit(c, name)
+    html = re.sub(r"<img\s([^>]*data-img=[^>]*?)\s*/?>", _img, html)
+    html = re.sub(r'href="@/([^"]*)"', lambda m: f'href="{c.url(m.group(1))}"', html)
+    html = re.sub(r'<div data-gallery="([^"]+)"></div>', lambda m: gallery_grid(c, m.group(1).split(), "g" + str(abs(hash(m.group(1))) % 10**6), "gal-grid gal-grid--4"), html)
+    html = re.sub(r'<i data-ic="([a-z]+)"></i>', lambda m: f'<span class="tv-ic" aria-hidden="true"><svg viewBox="0 0 24 24">{SC_ICONS[m.group(1)]}</svg></span>', html)
+    return html
+
+
+def smart_words(html):
+    text = re.sub(r"<[^>]+>", " ", html)
+    return len(H.unescape(text).split())
+
+
 def article_body(c, n):
+    if n.get("smart"):
+        return (f'<div class="news-meta" style="margin-bottom:14px">{SVG["date"]}<time datetime="{n["date"]}">{e(c.date(n["date"]))}</time></div>'
+                f'<div class="sc">{smart_html(c, n)}</div>')
     body = c.pick(n["body"])
     parts = re.split(r'(?<=[.。])\s*(?=[A-ZÀ-Ỹ가-힣一-龥А-ЯÄÖÜ])', body)
     half = (len(parts) + 1) // 2
@@ -1119,7 +1213,9 @@ def build(lang):
                 "image": [f'{SITE}/{og_file(n["img"])}', f'{SITE}/images/{n["img"]}.jpg'], "datePublished": n["date"] + "T08:00:00+07:00",
                 "dateModified": n["date"] + "T08:00:00+07:00", "author": {"@id": HOTEL_ID}, "publisher": {"@id": HOTEL_ID},
                 "mainEntityOfPage": {"@id": u + "#webpage"}, "isPartOf": {"@id": SITE_ID}}
-        page(c, f'{title} | {c.t("intro.title")}', desc, ["home", "news", "pages"], "news", art, og_img=n["img"], og_type="article", ld=[post], published=n["date"])
+        if n.get("smart"):
+            post["wordCount"] = smart_words(n["html"][c.i])
+        page(c, f'{title} | {c.t("intro.title")}', desc, ["home", "news", "pages"] + (["blocks"] if n.get("smart") else []), "news", art, og_img=n["img"], og_type="article", ld=[post], published=n["date"])
 
     # Booking (interactive widget rendered by js/booking.js in this page's language)
     c = Ctx(lang, "dat-phong/")
@@ -1136,6 +1232,10 @@ def build(lang):
 for l in LANGS:
     if l != DEFAULT and os.path.isdir(l):
         shutil.rmtree(l)  # regenerated below
+if os.path.isdir("tin-tuc"):  # default-language articles live next to other pages: drop the ones no longer in NEWS
+    for _d in os.listdir("tin-tuc"):
+        if os.path.isdir("tin-tuc/" + _d) and _d not in {n["id"] for n in NEWS}:
+            shutil.rmtree("tin-tuc/" + _d)
 for l in LANGS:
     build(l)
     build_packages(l)
