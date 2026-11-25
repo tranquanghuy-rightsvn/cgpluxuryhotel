@@ -1,0 +1,16 @@
+{
+  "name": "cgpluxuryhotel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cd html && python3 .work/build.py",
+    "dev": "wrangler dev",
+    "db:migrate:local": "wrangler d1 migrations apply cgpluxuryhotel --local",
+    "db:migrate": "wrangler d1 migrations apply cgpluxuryhotel --remote",
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run --outdir .wrangler/dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.2"
+  }
+}

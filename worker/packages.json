@@ -1,0 +1,158 @@
+{
+ "1": {
+  "nights": 3,
+  "usd": 2500,
+  "names": {
+   "vi": "Kỳ nghỉ thư giãn Hội An",
+   "en": "Hoi An Relaxing Stay",
+   "ko": "호이안 릴랙싱 스테이",
+   "zh": "会安悠闲假期",
+   "ru": "Спокойный отдых в Хойане",
+   "de": "Entspannter Aufenthalt in Hoi An"
+  }
+ },
+ "2": {
+  "nights": 3,
+  "usd": 2600,
+  "names": {
+   "vi": "Kỳ nghỉ lãng mạn",
+   "en": "Romantic Escape",
+   "ko": "로맨틱 이스케이프",
+   "zh": "浪漫之旅",
+   "ru": "Романтический отдых",
+   "de": "Romantische Auszeit"
+  }
+ },
+ "3": {
+  "nights": 4,
+  "usd": 2900,
+  "names": {
+   "vi": "Gói trăng mật",
+   "en": "Honeymoon Package",
+   "ko": "허니문 패키지",
+   "zh": "蜜月套餐",
+   "ru": "Медовый месяц",
+   "de": "Flitterwochen-Paket"
+  }
+ },
+ "4": {
+  "nights": 4,
+  "usd": 4500,
+  "names": {
+   "vi": "Kỳ nghỉ gia đình",
+   "en": "Family Holiday",
+   "ko": "패밀리 홀리데이",
+   "zh": "家庭假期",
+   "ru": "Семейный отдых",
+   "de": "Familienurlaub"
+  }
+ },
+ "5": {
+  "nights": 3,
+  "usd": 2700,
+  "names": {
+   "vi": "Gói lưu trú tiện lợi",
+   "en": "Easy Stay Package",
+   "ko": "이지 스테이 패키지",
+   "zh": "轻松住宿套餐",
+   "ru": "Пакет «Лёгкий отдых»",
+   "de": "Easy-Stay-Paket"
+  }
+ },
+ "6": {
+  "nights": 5,
+  "usd": 3500,
+  "names": {
+   "vi": "Trải nghiệm lưu trú trọn vẹn",
+   "en": "Complete Stay Experience",
+   "ko": "컴플리트 스테이 익스피리언스",
+   "zh": "全享住宿体验",
+   "ru": "Отдых «Всё включено»",
+   "de": "Rundum-Aufenthalt"
+  }
+ },
+ "7": {
+  "nights": 3,
+  "usd": 2500,
+  "names": {
+   "vi": "Kỷ niệm ngày đặc biệt",
+   "en": "Anniversary Celebration",
+   "ko": "기념일 셀러브레이션",
+   "zh": "纪念日庆祝",
+   "ru": "Празднование годовщины",
+   "de": "Jubiläumsfeier"
+  }
+ },
+ "8": {
+  "nights": 5,
+  "usd": 3500,
+  "names": {
+   "vi": "Kỳ nghỉ sống chậm",
+   "en": "Slow Living Stay",
+   "ko": "슬로우 리빙 스테이",
+   "zh": "慢生活假期",
+   "ru": "Неспешный отдых",
+   "de": "Slow-Living-Aufenthalt"
+  }
+ },
+ "9": {
+  "nights": 7,
+  "usd": 5000,
+  "names": {
+   "vi": "Gói làm việc & thư giãn",
+   "en": "Work & Relax Package",
+   "ko": "워크 & 릴랙스 패키지",
+   "zh": "工作与休闲套餐",
+   "ru": "Пакет «Работа и отдых»",
+   "de": "Arbeiten & Entspannen"
+  }
+ },
+ "10": {
+  "nights": 7,
+  "usd": 6000,
+  "names": {
+   "vi": "Kỳ nghỉ sang trọng CGP Signature",
+   "en": "CGP Signature Luxury Stay",
+   "ko": "CGP 시그니처 럭셔리 스테이",
+   "zh": "CGP 尊享奢华假期",
+   "ru": "CGP Signature: роскошный отдых",
+   "de": "CGP Signature Luxusaufenthalt"
+  }
+ },
+ "11": {
+  "nights": 3,
+  "usd": 3000,
+  "names": {
+   "vi": "Kỳ nghỉ một mình",
+   "en": "Solo Escape",
+   "ko": "솔로 이스케이프",
+   "zh": "独享之旅",
+   "ru": "Соло-отдых",
+   "de": "Solo-Auszeit"
+  }
+ },
+ "12": {
+  "nights": 5,
+  "usd": 5000,
+  "names": {
+   "vi": "Nghỉ dưỡng một mình",
+   "en": "Solo Retreat",
+   "ko": "솔로 리트릿",
+   "zh": "独享休养",
+   "ru": "Соло-ретрит",
+   "de": "Solo-Retreat"
+  }
+ },
+ "13": {
+  "nights": 7,
+  "usd": 7000,
+  "names": {
+   "vi": "Kỳ nghỉ Solo Signature",
+   "en": "Solo Signature Stay",
+   "ko": "솔로 시그니처 스테이",
+   "zh": "独享尊选假期",
+   "ru": "Отдых Solo Signature",
+   "de": "Solo-Signature-Aufenthalt"
+  }
+ }
+}

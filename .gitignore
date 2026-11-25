@@ -4,3 +4,6 @@ html/.work/old/
 .DS_Store
 raw-photos/
 __pycache__/
+node_modules/
+.wrangler/
+.dev.vars

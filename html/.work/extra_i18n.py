@@ -292,6 +292,31 @@ T = {
     "map.title": ["Bản đồ CGP Luxury Hotel", "Map of CGP Luxury Hotel", "CGP 럭셔리 호텔 지도", "CGP 奢华酒店地图", "Карта CGP Luxury Hotel", "Karte CGP Luxury Hotel"],
     "map.open": ["Mở trong Google Maps", "Open in Google Maps", "Google 지도에서 열기", "在 Google 地图中打开", "Открыть в Google Maps", "In Google Maps öffnen"],
     "art.gal": ["Hình ảnh", "Photos", "사진", "图片", "Фотографии", "Bilder"],
+
+    # ---------------------------------------------------------------- OnePay payment result (booking step 4)
+    "bk.check": ["Đang kiểm tra kết quả thanh toán…", "Checking your payment result…", "결제 결과를 확인하는 중…", "正在确认付款结果…", "Проверяем результат оплаты…", "Zahlungsergebnis wird geprüft…"],
+    "bk.fail.t": ["Thanh toán chưa thành công", "Payment not completed", "결제가 완료되지 않았습니다", "付款未成功", "Оплата не прошла", "Zahlung nicht abgeschlossen"],
+    "bk.fail.d": ["Giao dịch đã bị huỷ hoặc ngân hàng từ chối. Quý khách chưa bị trừ tiền — vui lòng thử lại hoặc chọn phương thức thanh toán khác.",
+                  "The transaction was cancelled or declined by the bank. You have not been charged — please try again or choose another payment method.",
+                  "거래가 취소되었거나 은행에서 거절되었습니다. 요금은 청구되지 않았습니다. 다시 시도하시거나 다른 결제 수단을 선택해 주세요.",
+                  "交易已取消或被银行拒绝，您未被扣款。请重试或选择其他支付方式。",
+                  "Платёж отменён или отклонён банком. Деньги не списаны — попробуйте ещё раз или выберите другой способ оплаты.",
+                  "Die Transaktion wurde abgebrochen oder von der Bank abgelehnt. Es wurde nichts belastet – bitte erneut versuchen oder eine andere Zahlungsart wählen."],
+    "bk.pend.t": ["Đang xử lý thanh toán", "Payment is being processed", "결제 처리 중입니다", "付款处理中", "Платёж обрабатывается", "Zahlung wird verarbeitet"],
+    "bk.pend.d": ["Chúng tôi chưa nhận được kết quả cuối cùng từ ngân hàng. Ngay khi giao dịch được xác nhận, email xác nhận đặt phòng sẽ được gửi tới quý khách. Vui lòng không thanh toán lại.",
+                  "We have not yet received the final result from the bank. As soon as the transaction is confirmed, your booking confirmation will be emailed to you. Please do not pay again.",
+                  "아직 은행으로부터 최종 결과를 받지 못했습니다. 거래가 확인되는 즉시 예약 확인 메일을 보내 드립니다. 다시 결제하지 마세요.",
+                  "我们尚未收到银行的最终结果。交易一经确认，预订确认邮件将立即发送给您。请勿重复付款。",
+                  "Мы ещё не получили окончательный ответ банка. Как только платёж будет подтверждён, мы отправим подтверждение бронирования на email. Пожалуйста, не оплачивайте повторно.",
+                  "Das endgültige Ergebnis der Bank liegt noch nicht vor. Sobald die Zahlung bestätigt ist, senden wir Ihnen die Buchungsbestätigung per E-Mail. Bitte nicht erneut bezahlen."],
+    "bk.retry": ["Thử thanh toán lại", "Try again", "다시 결제하기", "重新付款", "Повторить оплату", "Erneut versuchen"],
+    "bk.err": ["Không kết nối được cổng thanh toán. Vui lòng thử lại sau ít phút hoặc gọi (+84) 905 926 638.",
+               "Could not connect to the payment gateway. Please try again in a few minutes or call (+84) 905 926 638.",
+               "결제 게이트웨이에 연결할 수 없습니다. 잠시 후 다시 시도하시거나 (+84) 905 926 638로 연락해 주세요.",
+               "无法连接支付网关，请稍后重试或致电 (+84) 905 926 638。",
+               "Не удалось подключиться к платёжному шлюзу. Повторите через несколько минут или позвоните (+84) 905 926 638.",
+               "Keine Verbindung zum Zahlungs-Gateway. Bitte in einigen Minuten erneut versuchen oder (+84) 905 926 638 anrufen."],
+    "bk.vnd": ["Thanh toán bằng VND theo tỷ giá quy đổi", "Charged in VND at the conversion rate", "환산 환율에 따라 VND로 결제", "按汇率以越南盾 (VND) 支付", "Оплата в VND по курсу конвертации", "Abrechnung in VND zum Umrechnungskurs"],
 }
 
 SHORT = {

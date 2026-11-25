@@ -1,0 +1,5 @@
+# Copy thành .dev.vars để chạy `npm run dev` (file .dev.vars KHÔNG commit).
+# Đây là khóa sandbox OnePay (document-api-onepay.txt). Khóa thật: `npx wrangler secret put ONEPAY_HASH_CODE`.
+ONEPAY_HASH_CODE=6D0870CDE5F24F34F3915FB0045120D6
+ONEPAY_PASSWORD=op123456
+SITE_URL=http://localhost:8787

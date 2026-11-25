@@ -2,7 +2,9 @@
    Steps: 0 search -> 1 select package -> 2 package details -> 3 guest details + payment -> 4 confirmation.
    Every step is pre-rendered in the page's language by .work/build.py (SEO, no text in JS).
    This script only switches steps, filters/sorts the cards and fills in the guest's own choices.
-   Payment is SIMULATED (PayOne not connected). */
+   Payment: step 3 POSTs the guest details to /api/booking (worker/index.js), which stores the booking, prices it
+   server-side and returns a signed OnePay URL. OnePay sends the guest back through /api/onepay/return to
+   dat-phong/#kq=<code>.<token>; step 4 then asks /api/booking/status for the result (ok / fail / pend). */
 (function () {
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
@@ -127,7 +129,9 @@
     show(1, true);
   });
 
+  var busy = false;
   function submit() {
+    if (busy) return; /* double click must create only one transaction (OnePay test case OC-02) */
     var ok = true;
     var rules = { "d-first": /\S/, "d-last": /\S/, "d-phone": /^[+\d][\d\s().-]{6,}$/, "d-email": /^[^\s@]+@[^\s@]+\.[^\s@]+$/ };
     Object.keys(rules).forEach(function (id) {
@@ -137,18 +141,59 @@
     var ag = $("#d-agree");
     $("#d-agree-l").classList.toggle("is-invalid", !ag.checked); if (!ag.checked) ok = false;
     $("#d-err").hidden = ok;
+    $("#d-gwerr").hidden = true;
     if (!ok) return;
-    /* Demo only: stands in for the redirect to the PayOne hosted payment page. */
+    var v = function (id) { return ($("#" + id).value || "").trim(); };
+    var pay = $('input[name="pay"]:checked', box);
+    var body = {
+      pkg: S.pkg, checkin: S.checkin, adults: +ad.value, children: +ch.value, lang: document.documentElement.lang,
+      first: v("d-first"), last: v("d-last"), phone: v("d-phone"), email: v("d-email"), country: v("d-country"), note: v("d-note"),
+      promo: hp.checked ? promo.value.trim() : "", newsletter: $("#d-news").checked, agree: true, pay: pay ? pay.value : "card"
+    };
+    busy = true;
     var gw = $("#gateway"); gw.hidden = false;
-    setTimeout(function () {
-      gw.hidden = true;
-      setText("code", "CGP-" + Math.random().toString(36).slice(2, 8).toUpperCase());
-      $$(".details input[type=text], .details input[type=tel], .details input[type=email], .details textarea", box).forEach(function (el) { el.value = ""; });
-      $$(".details input[type=checkbox]", box).forEach(function (el) { el.checked = false; });
-      show(4, true);
-    }, 1800);
+    fetch("/api/booking", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j.payUrl) { location.href = res.j.payUrl; return; } /* -> OnePay hosted payment page */
+        var f = (res.j && res.j.fields) || [];
+        var map = { first: "d-first", last: "d-last", phone: "d-phone", email: "d-email" };
+        f.forEach(function (k) { if (map[k]) $("#" + map[k]).parentNode.classList.add("is-invalid"); });
+        throw new Error(f.length ? "invalid" : "server");
+      })
+      .catch(function (er) {
+        busy = false; gw.hidden = true;
+        $(er.message === "invalid" ? "#d-err" : "#d-gwerr").hidden = false;
+      });
+  }
+  /* back button from OnePay restores this page from bfcache with the overlay still up */
+  window.addEventListener("pageshow", function (e) { if (e.persisted) { busy = false; $("#gateway").hidden = true; } });
+
+  /* ----- step 4: payment result after OnePay redirects back ----- */
+  function result(state) {
+    $$("[data-res]", box).forEach(function (el) { el.hidden = el.dataset.res.split(" ").indexOf(state) < 0; });
+  }
+  function checkResult(code, token, tries) {
+    fetch("/api/booking/status?code=" + encodeURIComponent(code) + "&t=" + encodeURIComponent(token), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("x"); return r.json(); })
+      .then(function (d) {
+        if (PK[d.pkg]) S.pkg = d.pkg;
+        S.checkin = d.checkin; S.checkout = d.checkout;
+        ad.value = String(d.adults); ch.value = String(d.children);
+        syncDates(); show(4, false);
+        setText("code", d.code);
+        /* IPN may land a few seconds after the browser: keep asking for ~30 s before showing "processing" */
+        if (d.status === "pending" && tries < 10) { result("wait"); setTimeout(function () { checkResult(code, token, tries + 1); }, 3000); return; }
+        result(d.status === "paid" ? "ok" : d.status === "pending" ? "pend" : "fail");
+      })
+      .catch(function () { if (tries < 3) setTimeout(function () { checkResult(code, token, tries + 1); }, 3000); else { show(4, false); result("pend"); } });
   }
 
   syncDates();
-  show(S.step, false);
+  var kq = /^#kq=([A-Z0-9]+)\.([a-f0-9]+)$/.exec(location.hash);
+  if (kq) {
+    if (!S.pkg) S.pkg = Object.keys(PK)[0]; /* placeholder until the status call answers */
+    show(4, false); result("wait"); setText("code", kq[1]);
+    checkResult(kq[1], kq[2], 0);
+  } else show(S.step, false);
 })();

@@ -1,0 +1,50 @@
+// Worker "cgpluxuryhotel": phục vụ site tĩnh html/ + API thanh toán OnePay /api/* (worker/index.js).
+// Khóa bí mật KHÔNG để ở đây — đặt bằng `npx wrangler secret put <TÊN>` (production) hoặc file .dev.vars (local):
+//   ONEPAY_HASH_CODE, ONEPAY_PASSWORD
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cgpluxuryhotel",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+
+  "assets": {
+    "directory": "./html",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    // Bắt buộc để /api/* luôn chạy Worker thay vì trả trang 404 tĩnh
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Bật khi trỏ domain về Cloudflare:
+  // "routes": [{ "pattern": "cgpgrouphotel.com", "custom_domain": true }],
+
+  // Tạo bằng `npx wrangler d1 create cgpluxuryhotel`, dán database_id vào đây
+  "d1_databases": [
+    { "binding": "DB", "database_name": "cgpluxuryhotel", "database_id": "REPLACE_WITH_D1_ID", "migrations_dir": "worker/migrations" }
+  ],
+
+  // Email giao dịch qua Cloudflare Email Service — domain gửi (MAIL_FROM) phải bật Email Sending
+  // (`npx wrangler email sending enable`), cần gói Workers Paid.
+  "send_email": [{ "name": "EMAIL" }],
+
+  // 10 phút/lần: QueryDR các đơn pending quá 15 phút (tài liệu OnePay mục II-5)
+  "triggers": { "crons": ["*/10 * * * *"] },
+
+  "vars": {
+    "SITE_URL": "https://cgpgrouphotel.com",
+    // Môi trường TEST (sandbox). Lên thật: https://onepay.vn + Merchant/AccessCode/HashCode do OnePay cấp khi nghiệm thu
+    "ONEPAY_BASE_URL": "https://mtf.onepay.vn",
+    "ONEPAY_MERCHANT": "TESTONEPAY31",
+    "ONEPAY_ACCESS_CODE": "6BEB2566",
+    "ONEPAY_USER": "op01",
+    // Tài khoản TESTONEPAY31 chỉ nhận VND (USD -> INVALID_CURRENCY). Giá web bằng USD -> quy đổi theo tỷ giá này.
+    "ONEPAY_CURRENCY": "VND",
+    "USD_VND_RATE": "26000",
+    "MAIL_FROM": "booking@cgpgrouphotel.com",
+    "MAIL_REPLY_TO": "cgpluxuryhotelhoian@gmail.com",
+    "HOTEL_NOTIFY_EMAIL": "cgpluxuryhotelhoian@gmail.com"
+  },
+
+  "observability": { "enabled": true }
+}

@@ -1028,7 +1028,9 @@ def booking_widget(c):
             f'<div class="row"><strong>{t("tl.svc")}</strong></div><div class="row"><span>{t("am1")}</span><span>{t("tl.incl")}</span></div>'
             f'<div class="row" data-promo-row hidden><span>{t("sum.promo")}</span><span data-v="promo"></span></div></div>'
             f'<div class="mybk-total"><div class="row"><strong>{t("tl.total")}</strong><b data-v="price"></b></div><hr><div class="row"><strong>{t("tl.paynow")}</strong><b data-v="price"></b></div>'
-            f'<button type="button" class="tl-btn" id="b-book">{t("pay.btn")}</button><p class="tl-error" id="d-err" hidden>{t("tl.invalid")}</p></div>'
+            f'<small class="mybk-vnd">{t("bk.vnd")}</small>'
+            f'<button type="button" class="tl-btn" id="b-book">{t("pay.btn")}</button><p class="tl-error" id="d-err" hidden>{t("tl.invalid")}</p>'
+            f'<p class="tl-error" id="d-gwerr" hidden>{t("bk.err")}</p></div>'
             f'<div class="mybk-foot">{t("tl.summary")}</div></aside>')
     step3 = (title(3, "tl.enter", ("tl.backRate", 2)) + bar(80) +
              f'<div class="tl-body"><div class="details"><div>'
@@ -1048,11 +1050,19 @@ def booking_widget(c):
              f'<p class="pay-demo">{t("pay.demo")}</p></div></section></div>{mybk}</div></div>')
 
     # step 4 — confirmation
-    step4 = (title(4, "ok.title") + bar(100) +
-             f'<div class="tl-body"><div class="done"><div class="done-ico"></div><h3>{t("ok.title")}</h3><p>{t("ok.text")}</p>'
-             f'<div class="done-code">{t("ok.code")}<b data-v="code"></b></div>'
-             f'<p><span data-v="name"></span> · <span data-v="range"></span> · <span data-v="price"></span></p>'
-             f'<p class="done-home"><a class="tl-btn" href="{c.home}">{t("ok.home")}</a></p></div></div>')
+    # step 4 — payment result, shown after OnePay redirects back (/api/onepay/return -> dat-phong/#kq=<code>.<token>).
+    # booking.js reads /api/booking/status and shows the block matching data-res: ok | fail | pend (wait = still checking).
+    step4 = (f'<div class="x-hnp"><h2 data-res="ok" hidden>{t("ok.title")}</h2><h2 data-res="fail" hidden>{t("bk.fail.t")}</h2>'
+             f'<h2 data-res="pend wait">{t("bk.pend.t")}</h2></div>' + bar(100) +
+             f'<div class="tl-body"><div class="done">'
+             f'<div data-res="wait"><div class="gw-spin"></div><p>{t("bk.check")}</p></div>'
+             f'<div data-res="ok" hidden><div class="done-ico"></div><h3>{t("ok.title")}</h3><p>{t("ok.text")}</p></div>'
+             f'<div data-res="fail" hidden><div class="done-ico done-ico--fail"></div><h3>{t("bk.fail.t")}</h3><p>{t("bk.fail.d")}</p></div>'
+             f'<div data-res="pend" hidden><div class="done-ico done-ico--pend"></div><h3>{t("bk.pend.t")}</h3><p>{t("bk.pend.d")}</p></div>'
+             f'<div data-res="ok fail pend" hidden><div class="done-code">{t("ok.code")}<b data-v="code"></b></div>'
+             f'<p><span data-v="name"></span> · <span data-v="range"></span> · <span data-v="price"></span></p></div>'
+             f'<p class="done-home"><a class="tl-btn" href="{c.url("dat-phong/")}" data-res="fail" hidden>{t("bk.retry")}</a> '
+             f'<a class="tl-btn" href="{c.home}" data-res="ok fail pend" hidden>{t("ok.home")}</a></p></div></div>')
 
     steps = "".join(f'<div class="tl-step" data-step="{k}"{" hidden" if k else ""}>{s}</div>' for k, s in enumerate([step0, step1, step2, step3, step4]))
     return top + steps
@@ -1242,6 +1252,12 @@ for l in LANGS:
     build_services(l)
     build_gallery(l)
     build_rooms(l)
+
+# package price list for the payment Worker (../worker/index.js): the server charges the price from
+# this file, never a price sent by the browser. Names are used in the confirmation emails.
+os.makedirs("../worker", exist_ok=True)
+json.dump({str(i): {"nights": P[i]["nights"], "usd": P[i]["price"], "names": {l: Ctx(l, "").name(i) for l in LANGS}} for i in sorted(P)},
+          open("../worker/packages.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 # sitemap with hreflang alternates
 slugs = ["", "gioi-thieu/", "phong-nghi/", "goi-luu-tru/", "dich-vu/", "thu-vien-anh/", "tin-tuc/", "dat-phong/"] + [f'goi-luu-tru/{P[i]["slug"]}/' for i in sorted(P)] + [f'tin-tuc/{n["id"]}/' for n in NEWS]
