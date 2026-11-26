@@ -1046,11 +1046,11 @@ def booking_widget(c):
              f'<div class="times"><span class="x-input"><small>{t("box.checkin")}</small><b>14:00 — <em>{t("tl.free")}</em></b></span><span class="x-input is-disabled"><small>{t("box.checkout")}</small><b>12:00</b></span></div>'
              f'<hr><h4 class="h4">{t("tl.req")}</h4><textarea class="x-textarea" id="d-note" placeholder="{t("tl.reqph")}"></textarea></div></section>'
              f'<section class="plate"><h3 class="plate-cap">{t("tl.paym")}</h3><div class="plate-body"><p class="pay-info">{BK_ICON["back"]}{t("tl.payinfo")}</p>'
-             + opt("card", "pay.card", "tl.payCardD", "card") + opt("atm", "pay.atm", "tl.payAtmD", "card") + opt("qr", "pay.qr", "tl.payQrD", "qr") +
+             + opt("card", "pay.card", "tl.payCardD", "card") +
              f'<p class="pay-demo">{t("pay.demo")}</p></div></section></div>{mybk}</div></div>')
 
     # step 4 — confirmation
-    # step 4 — payment result, shown after OnePay redirects back (/api/onepay/return -> dat-phong/#kq=<code>.<token>).
+    # step 4 — payment result, shown after AsiaPay redirects back (/api/asiapay/back -> dat-phong/#kq=<code>.<token>).
     # booking.js reads /api/booking/status and shows the block matching data-res: ok | fail | pend (wait = still checking).
     step4 = (f'<div class="x-hnp"><h2 data-res="ok" hidden>{t("ok.title")}</h2><h2 data-res="fail" hidden>{t("bk.fail.t")}</h2>'
              f'<h2 data-res="pend wait">{t("bk.pend.t")}</h2></div>' + bar(100) +

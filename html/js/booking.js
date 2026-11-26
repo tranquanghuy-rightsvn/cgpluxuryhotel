@@ -3,7 +3,7 @@
    Every step is pre-rendered in the page's language by .work/build.py (SEO, no text in JS).
    This script only switches steps, filters/sorts the cards and fills in the guest's own choices.
    Payment: step 3 POSTs the guest details to /api/booking (worker/index.js), which stores the booking, prices it
-   server-side and returns a signed OnePay URL. OnePay sends the guest back through /api/onepay/return to
+   server-side and returns a signed PayDollar form. AsiaPay sends the guest back through /api/asiapay/back to
    dat-phong/#kq=<code>.<token>; step 4 then asks /api/booking/status for the result (ok / fail / pend). */
 (function () {
   var $ = function (s, el) { return (el || document).querySelector(s); };
@@ -129,9 +129,19 @@
     show(1, true);
   });
 
+  /* PayDollar Client Post: a plain HTML form POST to payForm.jsp with the server-signed fields */
+  function post(f) {
+    var form = document.createElement("form");
+    form.method = "post"; form.action = f.action; form.acceptCharset = "UTF-8"; form.hidden = true;
+    Object.keys(f.fields).forEach(function (k) {
+      var i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = f.fields[k]; form.appendChild(i);
+    });
+    document.body.appendChild(form); form.submit();
+  }
+
   var busy = false;
   function submit() {
-    if (busy) return; /* double click must create only one transaction (OnePay test case OC-02) */
+    if (busy) return; /* double click must create only one transaction */
     var ok = true;
     var rules = { "d-first": /\S/, "d-last": /\S/, "d-phone": /^[+\d][\d\s().-]{6,}$/, "d-email": /^[^\s@]+@[^\s@]+\.[^\s@]+$/ };
     Object.keys(rules).forEach(function (id) {
@@ -155,7 +165,7 @@
     fetch("/api/booking", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
-        if (res.ok && res.j.payUrl) { location.href = res.j.payUrl; return; } /* -> OnePay hosted payment page */
+        if (res.ok && res.j.form) { post(res.j.form); return; } /* -> AsiaPay PayDollar hosted payment page */
         var f = (res.j && res.j.fields) || [];
         var map = { first: "d-first", last: "d-last", phone: "d-phone", email: "d-email" };
         f.forEach(function (k) { if (map[k]) $("#" + map[k]).parentNode.classList.add("is-invalid"); });
@@ -166,10 +176,10 @@
         $(er.message === "invalid" ? "#d-err" : "#d-gwerr").hidden = false;
       });
   }
-  /* back button from OnePay restores this page from bfcache with the overlay still up */
+  /* back button from AsiaPay restores this page from bfcache with the overlay still up */
   window.addEventListener("pageshow", function (e) { if (e.persisted) { busy = false; $("#gateway").hidden = true; } });
 
-  /* ----- step 4: payment result after OnePay redirects back ----- */
+  /* ----- step 4: payment result after AsiaPay redirects back ----- */
   function result(state) {
     $$("[data-res]", box).forEach(function (el) { el.hidden = el.dataset.res.split(" ").indexOf(state) < 0; });
   }
@@ -182,7 +192,7 @@
         ad.value = String(d.adults); ch.value = String(d.children);
         syncDates(); show(4, false);
         setText("code", d.code);
-        /* IPN may land a few seconds after the browser: keep asking for ~30 s before showing "processing" */
+        /* the datafeed may land a few seconds after the browser: keep asking for ~30 s before showing "processing" */
         if (d.status === "pending" && tries < 10) { result("wait"); setTimeout(function () { checkResult(code, token, tries + 1); }, 3000); return; }
         result(d.status === "paid" ? "ok" : d.status === "pending" ? "pend" : "fail");
       })

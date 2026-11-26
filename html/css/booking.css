@@ -251,7 +251,7 @@
 .psf-extra-row, .done-home { margin-top: 24px; }
 .done-home .tl-btn { text-decoration: none; }
 
-/* OnePay payment result (step 4) */
+/* AsiaPay payment result (step 4) */
 .done-ico--fail { background: #e57373; }
 .done-ico--fail::after { width: 26px; height: 26px; margin: 0; border: 0; transform: none;
   background: linear-gradient(45deg, transparent 44%, #fff 44% 56%, transparent 56%), linear-gradient(-45deg, transparent 44%, #fff 44% 56%, transparent 56%); }

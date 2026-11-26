@@ -1,4 +1,4 @@
--- Đơn đặt phòng + trạng thái thanh toán OnePay. code = vpc_MerchTxnRef = vpc_OrderInfo.
+-- Đơn đặt phòng + trạng thái thanh toán AsiaPay PayDollar. code = orderRef gửi PayDollar.
 -- status: pending (chờ thanh toán) | paid | failed (khách huỷ / ngân hàng từ chối) | expired (bỏ dở > 1 ngày)
 CREATE TABLE bookings (
   code          TEXT PRIMARY KEY,
@@ -17,16 +17,16 @@ CREATE TABLE bookings (
   note          TEXT,
   promo         TEXT,
   newsletter    INTEGER NOT NULL DEFAULT 0,
-  pay_method    TEXT,                   -- card | atm | qr (vpc_CardList)
+  pay_method    TEXT,                   -- card (Visa / Mastercard / JCB)
   lang          TEXT NOT NULL,
   amount_usd    INTEGER NOT NULL,
-  amount_vnd    INTEGER NOT NULL,       -- số tiền gửi OnePay (chưa nhân 100)
-  resp_code     TEXT,                   -- vpc_TxnResponseCode gần nhất
+  amount_vnd    INTEGER NOT NULL,       -- số tiền gửi PayDollar (VND, số nguyên)
+  resp_code     TEXT,                   -- prc (mã phản hồi chính) gần nhất
   resp_message  TEXT,
-  txn_no        TEXT,                   -- vpc_TransactionNo
+  txn_no        TEXT,                   -- PayRef (mã giao dịch PayDollar)
   card_type     TEXT,
-  card_num      TEXT,                   -- dạng che 412345xxxxxx1234
-  paid_via      TEXT,                   -- return | ipn | querydr
+  card_num      TEXT,                   -- dạng che 491891******5005 (từ Query API)
+  paid_via      TEXT,                   -- datafeed | back | query
   created_at    TEXT NOT NULL,
   updated_at    TEXT,
   paid_at       TEXT,

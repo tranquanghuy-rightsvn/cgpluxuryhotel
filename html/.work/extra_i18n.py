@@ -293,7 +293,7 @@ T = {
     "map.open": ["Mở trong Google Maps", "Open in Google Maps", "Google 지도에서 열기", "在 Google 地图中打开", "Открыть в Google Maps", "In Google Maps öffnen"],
     "art.gal": ["Hình ảnh", "Photos", "사진", "图片", "Фотографии", "Bilder"],
 
-    # ---------------------------------------------------------------- OnePay payment result (booking step 4)
+    # ---------------------------------------------------------------- AsiaPay payment result (booking step 4)
     "bk.check": ["Đang kiểm tra kết quả thanh toán…", "Checking your payment result…", "결제 결과를 확인하는 중…", "正在确认付款结果…", "Проверяем результат оплаты…", "Zahlungsergebnis wird geprüft…"],
     "bk.fail.t": ["Thanh toán chưa thành công", "Payment not completed", "결제가 완료되지 않았습니다", "付款未成功", "Оплата не прошла", "Zahlung nicht abgeschlossen"],
     "bk.fail.d": ["Giao dịch đã bị huỷ hoặc ngân hàng từ chối. Quý khách chưa bị trừ tiền — vui lòng thử lại hoặc chọn phương thức thanh toán khác.",

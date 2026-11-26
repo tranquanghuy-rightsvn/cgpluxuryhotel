@@ -1,4 +1,4 @@
-/* Email sau khi thanh toán OnePay thành công, gửi qua Cloudflare Email Service (binding EMAIL):
+/* Email sau khi thanh toán AsiaPay thành công, gửi qua Cloudflare Email Service (binding EMAIL):
      - khách: xác nhận đặt phòng, đúng ngôn ngữ khách đã đặt (vi/en/ko/zh/ru/de)
      - khách sạn (HOTEL_NOTIFY_EMAIL): báo có đơn mới đã thanh toán, tiếng Việt.
    Gửi lỗi -> chỉ ghi log, không làm hỏng xử lý thanh toán. Chưa cấu hình EMAIL (chạy local) -> in email ra log. */
@@ -33,7 +33,7 @@ const T = {
   adults: ["{n} người lớn", "{n} adult(s)", "성인 {n}명", "{n} 位成人", "взрослых: {n}", "{n} Erwachsene"],
   kids: ["{n} trẻ em", "{n} child(ren)", "어린이 {n}명", "{n} 位儿童", "детей: {n}", "{n} Kind(er)"],
   paid: ["Đã thanh toán", "Amount paid", "결제 금액", "已付金额", "Оплачено", "Bezahlt"],
-  txn: ["Mã giao dịch OnePay", "OnePay transaction no.", "OnePay 거래 번호", "OnePay 交易号", "Номер транзакции OnePay", "OnePay-Transaktionsnr."],
+  txn: ["Mã giao dịch AsiaPay", "AsiaPay payment ref.", "AsiaPay 거래 번호", "AsiaPay 交易号", "Номер транзакции AsiaPay", "AsiaPay-Zahlungsreferenz"],
   note: ["Yêu cầu riêng", "Special request", "요청 사항", "特别要求", "Особые пожелания", "Besondere Wünsche"],
   bring: ["Vui lòng mang theo giấy tờ tùy thân (CCCD/hộ chiếu) khi nhận phòng. Nếu cần thay đổi hoặc hỗ trợ, quý khách chỉ cần trả lời email này hoặc gọi cho chúng tôi.", "Please bring your ID or passport at check-in. If you need any change or assistance, simply reply to this email or call us.", "체크인 시 신분증 또는 여권을 지참해 주세요. 변경이나 도움이 필요하시면 이 메일에 회신하시거나 전화해 주세요.", "办理入住时请携带身份证件或护照。如需更改或协助，请直接回复本邮件或致电我们。", "Пожалуйста, возьмите с собой паспорт при заезде. Если нужны изменения или помощь — просто ответьте на это письмо или позвоните нам.", "Bitte bringen Sie beim Check-in Ihren Ausweis oder Reisepass mit. Für Änderungen oder Fragen antworten Sie einfach auf diese E-Mail oder rufen Sie uns an."],
   bye: ["Hẹn gặp quý khách tại Hội An!", "We look forward to welcoming you in Hoi An!", "호이안에서 뵙기를 기대합니다!", "期待在会安与您相见！", "Ждём вас в Хойане!", "Wir freuen uns, Sie in Hoi An begrüßen zu dürfen!"],
@@ -104,14 +104,14 @@ function hotelMail(b) {
     ["Trả phòng", esc(day(b.checkout, "vi"))],
     ["Số khách", esc(b.adults + " người lớn" + (b.children ? ", " + b.children + " trẻ em" : ""))],
     ["Đã thu", esc(vnd(b.amount_vnd)) + " (" + esc(usd(b.amount_usd)) + ")"],
-    ["Mã giao dịch OnePay", esc(b.txn_no || "—")],
+    ["Mã giao dịch AsiaPay (PayRef)", esc(b.txn_no || "—")],
     ["Thẻ", esc([b.card_type, b.card_num].filter(Boolean).join(" ") || "—")],
     ["Ngôn ngữ khách", esc(b.lang)],
     ["Nhận tin ưu đãi", b.newsletter ? "Có" : "Không"],
   ];
   if (b.promo) rows.push(["Mã ưu đãi khách nhập", esc(b.promo)]);
   if (b.note) rows.push(["Yêu cầu riêng", esc(b.note)]);
-  return ["[Đơn mới đã thanh toán] " + b.code + " — " + fullName(b, "vi"), layout("Có đơn đặt phòng mới đã thanh toán qua OnePay", ["Khách đã nhận email xác nhận. Thông tin đơn:"], rows, ["Trả lời email này sẽ gửi thẳng tới khách (" + esc(b.email) + ")."])];
+  return ["[Đơn mới đã thanh toán] " + b.code + " — " + fullName(b, "vi"), layout("Có đơn đặt phòng mới đã thanh toán qua AsiaPay", ["Khách đã nhận email xác nhận. Thông tin đơn:"], rows, ["Trả lời email này sẽ gửi thẳng tới khách (" + esc(b.email) + ")."])];
 }
 
 async function send(env, to, [subject, content], replyTo) {

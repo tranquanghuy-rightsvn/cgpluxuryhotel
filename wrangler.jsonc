@@ -1,6 +1,8 @@
-// Worker "cgpluxuryhotel": phục vụ site tĩnh html/ + API thanh toán OnePay /api/* (worker/index.js).
+// Worker "cgpluxuryhotel": phục vụ site tĩnh html/ + API thanh toán AsiaPay PayDollar /api/* (worker/index.js).
 // Khóa bí mật KHÔNG để ở đây — đặt bằng `npx wrangler secret put <TÊN>` (production) hoặc file .dev.vars (local):
-//   ONEPAY_HASH_CODE, ONEPAY_PASSWORD
+//   ASIAPAY_SECURE_HASH_SECRET  (Merchant Admin > Profile > Payment Account Information)
+//   ASIAPAY_API_PASSWORD        (mật khẩu của API login, email "Test Account Password Setup")
+// Datafeed: trong Merchant Admin > Profile > Payment Options bật Data Feed, URL = <SITE_URL>/api/asiapay/datafeed
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "cgpluxuryhotel",
@@ -28,18 +30,20 @@
   // (`npx wrangler email sending enable`), cần gói Workers Paid.
   "send_email": [{ "name": "EMAIL" }],
 
-  // 10 phút/lần: QueryDR các đơn pending quá 15 phút (tài liệu OnePay mục II-5)
+  // 10 phút/lần: hỏi Query API (orderApi.jsp) cho các đơn pending quá 15 phút
   "triggers": { "crons": ["*/10 * * * *"] },
 
   "vars": {
     "SITE_URL": "https://cgpgrouphotel.com",
-    // Môi trường TEST (sandbox). Lên thật: https://onepay.vn + Merchant/AccessCode/HashCode do OnePay cấp khi nghiệm thu
-    "ONEPAY_BASE_URL": "https://mtf.onepay.vn",
-    "ONEPAY_MERCHANT": "TESTONEPAY31",
-    "ONEPAY_ACCESS_CODE": "6BEB2566",
-    "ONEPAY_USER": "op01",
-    // Tài khoản TESTONEPAY31 chỉ nhận VND (USD -> INVALID_CURRENCY). Giá web bằng USD -> quy đổi theo tỷ giá này.
-    "ONEPAY_CURRENCY": "VND",
+    // Môi trường TEST (UAT) của AsiaPay. Lên thật: đổi sang URL production + Merchant ID/secret AsiaPay cấp sau khi
+    // ký UAT Acceptance Form (hỏi AsiaPay URL production của tài khoản Việt Nam).
+    "ASIAPAY_BASE_URL": "https://test.paydollar.com/b2cDemo",
+    "ASIAPAY_MERCHANT_ID": "74002484",
+    "ASIAPAY_API_LOGIN": "apicpglxr",
+    "ASIAPAY_PAY_METHOD": "CC",
+    "ASIAPAY_HASH_ALGO": "SHA-1",
+    // Tài khoản 74002484 mở bằng VND. Giá web bằng USD -> quy đổi theo tỷ giá này.
+    "ASIAPAY_CURRENCY": "VND",
     "USD_VND_RATE": "26000",
     "MAIL_FROM": "booking@cgpgrouphotel.com",
     "MAIL_REPLY_TO": "cgpluxuryhotelhoian@gmail.com",
