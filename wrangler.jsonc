@@ -47,7 +47,7 @@
     "ASIAPAY_CURRENCY": "VND",
     "MAIL_FROM": "booking@cgpgrouphotel.com",
     "MAIL_REPLY_TO": "cgpluxuryhotelhoian@gmail.com",
-    "HOTEL_NOTIFY_EMAIL": "cgpluxuryhotelhoian@gmail.com"
+    "HOTEL_NOTIFY_EMAIL": "phongketoancgp@gmail.com"
   },
 
   "observability": { "enabled": true }
