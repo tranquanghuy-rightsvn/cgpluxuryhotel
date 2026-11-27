@@ -75,7 +75,7 @@ export async function queryOrder(env, ref) {
   try {
     const r = await fetch(base(env) + "/eng/merchant/api/orderApi.jsp", {
       method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
+      headers: { "content-type": "application/x-www-form-urlencoded", "user-agent": "Mozilla/5.0 (compatible; CGPLuxuryHotel-Booking/1.0; +https://cgpgrouphotel.com)", accept: "text/xml,application/xml,*/*" },
       body: body.toString(),
     });
     const xml = await r.text();

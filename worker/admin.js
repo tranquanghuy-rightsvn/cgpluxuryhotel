@@ -1,7 +1,9 @@
 /* API cho trang quản trị GAS (GAS.md mục V). Chỉ GAS gọi (server-to-server), xác thực bằng header
    x-admin-key = Worker secret ADMIN_API_KEY. Quyền admin/editor do GAS kiểm tra trước khi gọi.
      GET  /api/admin/bookings?status=&handled=&q=&page=   danh sách, 50 đơn/trang, mới nhất trước
-     POST /api/admin/bookings/<code>   {handled?: bool, note?: string, by: email}   */
+     POST /api/admin/bookings/<code>   {handled?: bool, note?: string, by: email}
+     POST /api/admin/bookings/<code>/resend-email   gửi lại email xác nhận (chỉ đơn đã thanh toán)   */
+import { sendPaidMails } from "./mail.js";
 const PAGE = 50;
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
@@ -60,5 +62,14 @@ export async function adminApi(req, env, url) {
   if (url.pathname === "/api/admin/bookings" && req.method === "GET") return list(url, env);
   const m = /^\/api\/admin\/bookings\/([A-Z0-9]{4,20})$/.exec(url.pathname);
   if (m && req.method === "POST") return update(m[1], req, env);
+  const r = /^\/api\/admin\/bookings\/([A-Z0-9]{4,20})\/resend-email$/.exec(url.pathname);
+  if (r && req.method === "POST") {
+    const b = await env.DB.prepare("SELECT * FROM bookings WHERE code = ?").bind(r[1]).first();
+    if (!b) return json({ error: "not_found" }, 404);
+    if (b.status !== "paid") return json({ error: "not_paid" }, 400);
+    const ok = await sendPaidMails(env, b);
+    if (ok) await env.DB.prepare("UPDATE bookings SET email_sent_at=? WHERE code=?").bind(new Date().toISOString(), b.code).run();
+    return json({ ok });
+  }
   return json({ error: "not_found" }, 404);
 }
