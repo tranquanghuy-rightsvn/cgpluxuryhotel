@@ -130,13 +130,15 @@ async function mailIfJustPaid(env, res) {
 }
 
 /* Datafeed: POST form-urlencoded. successcode 0 = thành công, 1 = thất bại, 2 = đang xử lý.
-   In ra "OK" khi đã ghi nhận; lỗi khác -> trả mã lỗi để PayDollar gửi lại (cron Query API cũng sẽ bù). */
+   AsiaPay yêu cầu trang datafeed LUÔN in "OK" (công cụ "Test Datafeed" trong Merchant Admin gửi dữ liệu mẫu
+   KHÔNG có secureHash và báo fail nếu không nhận được "OK"). Chữ ký sai / thiếu -> trả "OK" nhưng KHÔNG cập nhật
+   gì (chỉ log). Lỗi khi xử lý đơn thật (DB...) -> trả 500 để PayDollar gửi lại; cron Query API cũng sẽ bù. */
 async function onDatafeed(req, env, ctx) {
   const p = Object.fromEntries(new URLSearchParams(await req.text()));
   const plain = (s, status = 200) => new Response(s, { status, headers: { "content-type": "text/plain" } });
   if (!(await verifyDatafeed(env, p))) {
-    console.error("datafeed: secureHash sai", p.Ref);
-    return plain("secureHash mismatch", 400);
+    console.error("datafeed: secureHash sai/thiếu - bỏ qua", p.Ref, p.secureHash ? "có hash" : "không có hash");
+    return plain("OK");
   }
   if (p.MerchantId && p.MerchantId !== String(env.ASIAPAY_MERCHANT_ID)) {
     console.error("datafeed: sai merchant", p.Ref, p.MerchantId);
