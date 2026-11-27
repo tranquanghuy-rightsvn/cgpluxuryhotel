@@ -22,7 +22,16 @@ LANGS = D["langs"]
 DEFAULT = "vi"
 P = {p["id"]: p for p in D["P"]}
 for _p in P.values():
-    _p["slug"] = slugify(_p["names"][1])
+    _p["slug"] = slugify(_p["names"][1])  # from the original English name: URLs never change when the CMS renames
+# CMS overrides (GAS.md VI): ../data/packages.json {id: {price, hidden, names, badge, tag, desc}} — text arrays
+# follow LANGS. Hidden packages vanish from every page and from the Worker price list (cannot be booked).
+PKG_FILE = "../data/packages.json"
+if os.path.isfile(PKG_FILE):
+    for _id, _o in json.load(open(PKG_FILE, encoding="utf-8")).items():
+        if int(_id) in P:
+            P[int(_id)].update({k: _o[k] for k in ("price", "hidden", "names", "badge", "tag", "desc") if k in _o})
+P = {i: p for i, p in P.items() if not p.get("hidden")}
+SETTINGS = json.load(open("../data/settings.json", encoding="utf-8")) if os.path.isfile("../data/settings.json") else {"usd_vnd_rate": 26000}
 NEWS = D["NEWS"]
 
 # extra content for the Nov 2026 photo set (.work/extra_i18n.py)
@@ -313,7 +322,7 @@ def header(c, cur):
     def a(slug, key, name):
         cls = ' class="is-current"' if cur == name else ""
         return f'<a href="{c.url(slug)}"{cls}>{e(c.t(key))}</a>'
-    sub = "".join(f'<li><a href="{c.pkg(i)}">{e(c.name(i))}</a></li>' for i in PKG_MENU)
+    sub = "".join(f'<li><a href="{c.pkg(i)}">{e(c.name(i))}</a></li>' for i in PKG_MENU if i in P)
     langs = "".join(
         f'<li><a href="{c.R + ("" if l == DEFAULT else l + "/") + c.slug or "./"}" hreflang="{l}" lang="{l}"{" class=is-active" if l == c.lang else ""}>'
         f'<img src="{c.R}images/flags/{FLAGS[l]}" alt="">{NAMES[l]}</a></li>' for l in LANGS)
@@ -554,7 +563,7 @@ def services_block(c):
 
 def featured_cards(c, ids):
     out = ""
-    for i in ids:
+    for i in [i for i in ids if i in P]:
         p, n = P[i], e(c.name(i))
         out += (f'<article class="post"><a class="post-img" href="{c.pkg(i)}"><img {c.pic(p["img"], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, 373px")} alt="{n}" loading="lazy"></a>'
                 f'<div class="post-body"><h3 class="post-title"><a href="{c.pkg(i)}">{n}</a></h3>'
@@ -565,7 +574,7 @@ def featured_cards(c, ids):
 
 def room_cards(c, ids, wide_from=3):
     out = ""
-    for k, i in enumerate(ids):
+    for k, i in enumerate([i for i in ids if i in P]):
         p, n = P[i], e(c.name(i))
         href = c.pkg(i)
         out += (f'<article class="room{" is-wide" if k >= wide_from else ""}"><a class="room-img" href="{href}"><img {c.pic(p["img"], "(max-width: 600px) 100vw, (max-width: 991px) 50vw, " + ("570px" if k >= wide_from else "373px"))} alt="{n}" loading="lazy"></a>'
@@ -600,7 +609,7 @@ def news_list(c):
 
 def sidebar(c):
     recent = "".join(f'<li><a href="{news_url(c, n)}"><img src="{c.th(n["img"])}" alt="" loading="lazy"><span>{e(c.pick(n["title"]))}</span></a></li>' for n in NEWS)
-    pk = "".join(f'<li><a href="{c.pkg(i)}"><img src="{c.th(P[i]["img"])}" alt="" loading="lazy"><span>{e(c.name(i))}</span></a></li>' for i in range(1, 8))
+    pk = "".join(f'<li><a href="{c.pkg(i)}"><img src="{c.th(P[i]["img"])}" alt="" loading="lazy"><span>{e(c.name(i))}</span></a></li>' for i in sorted(P)[:7])
     return f'''<aside class="sidebar">
       <section><h3 class="widget-title">{e(c.t("sb.search"))}</h3>
         <form class="search-box" role="search" action="{c.url("tin-tuc/")}" method="get"><input type="search" name="s" placeholder="{e(c.t("sb.looking"))}" aria-label="{e(c.t("sb.search"))}"><button type="submit" aria-label="{e(c.t("sb.search"))}">{SVG["search"]}</button></form></section>
@@ -652,7 +661,8 @@ def smart_html(c, n):
         rest = re.sub(r'\s*data-(img|sizes)="[^"]*"', "", attrs)
         return f'<img {c.pic(name, sz.group(1) if sz else "(max-width: 991px) 100vw, 865px")}{rest} loading="lazy" decoding="async">' + credit(c, name)
     html = re.sub(r"<img\s([^>]*data-img=[^>]*?)\s*/?>", _img, html)
-    html = re.sub(r'href="@/([^"]*)"', lambda m: f'href="{c.url(m.group(1))}"', html)
+    live = {f'goi-luu-tru/{p["slug"]}/' for p in P.values()}
+    html = re.sub(r'href="@/([^"]*)"', lambda m: f'href="{c.url(m.group(1) if not m.group(1).startswith("goi-luu-tru/") or m.group(1) in live or m.group(1) == "goi-luu-tru/" else "goi-luu-tru/")}"', html)  # hidden package -> package list
     html = re.sub(r'<div data-gallery="([^"]+)"></div>', lambda m: gallery_grid(c, m.group(1).split(), "g" + str(abs(hash(m.group(1))) % 10**6), "gal-grid gal-grid--4"), html)
     html = re.sub(r'<i data-ic="([a-z]+)"></i>', lambda m: f'<span class="tv-ic" aria-hidden="true"><svg viewBox="0 0 24 24">{SC_ICONS[m.group(1)]}</svg></span>', html)
     return html
@@ -819,6 +829,8 @@ def build_packages(lang):
     groups = ""
     for cat in CATS:
         ids = [i for i in sorted(P) if P[i]["cat"] == cat]
+        if not ids:
+            continue  # every package of this collection hidden by the CMS
         fill = "".join(f'<figure class="room room-photo"><img {c.pic(n, "(max-width: 991px) 50vw, 373px")} alt="{e(c.t("cat." + cat))}" loading="lazy"></figure>'
                        for n in GROUP_FILL[cat][:(3 - len(ids) % 3) % 3])
         groups += f'''<section class="pk-group">
@@ -1242,6 +1254,10 @@ def build(lang):
 for l in LANGS:
     if l != DEFAULT and os.path.isdir(l):
         shutil.rmtree(l)  # regenerated below
+if os.path.isdir("goi-luu-tru"):  # packages hidden by the CMS: drop their default-language pages
+    for _d in os.listdir("goi-luu-tru"):
+        if os.path.isdir("goi-luu-tru/" + _d) and _d not in {p["slug"] for p in P.values()}:
+            shutil.rmtree("goi-luu-tru/" + _d)
 if os.path.isdir("tin-tuc"):  # default-language articles live next to other pages: drop the ones no longer in NEWS
     for _d in os.listdir("tin-tuc"):
         if os.path.isdir("tin-tuc/" + _d) and _d not in {n["id"] for n in NEWS}:
@@ -1258,6 +1274,7 @@ for l in LANGS:
 os.makedirs("../worker", exist_ok=True)
 json.dump({str(i): {"nights": P[i]["nights"], "usd": P[i]["price"], "names": {l: Ctx(l, "").name(i) for l in LANGS}} for i in sorted(P)},
           open("../worker/packages.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump({"usd_vnd_rate": int(SETTINGS["usd_vnd_rate"])}, open("../worker/settings.json", "w", encoding="utf-8"), indent=1)
 
 # sitemap with hreflang alternates
 slugs = ["", "gioi-thieu/", "phong-nghi/", "goi-luu-tru/", "dich-vu/", "thu-vien-anh/", "tin-tuc/", "dat-phong/"] + [f'goi-luu-tru/{P[i]["slug"]}/' for i in sorted(P)] + [f'tin-tuc/{n["id"]}/' for n in NEWS]

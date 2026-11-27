@@ -7,3 +7,6 @@ __pycache__/
 node_modules/
 .wrangler/
 .dev.vars
+
+# GAS CMS backend: deploy bằng clasp, không đẩy lên GitHub (GAS.md)
+gas/

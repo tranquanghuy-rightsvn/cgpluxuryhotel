@@ -116,3 +116,12 @@
 .tv-credit { display: block; margin: 5px 0 22px; font-size: 11.5px; line-height: 1.4; color: #8b8178; }
 .tv-figure .tv-credit, .tv-duo .tv-credit { margin-bottom: 0; }
 .sc .tv-credit a { color: inherit; }
+
+/* Plain rich text written in the GAS CMS (TinyMCE): tables, quotes, image captions */
+.sc table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 15px; }
+.sc th, .sc td { border: 1px solid #e3ddd2; padding: 10px 12px; text-align: left; vertical-align: top; }
+.sc th { background: #f6f2ea; font-weight: 700; }
+.sc blockquote:not(.tv-quote) { margin: 0 0 22px; padding: 14px 20px; border-left: 3px solid #b8955b; background: #faf7f1; font-style: italic; }
+.sc figure { margin: 0 0 22px; }
+.sc figcaption { font-size: 14px; color: #777; text-align: center; margin-top: 6px; }
+.sc .sc-table { overflow-x: auto; }

@@ -13,6 +13,8 @@
 import PACKAGES from "./packages.json";
 import { payForm, verifyDatafeed, queryOrder, summarize } from "./asiapay.js";
 import { sendPaidMails } from "./mail.js";
+import SETTINGS from "./settings.json";
+import { adminApi } from "./admin.js";
 
 const LANGS = ["vi", "en", "ko", "zh", "ru", "de"];
 
@@ -71,7 +73,7 @@ async function createBooking(req, env) {
   // Gói có số đêm cố định: ngày trả phòng và giá tính ở server, không lấy từ trình duyệt
   b.checkout = addDays(b.checkin, pkg.nights);
   b.amount_usd = pkg.usd;
-  const rate = Number(env.USD_VND_RATE);
+  const rate = Number(SETTINGS.usd_vnd_rate); // tỷ giá do CMS quản lý (data/settings.json -> build -> worker/settings.json)
   if (!(rate > 0)) return json({ error: "config" }, 500);
   b.amount_vnd = Math.round((pkg.usd * rate) / 1000) * 1000; // làm tròn nghìn đồng
   b.code = newCode();
@@ -204,8 +206,10 @@ async function sweep(env) {
 
 export default {
   async fetch(req, env, ctx) {
-    const { pathname } = new URL(req.url);
+    const url = new URL(req.url);
+    const { pathname } = url;
     try {
+      if (pathname.startsWith("/api/admin/")) return await adminApi(req, env, url);
       if (pathname === "/api/booking" && req.method === "POST") return await createBooking(req, env);
       if (pathname === "/api/booking/status" && req.method === "GET") return await status(req, env);
       if (pathname === "/api/asiapay/datafeed" && req.method === "POST") return await onDatafeed(req, env, ctx);

@@ -2,6 +2,7 @@
 // Khóa bí mật KHÔNG để ở đây — đặt bằng `npx wrangler secret put <TÊN>` (production) hoặc file .dev.vars (local):
 //   ASIAPAY_SECURE_HASH_SECRET  (Merchant Admin > Profile > Payment Account Information)
 //   ASIAPAY_API_PASSWORD        (mật khẩu của API login, email "Test Account Password Setup")
+//   ADMIN_API_KEY               (chuỗi ngẫu nhiên ≥ 24 ký tự, trùng Script Property WORKER_ADMIN_KEY của GAS CMS)
 // Datafeed: trong Merchant Admin > Profile > Payment Options bật Data Feed, URL = <SITE_URL>/api/asiapay/datafeed
 {
   "$schema": "node_modules/wrangler/config-schema.json",
@@ -44,7 +45,6 @@
     "ASIAPAY_HASH_ALGO": "SHA-1",
     // Tài khoản 74002484 mở bằng VND. Giá web bằng USD -> quy đổi theo tỷ giá này.
     "ASIAPAY_CURRENCY": "VND",
-    "USD_VND_RATE": "26000",
     "MAIL_FROM": "booking@cgpgrouphotel.com",
     "MAIL_REPLY_TO": "cgpluxuryhotelhoian@gmail.com",
     "HOTEL_NOTIFY_EMAIL": "cgpluxuryhotelhoian@gmail.com"

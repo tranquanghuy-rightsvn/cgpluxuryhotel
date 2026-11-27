@@ -1,0 +1,548 @@
+{
+ "1": {
+  "price": 2500,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ thư giãn Hội An",
+   "Hoi An Relaxing Stay",
+   "호이안 릴랙싱 스테이",
+   "会安悠闲假期",
+   "Спокойный отдых в Хойане",
+   "Entspannter Aufenthalt in Hoi An"
+  ],
+  "badge": [
+   "Thư giãn",
+   "Relaxing stay",
+   "릴랙싱 스테이",
+   "悠享假期",
+   "Спокойный отдых",
+   "Erholung"
+  ],
+  "tag": [
+   "Sống chậm lại, thư giãn và tận hưởng nét duyên vượt thời gian của Hội An.",
+   "Slow down, relax, and enjoy the timeless charm of Hoi An.",
+   "속도를 늦추고 호이안의 변치 않는 매력을 느껴 보세요.",
+   "放慢脚步，尽享会安永恒的魅力。",
+   "Замедлитесь и насладитесь вечным очарованием Хойана.",
+   "Entschleunigen und den zeitlosen Charme von Hoi An genießen."
+  ],
+  "desc": [
+   "Tạm rời nhịp sống thường ngày để tận hưởng kỳ nghỉ thư thái tại CGP Luxury Hotel. Thức dậy với bữa sáng ngon miệng, thư giãn bên hồ bơi và cảm nhận lòng hiếu khách ấm áp của người Việt giữa không gian cổ kính của Hội An.",
+   "Escape the everyday and enjoy a relaxing stay at CGP Luxury Hotel. Wake up to a delicious daily breakfast, unwind by the pool, and experience warm Vietnamese hospitality while enjoying the charming atmosphere of Hoi An.",
+   "일상에서 벗어나 CGP 럭셔리 호텔에서 여유로운 휴식을 즐기세요. 맛있는 조식으로 하루를 시작하고 수영장에서 휴식을 취하며, 호이안의 매력적인 분위기 속에서 따뜻한 베트남식 환대를 경험해 보세요.",
+   "暂别日常，在 CGP 奢华酒店享受悠闲时光。每天以美味早餐开启新的一天，在泳池边放松身心，在会安迷人的氛围中感受越南式的热情款待。",
+   "Отвлекитесь от повседневности и отдохните в CGP Luxury Hotel: вкусный завтрак каждое утро, отдых у бассейна и тёплое вьетнамское гостеприимство в очаровательной атмосфере Хойана.",
+   "Lassen Sie den Alltag hinter sich und genießen Sie einen entspannten Aufenthalt im CGP Luxury Hotel. Wachen Sie mit einem leckeren Frühstück auf, entspannen Sie am Pool und erleben Sie herzliche vietnamesische Gastfreundschaft in der charmanten Atmosphäre von Hoi An."
+  ],
+  "_info": {
+   "nights": 3,
+   "img": "room-double-balcony",
+   "cat": "relax",
+   "guests": "g2"
+  }
+ },
+ "2": {
+  "price": 2600,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ lãng mạn",
+   "Romantic Escape",
+   "로맨틱 이스케이프",
+   "浪漫之旅",
+   "Романтический отдых",
+   "Romantische Auszeit"
+  ],
+  "badge": [
+   "Lãng mạn nhất",
+   "Most romantic",
+   "가장 로맨틱",
+   "最浪漫",
+   "Самый романтичный",
+   "Besonders romantisch"
+  ],
+  "tag": [
+   "Kỳ nghỉ lãng mạn dành riêng cho hai người.",
+   "A romantic getaway made just for two.",
+   "단둘만을 위한 로맨틱한 휴가.",
+   "专属二人的浪漫假期。",
+   "Романтический отдых для двоих.",
+   "Eine romantische Auszeit nur für zwei."
+  ],
+  "desc": [
+   "Tôn vinh tình yêu với kỳ nghỉ lãng mạn tại CGP Luxury Hotel. Căn phòng được trang trí xinh đẹp, bữa tối đặc biệt cho hai người cùng những chi tiết chu đáo sẽ giúp khoảng thời gian bên nhau thật khó quên.",
+   "Celebrate love with a romantic escape at CGP Luxury Hotel. Enjoy a beautifully decorated room, a special dinner for two, and thoughtful touches designed to make your time together truly unforgettable.",
+   "CGP 럭셔리 호텔에서 로맨틱한 휴가로 사랑을 기념하세요. 아름답게 꾸며진 객실, 둘만을 위한 특별한 디너, 세심한 배려로 함께하는 시간을 잊지 못할 추억으로 만들어 드립니다.",
+   "在 CGP 奢华酒店来一场浪漫之旅，为爱庆祝。精心布置的客房、专属双人晚餐与贴心细节，让你们的相伴时光难以忘怀。",
+   "Отпразднуйте любовь романтическим отдыхом в CGP Luxury Hotel: красиво оформленный номер, особый ужин на двоих и продуманные детали, которые сделают ваше время вместе незабываемым.",
+   "Feiern Sie die Liebe mit einer romantischen Auszeit im CGP Luxury Hotel. Ein liebevoll dekoriertes Zimmer, ein besonderes Dinner zu zweit und aufmerksame Details machen Ihre gemeinsame Zeit unvergesslich."
+  ],
+  "_info": {
+   "nights": 3,
+   "img": "room-romantic",
+   "cat": "romance",
+   "guests": "g2"
+  }
+ },
+ "3": {
+  "price": 2900,
+  "hidden": false,
+  "names": [
+   "Gói trăng mật",
+   "Honeymoon Package",
+   "허니문 패키지",
+   "蜜月套餐",
+   "Медовый месяц",
+   "Flitterwochen-Paket"
+  ],
+  "badge": [
+   "Dành cho cặp đôi",
+   "Perfect for couples",
+   "커플 추천",
+   "情侣之选",
+   "Идеально для пар",
+   "Ideal für Paare"
+  ],
+  "tag": [
+   "Bắt đầu hành trình chung đôi với những kỷ niệm đẹp tại Hội An.",
+   "Begin your journey together with beautiful memories in Hoi An.",
+   "호이안에서 아름다운 추억과 함께 두 분의 여정을 시작하세요.",
+   "在会安以美好回忆开启二人的旅程。",
+   "Начните совместный путь с прекрасных воспоминаний о Хойане.",
+   "Beginnen Sie Ihre gemeinsame Reise mit schönen Erinnerungen an Hoi An."
+  ],
+  "desc": [
+   "Làm cho tuần trăng mật thêm đáng nhớ với kỳ nghỉ lãng mạn dành riêng cho các cặp đôi mới cưới. Từ trang trí phòng chu đáo, bữa tối riêng tư đến những phút giây thư giãn — hãy để CGP Luxury Hotel lo từng chi tiết nhỏ.",
+   "Make your honeymoon even more memorable with a romantic stay designed especially for newlyweds. From thoughtful room decoration to intimate dining and relaxing moments, let CGP Luxury Hotel take care of the little details.",
+   "신혼부부를 위해 특별히 준비한 로맨틱한 스테이로 허니문을 더욱 특별하게 만드세요. 세심한 객실 장식부터 오붓한 디너와 휴식의 순간까지, 작은 디테일은 CGP 럭셔리 호텔이 챙겨 드립니다.",
+   "专为新婚夫妇打造的浪漫住宿，让蜜月更加难忘。从用心的客房布置到私密晚餐与放松时光，所有细节交给 CGP 奢华酒店。",
+   "Сделайте медовый месяц ещё более запоминающимся: романтический отдых, созданный специально для молодожёнов. От оформления номера до ужина вдвоём — CGP Luxury Hotel позаботится о каждой мелочи.",
+   "Machen Sie Ihre Flitterwochen noch unvergesslicher mit einem romantischen Aufenthalt speziell für Frischvermählte. Von der Zimmerdekoration bis zu intimen Dinners und entspannten Momenten – das CGP Luxury Hotel kümmert sich um die kleinen Details."
+  ],
+  "_info": {
+   "nights": 4,
+   "img": "bathtub",
+   "cat": "romance",
+   "guests": "g2"
+  }
+ },
+ "4": {
+  "price": 4500,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ gia đình",
+   "Family Holiday",
+   "패밀리 홀리데이",
+   "家庭假期",
+   "Семейный отдых",
+   "Familienurlaub"
+  ],
+  "badge": [
+   "Gia đình ưa chuộng",
+   "Family choice",
+   "가족 추천",
+   "家庭之选",
+   "Выбор семей",
+   "Familienfavorit"
+  ],
+  "tag": [
+   "Thêm thời gian bên gia đình. Thêm nhiều kỷ niệm đẹp.",
+   "More family time. More beautiful memories.",
+   "가족과 더 많은 시간, 더 아름다운 추억.",
+   "更多亲子时光，更多美好回忆。",
+   "Больше времени с семьёй. Больше прекрасных воспоминаний.",
+   "Mehr Familienzeit. Mehr schöne Erinnerungen."
+  ],
+  "desc": [
+   "Tận hưởng kỳ nghỉ gia đình thoải mái tại Hội An với phòng nghỉ rộng rãi, bữa sáng hằng ngày và các dịch vụ chu đáo giúp chuyến đi cùng người thân dễ dàng, thư thái và vui vẻ hơn.",
+   "Enjoy a comfortable family getaway in Hoi An with spacious accommodation, daily breakfast, and thoughtful services designed to make travelling with your loved ones easier, more relaxing, and more enjoyable.",
+   "넓은 객실과 매일 조식, 세심한 서비스로 사랑하는 가족과의 여행을 더 편안하고 즐겁게 만들어 줄 호이안 가족 휴가를 즐기세요.",
+   "宽敞的客房、每日早餐与贴心服务，让您与家人在会安的旅行更轻松、更惬意、更愉快。",
+   "Комфортный семейный отдых в Хойане: просторный номер, ежедневный завтрак и внимательный сервис, чтобы путешествие с близкими было проще, спокойнее и приятнее.",
+   "Genießen Sie einen komfortablen Familienurlaub in Hoi An mit geräumiger Unterkunft, täglichem Frühstück und aufmerksamem Service, der das Reisen mit Ihren Liebsten einfacher, entspannter und schöner macht."
+  ],
+  "_info": {
+   "nights": 4,
+   "img": "room-twin",
+   "cat": "family",
+   "guests": "fam"
+  }
+ },
+ "5": {
+  "price": 2700,
+  "hidden": false,
+  "names": [
+   "Gói lưu trú tiện lợi",
+   "Easy Stay Package",
+   "이지 스테이 패키지",
+   "轻松住宿套餐",
+   "Пакет «Лёгкий отдых»",
+   "Easy-Stay-Paket"
+  ],
+  "badge": [
+   "Nhẹ nhàng, tiện lợi",
+   "Hassle-free stay",
+   "편안한 스테이",
+   "省心之旅",
+   "Отдых без хлопот",
+   "Sorglos-Aufenthalt"
+  ],
+  "tag": [
+   "Từ lúc đến nơi đến khi thư giãn – mọi thứ đều thật dễ dàng.",
+   "From arrival to relaxation, we make your stay effortless.",
+   "도착부터 휴식까지, 모든 것이 편안하게.",
+   "从抵达到放松，一切轻松无忧。",
+   "От приезда до отдыха — всё легко и просто.",
+   "Von der Ankunft bis zur Erholung – ganz unkompliziert."
+  ],
+  "desc": [
+   "Bắt đầu kỳ nghỉ Hội An thật nhẹ nhàng. Tận hưởng kỳ lưu trú thoải mái với dịch vụ đón sân bay khi bạn đến, bữa sáng hằng ngày và các dịch vụ chu đáo giúp chuyến đi dễ dàng, thư thái.",
+   "Start your Hoi An holiday without the hassle. Enjoy a comfortable stay with airport pick-up arranged for your arrival, daily breakfast, and thoughtful services to make your getaway easy and relaxing.",
+   "번거로움 없이 호이안 휴가를 시작하세요. 도착 시 공항 픽업, 매일 조식, 세심한 서비스로 편안하고 여유로운 휴가를 즐길 수 있습니다.",
+   "轻松开启会安假期。抵达时安排机场接机，每日早餐与贴心服务，让您的旅程轻松惬意。",
+   "Начните отпуск в Хойане без забот: встреча в аэропорту по прибытии, ежедневный завтрак и внимательный сервис для лёгкого и спокойного отдыха.",
+   "Starten Sie Ihren Urlaub in Hoi An ganz entspannt: Abholung vom Flughafen bei Ankunft, tägliches Frühstück und aufmerksamer Service für eine unkomplizierte Auszeit."
+  ],
+  "_info": {
+   "nights": 3,
+   "img": "room-window",
+   "cat": "relax",
+   "guests": "g2"
+  }
+ },
+ "6": {
+  "price": 3500,
+  "hidden": false,
+  "names": [
+   "Trải nghiệm lưu trú trọn vẹn",
+   "Complete Stay Experience",
+   "컴플리트 스테이 익스피리언스",
+   "全享住宿体验",
+   "Отдых «Всё включено»",
+   "Rundum-Aufenthalt"
+  ],
+  "badge": [
+   "Bán chạy nhất",
+   "Best seller",
+   "베스트셀러",
+   "最畅销",
+   "Хит продаж",
+   "Bestseller"
+  ],
+  "tag": [
+   "Mọi thứ bạn cần cho một kỳ nghỉ thư thái tại Hội An.",
+   "Everything you need for a relaxing Hoi An escape.",
+   "편안한 호이안 휴가에 필요한 모든 것.",
+   "悠闲会安假期所需的一切。",
+   "Всё необходимое для спокойного отдыха в Хойане.",
+   "Alles für eine entspannte Auszeit in Hoi An."
+  ],
+  "desc": [
+   "Ở lâu hơn, tận hưởng nhiều hơn. Gói Trải nghiệm lưu trú trọn vẹn kết hợp phòng nghỉ thoải mái, ẩm thực và các dịch vụ tiện lợi cho du khách muốn có kỳ nghỉ nhẹ nhàng, thư thái tại Hội An.",
+   "Stay longer and enjoy more. Our Complete Stay Experience combines comfortable accommodation, dining, and convenient services for travellers looking for an easy and relaxing holiday in Hoi An.",
+   "더 오래 머물고 더 많이 즐기세요. 컴플리트 스테이 익스피리언스는 편안한 객실, 다이닝, 편리한 서비스를 결합해 호이안에서 여유로운 휴가를 원하는 여행객에게 딱 맞습니다.",
+   "住得更久，享受更多。全享住宿体验集舒适客房、餐饮与便捷服务于一体，适合想在会安轻松度假的旅客。",
+   "Оставайтесь дольше — получайте больше. Пакет сочетает комфортное проживание, питание и удобные услуги для лёгкого и спокойного отдыха в Хойане.",
+   "Länger bleiben, mehr genießen: Das Paket verbindet komfortable Unterkunft, Kulinarik und praktische Services für einen unkomplizierten, entspannten Urlaub in Hoi An."
+  ],
+  "_info": {
+   "nights": 5,
+   "img": "suite-sunset",
+   "cat": "relax",
+   "guests": "g2"
+  }
+ },
+ "7": {
+  "price": 2500,
+  "hidden": false,
+  "names": [
+   "Kỷ niệm ngày đặc biệt",
+   "Anniversary Celebration",
+   "기념일 셀러브레이션",
+   "纪念日庆祝",
+   "Празднование годовщины",
+   "Jubiläumsfeier"
+  ],
+  "badge": [
+   "Dịp đặc biệt",
+   "Special occasions",
+   "특별한 날",
+   "特别时刻",
+   "Особые случаи",
+   "Besondere Anlässe"
+  ],
+  "tag": [
+   "Kỷ niệm những khoảnh khắc đặc biệt giữa lòng Hội An.",
+   "Celebrate your special moments in the heart of Hoi An.",
+   "호이안의 중심에서 특별한 순간을 기념하세요.",
+   "在会安中心庆祝您的特别时刻。",
+   "Отпразднуйте особые моменты в сердце Хойана.",
+   "Feiern Sie besondere Momente im Herzen von Hoi An."
+  ],
+  "desc": [
+   "Dù là kỷ niệm ngày cưới, sinh nhật hay một cột mốc đặc biệt, hãy để CGP Luxury Hotel tạo nên dịp kỷ niệm đáng nhớ với những chi tiết chu đáo và sự hiếu khách ấm áp.",
+   "Whether it is an anniversary, birthday, or another special milestone, let CGP Luxury Hotel create a memorable celebration filled with thoughtful details and warm hospitality.",
+   "결혼기념일, 생일 또는 특별한 순간이라면 CGP 럭셔리 호텔이 세심한 디테일과 따뜻한 환대로 잊지 못할 축하를 준비해 드립니다.",
+   "无论是周年纪念、生日还是其他特别时刻，CGP 奢华酒店都将以贴心细节与热情款待，为您打造难忘的庆祝。",
+   "Годовщина, день рождения или другое важное событие — CGP Luxury Hotel устроит запоминающийся праздник с продуманными деталями и тёплым гостеприимством.",
+   "Ob Jahrestag, Geburtstag oder ein anderer besonderer Anlass – das CGP Luxury Hotel gestaltet eine unvergessliche Feier mit aufmerksamen Details und herzlicher Gastfreundschaft."
+  ],
+  "_info": {
+   "nights": 3,
+   "img": "room-bathtub-view",
+   "cat": "romance",
+   "guests": "g2"
+  }
+ },
+ "8": {
+  "price": 3500,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ sống chậm",
+   "Slow Living Stay",
+   "슬로우 리빙 스테이",
+   "慢生活假期",
+   "Неспешный отдых",
+   "Slow-Living-Aufenthalt"
+  ],
+  "badge": [
+   "Lưu trú dài được yêu thích",
+   "Long-stay favourite",
+   "장기 투숙 인기",
+   "长住之选",
+   "Фаворит долгого отдыха",
+   "Langzeit-Favorit"
+  ],
+  "tag": [
+   "Ở lâu hơn. Sống chậm lại. Tận hưởng từng khoảnh khắc.",
+   "Stay longer. Slow down. Enjoy every moment.",
+   "더 오래 머물고, 천천히, 모든 순간을 즐기세요.",
+   "多住几日，放慢节奏，享受每一刻。",
+   "Останьтесь дольше. Замедлитесь. Наслаждайтесь каждым мгновением.",
+   "Länger bleiben. Entschleunigen. Jeden Moment genießen."
+  ],
+  "desc": [
+   "Khám phá niềm vui sống chậm với kỳ lưu trú dài hơn tại CGP Luxury Hotel. Thong thả tận hưởng những buổi sáng nhàn nhã, buổi chiều thư giãn và vẻ đẹp, nét duyên của Hội An theo nhịp riêng của bạn.",
+   "Discover the joy of slow living with a longer stay at CGP Luxury Hotel. Take your time, enjoy leisurely mornings and relaxing afternoons, and experience the beauty and charm of Hoi An at your own pace.",
+   "CGP 럭셔리 호텔에서 긴 휴식을 즐기며 슬로우 라이프의 기쁨을 발견하세요. 여유로운 아침과 편안한 오후를 보내며 나만의 속도로 호이안의 아름다움과 매력을 경험해 보세요.",
+   "在 CGP 奢华酒店长住，体验慢生活的乐趣。从容享受悠闲的早晨与惬意的午后，按自己的节奏感受会安的美丽与魅力。",
+   "Откройте радость неспешной жизни, оставшись в CGP Luxury Hotel подольше: спокойные утра, расслабленные дни и красота Хойана в вашем собственном ритме.",
+   "Entdecken Sie die Freude des langsamen Lebens bei einem längeren Aufenthalt im CGP Luxury Hotel: gemütliche Morgen, entspannte Nachmittage und Hoi An in Ihrem eigenen Tempo."
+  ],
+  "_info": {
+   "nights": 5,
+   "img": "balcony-view",
+   "cat": "relax",
+   "guests": "g2"
+  }
+ },
+ "9": {
+  "price": 5000,
+  "hidden": false,
+  "names": [
+   "Gói làm việc & thư giãn",
+   "Work & Relax Package",
+   "워크 & 릴랙스 패키지",
+   "工作与休闲套餐",
+   "Пакет «Работа и отдых»",
+   "Arbeiten & Entspannen"
+  ],
+  "badge": [
+   "Digital nomad",
+   "Digital nomad",
+   "디지털 노마드",
+   "数字游民",
+   "Digital nomad",
+   "Digital Nomad"
+  ],
+  "tag": [
+   "Làm việc thoải mái. Sống chậm. Luôn tràn đầy cảm hứng.",
+   "Work comfortably. Live slowly. Stay inspired.",
+   "편안하게 일하고, 느리게 살며, 영감을 얻으세요.",
+   "舒适办公，慢享生活，灵感常在。",
+   "Работайте с комфортом. Живите неспешно. Вдохновляйтесь.",
+   "Komfortabel arbeiten. Langsam leben. Inspiriert bleiben."
+  ],
+  "desc": [
+   "Dành cho người làm việc từ xa và khách lưu trú dài ngày, gói này mang đến sự tiện nghi cần thiết để bạn làm việc hiệu quả trong khi vẫn tận hưởng nhịp sống thư thái tại Hội An.",
+   "Designed for remote workers and long-stay travellers, this package offers the comfort and convenience you need to stay productive while enjoying a relaxing lifestyle in Hoi An.",
+   "원격 근무자와 장기 투숙객을 위한 패키지로, 호이안의 여유로운 라이프스타일을 즐기면서도 생산적으로 일할 수 있는 편안함과 편의를 제공합니다.",
+   "专为远程办公者和长住旅客设计，在会安享受悠闲生活的同时，提供保持高效工作所需的舒适与便利。",
+   "Пакет для удалённых работников и длительных поездок: всё необходимое для продуктивной работы и спокойной жизни в Хойане.",
+   "Für Remote-Worker und Langzeitreisende: Komfort und Annehmlichkeiten, um produktiv zu bleiben und zugleich den entspannten Lebensstil in Hoi An zu genießen."
+  ],
+  "_info": {
+   "nights": 7,
+   "img": "room-desk",
+   "cat": "long",
+   "guests": "g12"
+  }
+ },
+ "10": {
+  "price": 6000,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ sang trọng CGP Signature",
+   "CGP Signature Luxury Stay",
+   "CGP 시그니처 럭셔리 스테이",
+   "CGP 尊享奢华假期",
+   "CGP Signature: роскошный отдых",
+   "CGP Signature Luxusaufenthalt"
+  ],
+  "badge": [
+   "Signature",
+   "Signature collection",
+   "시그니처",
+   "尊享系列",
+   "Signature",
+   "Signature"
+  ],
+  "tag": [
+   "Bảy đêm. Một trải nghiệm Hội An khó quên.",
+   "Seven nights. One unforgettable Hoi An experience.",
+   "7박, 잊지 못할 호이안의 경험.",
+   "七晚住宿，一段难忘的会安体验。",
+   "Семь ночей. Одно незабываемое впечатление от Хойана.",
+   "Sieben Nächte. Ein unvergessliches Hoi-An-Erlebnis."
+  ],
+  "desc": [
+   "Trải nghiệm những gì tinh túy nhất của CGP Luxury Hotel với kỳ nghỉ Signature. Bảy đêm thư thái với phòng nghỉ cao cấp, ẩm thực, chăm sóc sức khỏe và những chi tiết cá nhân hóa dành cho du khách muốn có một kỳ nghỉ thật đặc biệt tại Hội An.",
+   "Experience the best of CGP Luxury Hotel with our signature stay. Enjoy seven relaxing nights with premium accommodation, dining, wellness, and personalised touches designed for guests who want something truly special from their time in Hoi An.",
+   "시그니처 스테이로 CGP 럭셔리 호텔의 모든 것을 경험하세요. 프리미엄 객실, 다이닝, 웰니스, 맞춤형 서비스와 함께하는 7박은 호이안에서 특별한 시간을 원하는 분께 안성맞춤입니다.",
+   "以尊享假期体验 CGP 奢华酒店的精华。七晚悠闲时光，尽享高级客房、美食、康体与个性化服务，为追求非凡会安之旅的宾客而设。",
+   "Лучшее, что может предложить CGP Luxury Hotel: семь ночей в номере премиум-класса, питание, велнес и персональный подход для тех, кто хочет по-настоящему особенного отдыха в Хойане.",
+   "Erleben Sie das Beste des CGP Luxury Hotel: sieben entspannte Nächte mit Premium-Unterkunft, Kulinarik, Wellness und persönlichen Details für Gäste, die etwas wirklich Besonderes suchen."
+  ],
+  "_info": {
+   "nights": 7,
+   "img": "suite-gold",
+   "cat": "sig",
+   "guests": "g2"
+  }
+ },
+ "11": {
+  "price": 3000,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ một mình",
+   "Solo Escape",
+   "솔로 이스케이프",
+   "独享之旅",
+   "Соло-отдых",
+   "Solo-Auszeit"
+  ],
+  "badge": [
+   "Một mình thảnh thơi",
+   "Solo getaway",
+   "솔로 여행",
+   "独享假期",
+   "Соло-отдых",
+   "Solo-Auszeit"
+  ],
+  "tag": [
+   "Ba đêm để thư giãn, nạp lại năng lượng và khám phá Hội An theo nhịp riêng.",
+   "Three nights to relax, recharge, and enjoy Hoi An at your own pace.",
+   "3박 동안 쉬고 충전하며 나만의 속도로 호이안을 즐기세요.",
+   "三晚时光，放松充电，按自己的节奏畅游会安。",
+   "Три ночи, чтобы отдохнуть и насладиться Хойаном в своём ритме.",
+   "Drei Nächte zum Entspannen und Auftanken – in Ihrem eigenen Tempo."
+  ],
+  "desc": [
+   "Dành cho mình một kỳ nghỉ xứng đáng và tận hưởng sự tự do khi du lịch một mình. Gói Solo Escape được thiết kế cho du khách độc lập tìm kiếm sự thoải mái, thư giãn và thời gian riêng giữa không gian quyến rũ của Hội An.",
+   "Take a well-deserved break and enjoy the freedom of travelling solo. The Solo Escape package is designed for independent travellers looking for comfort, relaxation, and personal time in the charming atmosphere of Hoi An.",
+   "자신에게 휴식을 선물하고 혼자 여행하는 자유를 누리세요. 솔로 이스케이프는 호이안의 매력적인 분위기 속에서 편안함과 휴식, 나만의 시간을 원하는 여행자를 위한 패키지입니다.",
+   "给自己一个应得的假期，享受独自旅行的自由。独享之旅套餐专为追求舒适、放松与个人时光的独立旅行者打造，让您沉浸在会安的迷人氛围中。",
+   "Заслуженный отдых и свобода путешествия в одиночку. Пакет создан для самостоятельных путешественников, которые ищут комфорт, расслабление и время для себя в атмосфере Хойана.",
+   "Gönnen Sie sich eine wohlverdiente Pause und genießen Sie die Freiheit des Alleinreisens – für unabhängige Reisende, die Komfort, Erholung und Zeit für sich in der charmanten Atmosphäre von Hoi An suchen."
+  ],
+  "_info": {
+   "nights": 3,
+   "img": "suite-lounge",
+   "cat": "solo",
+   "guests": "g1"
+  }
+ },
+ "12": {
+  "price": 5000,
+  "hidden": false,
+  "names": [
+   "Nghỉ dưỡng một mình",
+   "Solo Retreat",
+   "솔로 리트릿",
+   "独享休养",
+   "Соло-ретрит",
+   "Solo-Retreat"
+  ],
+  "badge": [
+   "Chăm sóc bản thân",
+   "Solo wellness",
+   "솔로 웰니스",
+   "独享康养",
+   "Соло-велнес",
+   "Solo-Wellness"
+  ],
+  "tag": [
+   "Sống chậm lại, nạp năng lượng và dành thời gian cho chính mình.",
+   "Slow down, recharge, and make time for yourself.",
+   "속도를 늦추고 재충전하며 나를 위한 시간을 가지세요.",
+   "放慢脚步，恢复活力，把时间留给自己。",
+   "Замедлитесь, восстановите силы и найдите время для себя.",
+   "Entschleunigen, auftanken und Zeit für sich selbst nehmen."
+  ],
+  "desc": [
+   "Rời xa nhịp sống vội vã và tận hưởng năm đêm thư thái tại CGP Luxury Hotel. Được thiết kế riêng cho du khách đi một mình, gói này cho bạn tự do sống chậm, nạp lại năng lượng và khám phá Hội An hoàn toàn theo nhịp của mình.",
+   "Escape the rush of everyday life and enjoy five relaxing nights at CGP Luxury Hotel. Designed especially for solo travellers, this package gives you the freedom to slow down, recharge, and experience Hoi An entirely at your own pace.",
+   "바쁜 일상에서 벗어나 CGP 럭셔리 호텔에서 5박의 여유를 즐기세요. 혼자 여행하는 분을 위해 특별히 준비한 패키지로, 천천히 쉬고 재충전하며 나만의 속도로 호이안을 경험할 수 있습니다.",
+   "远离日常的匆忙，在 CGP 奢华酒店享受五晚悠闲时光。专为独自旅行者设计，让您自由地放慢脚步、恢复活力，完全按自己的节奏体验会安。",
+   "Сбегите от суеты и проведите пять спокойных ночей в CGP Luxury Hotel. Пакет создан для путешествующих в одиночку: замедлитесь, восстановите силы и откройте Хойан в своём ритме.",
+   "Entfliehen Sie der Hektik des Alltags und genießen Sie fünf entspannte Nächte im CGP Luxury Hotel – speziell für Alleinreisende, um zu entschleunigen, aufzutanken und Hoi An ganz im eigenen Tempo zu erleben."
+  ],
+  "_info": {
+   "nights": 5,
+   "img": "room-sofa",
+   "cat": "solo",
+   "guests": "g1"
+  }
+ },
+ "13": {
+  "price": 7000,
+  "hidden": false,
+  "names": [
+   "Kỳ nghỉ Solo Signature",
+   "Solo Signature Stay",
+   "솔로 시그니처 스테이",
+   "独享尊选假期",
+   "Отдых Solo Signature",
+   "Solo-Signature-Aufenthalt"
+  ],
+  "badge": [
+   "Solo Signature",
+   "Solo signature",
+   "솔로 시그니처",
+   "独享尊选",
+   "Solo Signature",
+   "Solo Signature"
+  ],
+  "tag": [
+   "Bảy đêm dành trọn cho riêng bạn.",
+   "Seven nights dedicated entirely to you.",
+   "오롯이 나만을 위한 7박.",
+   "七晚时光，全然属于您。",
+   "Семь ночей, посвящённых только вам.",
+   "Sieben Nächte, ganz Ihnen gewidmet."
+  ],
+  "desc": [
+   "Tìm lại niềm vui có thời gian cho riêng mình với kỳ nghỉ Solo Signature bảy đêm. Tận hưởng kỳ lưu trú dài thư thái với ẩm thực chu đáo, chăm sóc sức khỏe và những chi tiết cá nhân hóa dành cho du khách độc lập tìm kiếm sự thoải mái và riêng tư tại Hội An.",
+   "Rediscover the joy of having time for yourself with our seven-night Solo Signature Stay. Enjoy a relaxing extended stay with thoughtful dining, wellness, and personalised touches designed for independent travellers seeking comfort and privacy in Hoi An.",
+   "7박 솔로 시그니처 스테이로 나만의 시간을 갖는 기쁨을 다시 발견하세요. 세심한 다이닝, 웰니스, 맞춤형 서비스와 함께 호이안에서 편안함과 프라이버시를 원하는 독립 여행자를 위한 여유로운 장기 숙박입니다.",
+   "七晚独享尊选假期，让您重拾独处的乐趣。贴心的餐饮、康体与个性化服务，为在会安追求舒适与私密的独立旅行者打造悠闲长住体验。",
+   "Вновь откройте радость времени для себя: семь ночей Solo Signature с продуманным питанием, велнесом и персональным подходом для тех, кто ценит комфорт и уединение в Хойане.",
+   "Entdecken Sie die Freude an Zeit für sich selbst neu: sieben Nächte Solo Signature mit durchdachter Kulinarik, Wellness und persönlichen Details für unabhängige Reisende, die in Hoi An Komfort und Privatsphäre suchen."
+  ],
+  "_info": {
+   "nights": 7,
+   "img": "suite-arch",
+   "cat": "solo",
+   "guests": "g1"
+  }
+ }
+}
