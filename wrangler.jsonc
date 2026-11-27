@@ -22,9 +22,9 @@
   // Bật khi trỏ domain về Cloudflare:
   // "routes": [{ "pattern": "cgpgrouphotel.com", "custom_domain": true }],
 
-  // Tạo bằng `npx wrangler d1 create cgpluxuryhotel`, dán database_id vào đây
+  // D1 tạo ngày 27/11/2026 (`npx wrangler d1 create cgpluxuryhotel`)
   "d1_databases": [
-    { "binding": "DB", "database_name": "cgpluxuryhotel", "database_id": "REPLACE_WITH_D1_ID", "migrations_dir": "worker/migrations" }
+    { "binding": "DB", "database_name": "cgpluxuryhotel", "database_id": "d4b88deb-5e30-4f5e-83bb-f14118482d81", "migrations_dir": "worker/migrations" }
   ],
 
   // Email giao dịch qua Cloudflare Email Service — domain gửi (MAIL_FROM) phải bật Email Sending

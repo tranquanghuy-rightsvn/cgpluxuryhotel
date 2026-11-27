@@ -71,5 +71,9 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Chưa có secret CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID - bỏ qua deploy (html đã build và commit)."
+            exit 0
+          fi
           npx wrangler d1 migrations apply cgpluxuryhotel --remote
           npx wrangler deploy
