@@ -47,17 +47,20 @@ Không làm: thêm/xoá gói, đổi số đêm/số khách/danh sách "bao gồ
    - Theo ngôn ngữ: Tiêu đề, Mô tả ngắn (dùng làm meta description + đoạn tóm tắt ở danh sách), Nội dung.
    - Nội dung: TinyMCE tự host, có heading H2/H3, đậm/nghiêng, link, danh sách, bảng, trích dẫn và
      **CÓ chèn ảnh trong nội dung** bằng nút chèn nhanh (mở thẳng file picker, không dùng dialog Image).
-   - Tiếng Việt bắt buộc. Ngôn ngữ nào để trống tiêu đề → bài không hiện ở ngôn ngữ đó.
+   - Cả 6 ngôn ngữ đều bắt buộc (tiêu đề + mô tả + nội dung) — build hiện bài ở mọi ngôn ngữ, nên không cho
+     lưu bài thiếu ngôn ngữ; nút Dịch điền sẵn 5 ngôn ngữ trong 1 lần bấm. Tab còn trống có dấu •.
    - Nút **"Dịch từ tiếng Việt"**: dịch tiêu đề + mô tả + nội dung sang 5 ngôn ngữ bằng `LanguageApp`
      (Google Translate, miễn phí, nội dung dịch dạng HTML), điền vào các tab, người dùng sửa lại rồi Lưu.
-     Mã đích: en, ko, zh-CN, ru, de. Không ghi đè tab đã có chữ trừ khi xác nhận.
+     Mã đích: en, ko, zh-CN, ru, de. Tab đã có chữ chỉ bị ghi đè sau khi xác nhận. Hàm: `translateTexts`.
+   - Chỉ 1 ô TinyMCE; chuyển tab ngôn ngữ thì cất nội dung tab cũ vào bộ nhớ rồi nạp tab mới.
 2. Field tự suy, không có ô nhập: `<title>` = tiêu đề + hậu tố site; ảnh share = ảnh cover; số từ (JSON-LD).
 3. 6 bài "smart content" đã có (bố cục thiết kế riêng `tv-*`): CMS chỉ sửa **tiêu đề, mô tả, ảnh cover,
    ngày đăng** — nội dung khoá (không mở trong TinyMCE để khỏi vỡ bố cục). Nhận biết bằng việc file
    không có dòng `cms: 1` trong khối `<!-- smart-content -->`.
 4. Danh sách bài trong Admin: đọc qua GAS từ GitHub Contents API (`content/tin-tuc/index.json`), luôn mới nhất.
 5. Ảnh: nén phía client bằng canvas trước khi upload — cạnh dài tối đa 1600px, JPEG chất lượng 0.82.
-   Ảnh RIÊNG 1-1 theo bài: cover `html/images/news-<slug>.jpg`, ảnh trong bài
+   Ảnh RIÊNG 1-1 theo bài: cover `html/images/news-<slug>-<yyMMddHHmmss>.jpg` (tên mới mỗi lần tải để CI
+   không dùng nhầm bản WebP cũ; ảnh cover cũ do CMS tải bị xoá lúc Lưu), ảnh trong bài
    `html/images/news/<slug>/<NN>.jpg`. Build tự sinh bản WebP nhiều cỡ cho cover như ảnh hiện có.
 
 ## III. Sửa tin tức
@@ -117,7 +120,11 @@ Không làm: thêm/xoá gói, đổi số đêm/số khách/danh sách "bao gồ
 
 ## IX. Bug đã gặp ở dự án này
 
-(chưa có)
+- CI checkout đặt mọi file cùng mtime, mà build.py quyết định "ảnh phái sinh cũ chưa" bằng mtime → có thể
+  tạo lại ảnh hàng loạt / gọi Chrome (chỉ có trên Mac). Cách né: workflow đẩy mtime ảnh gốc về 2000-01-01
+  trước khi build, chỉ ảnh phái sinh CHƯA CÓ mới được tạo.
+- build.py có nhiều danh sách id gói gõ cứng (menu, trang chủ) → ẩn gói làm KeyError. Cách né: mọi chỗ lọc
+  `if i in P`; link `@/goi-luu-tru/<gói ẩn>/` trong bài smart content tự trỏ về trang danh sách gói.
 
 ## X. Script Properties
 
@@ -125,3 +132,5 @@ Không làm: thêm/xoá gói, đổi số đêm/số khách/danh sách "bao gồ
   `GITHUB_BRANCH` — bắt buộc.
 - `WORKER_API_URL` (vd `https://cgpgrouphotel.com`), `WORKER_ADMIN_KEY` — cho tab Đơn đặt phòng.
 - `SPREADSHEET_ID` — tự tạo, không cần điền.
+- Hàm `setup()` (chạy tay trong trình soạn Apps Script): xin cấp quyền, tạo Sheet, điền sẵn 4 property không
+  bí mật (`GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH`, `WORKER_API_URL`), báo property còn thiếu.
